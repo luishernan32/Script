@@ -3,14 +3,10 @@ select *from [documentos].[dbo].[plantilla] where id_plantilla=2664--2663
 select top 5 *from [documentos].[dbo].[documento] order by 1 desc
 
 
-
-
 -----------------------------------------------------------------------------
 select top 100 *from coactivo where id_tipo_coactivo=4  order by 1 desc
 
 -----------------------------------------------------------------------------
-
-
 
 --APELACION_REG_FALLO
 --REGISTRO_FALLO
@@ -25,21 +21,53 @@ select top 100 *from coactivo where id_tipo_coactivo=4  order by 1 desc
 --1	COA_SV_ACT_FC	10185	1412
 
 ----------------------------------------
+
+---------------------------------------------------------------------------------------------------------------
+-----------------------------------------------Impugnación fallo x 9-------------------------------------------
+---------------------------------------------------------------------------------------------------------------
+--Revisado 31/12/2023
+
 -- REGISTRO_FALLO  ok   id_plantilla=2619
 --APELACION_REG_FALLO ok id_plantilla=2604
 --ARCH_DESIST_COND ok id_plantilla=2602
---COA_JUNIO_2019 ok id_plantilla=2608-------------------
+--COA_JUNIO_2019 ok id_plantilla=2608
 --REG_FALL_CONS_PP ok id_plantilla=2609
 --COA_ACT_NV_FA id_plantilla=2610
 --COA_SV_ACT_FC id_plantilla=2611
 --COA_D_P_F_ABS id_plantilla=2622
 --COA_IMCL_SN_DC_P id_plantilla=2623
 
---2619  2604 2602 2609 2610 2611 2622 2623
+--Orden en el que aparecen en excel
+--REGISTRO_FALLO
+--APELACION_REG_FALLO
+--ARCH_DESIST_COND
+--COA_JUNIO_2019
+--REG_FALL_CONS_PP
+--COA_SV_ACT_FC
+--COA_D_P_F_ABS
+--COA_IMCL_SN_DC_P
+--COA_ACT_NV_FA
+
+--(2619,2604,2602,2608,2609,2610,2611,2622,2623)
 
 
---2	Impugnación de comparendo	Apertura impugnación sin tercero	APERT_IMPUG_SIN_TERC	11924
---2	Impugnación de comparendo	Apertura de impugnación	APERTURA_IMPUGNACION	3100
+
+
+
+----------------------------------------------------------------------------------------------------
+--REVISION
+ 
+--COA_CP 2624 *
+--CIERRE_PRUEBAS 2618 *
+--ACT_PERSONA_JUR 2625 *
+--APERT_IMPUG_SIN_TERC 2620 * la firma queda en una sola hoja y hay una hoja en blanco
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------Pilas con estos datos-----------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+--APERTURA_IMPUGNACION (2592 *Crear una nueva version 2669) revisarrrr *
+--ACTA_REC_FIR_RUB (2067 Crear new version) 2670 *
+-----------------------------------------------------------------------------
+
 
 ---------------------------------------------------------------------------------------------------------------
 --21/11/2023
@@ -86,30 +114,16 @@ select top 100 *from coactivo where id_tipo_coactivo=4  order by 1 desc
 --------------------------------------------------------------------------------------------------------------
 
 
-
 --COA_ORDEN_PAGO_P ACTA_DE_POSESION_P AUTO_PAGO_PATIO_V2 AUTO_PAGO_PATIO
 ----------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------
 
 
-
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-----------------------------------------------------------------------------------------------------
---REVISION
- 
---COA_CP 2624 *
---CIERRE_PRUEBAS 2618 *
---ACT_PERSONA_JUR 2625 *
---APERT_IMPUG_SIN_TERC 2620 * la firma queda en una sola hoja y hay una hoja en blanco
-----------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------Pilas con estos datos-----------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------------------------------
---APERTURA_IMPUGNACION (2592 *Crear una nueva version 2669) revisarrrr *
---ACTA_REC_FIR_RUB (2067 Crear new version) 2670 *
------------------------------------------------------------------------------
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 --REGISTRO_FALLO 2619 *
 
@@ -404,12 +418,30 @@ select top 5 *from [documentos].[dbo].[documento] order by 1 desc
 
 --------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------
+-------------------------------Impugnación de comparendo-------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------
+--Revisado 31/12/2023 --Salen hojas en blanco revisar con Nicolas
+--Apertura impugnación sin tercero	APERT_IMPUG_SIN_TERC	11924
+--	Apertura de impugnación	APERTURA_IMPUGNACION	3100
+
+
+--APERT_IMPUG_SIN_TERC 2620
+--APERTURA_IMPUGNACION 2669
+--ACTA_REC_FIR_RUB 2670
+
+--(2620,2669,2670)
+
+--ACTA_REC_FIR_RUB (2067 Crear new version) 2670 *
+---------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------
 
 ---------------------------Consulta CODIGOS_PLANTILLAS-----------------------------------------------------------------------------
 
 declare @codigoPlantilla varchar(20);
-set @codigoPlantilla = 'RAZON_CIER_SUBS_CAL';
+set @codigoPlantilla = 'APERTURA_IMPUGNACION';
 select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla
 select * from documentos..plantilla_configuracion where id_plantilla in (select id_plantilla from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 select * from documentos..proceso where id_proceso IN (select id_proceso from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
