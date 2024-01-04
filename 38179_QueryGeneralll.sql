@@ -75,16 +75,9 @@ select top 100 *from coactivo where id_tipo_coactivo=4  order by 1 desc
 --Impugnación con solución inmediata	Actualizar_Ubicabilidad Juridica	ACT_PERSONA_JUR	934 id_plantilla=2422 2625
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
---22/11/2023
 
 
---COA_A_I_R_D  id_plantilla=2631
---COA_FM_AI id_plantilla=2632
---COA_AUTO_INC_FDS id_plantilla=2633
---COA_AU_EV_PP id_plantilla=2634
---COA_FOT_PP_PP id_plantilla=2635
---COAMTVACT_DP_SPP id_plantilla=2636
---COA_MTV_MDCT_SPP id_plantilla=2637
+
 
 ---------------------------------------------------------------------------------------------
 --Incidencia Plantillas con variables desordenadas order_embargo
@@ -174,7 +167,7 @@ select top 100 *from coactivo where id_tipo_coactivo=4  order by 1 desc
 --PROVIDENCIA_RETENCIO 2648
 --OFICIO_BANCO_CARTA 2649
 
---OFIC_BAN_CARTA_SEPS 2650  --OFIC_BAN_CARTA_SEPS 2716 cambio su id
+--OFIC_BAN_CARTA_SEPS 2650  --OFIC_BAN_CARTA_SEPS 2716 cambio su id 2685 por 2716
 --PROVIDENCI_RET_SEPS 2651
 --ACTA_DE_POSESION  id_plantilla=2652
 
@@ -214,8 +207,8 @@ select top 100 *from coactivo where id_tipo_coactivo=4  order by 1 desc
 
 --CERTI_CURSO_VIRTU  Gui para la solución de las plantillas Jasper
 
-
---(2643,2644,2645,2646,2647,2648,2649,2650,2651,2652,2653,2654,2655,2656,2657,2658,2659,2660,2661,2662,2663,2664,2665,2666,2667,2668,2671,
+--2650 por 2685 por 2716
+--(2643,2644,2645,2646,2647,2648,2649,2716,2651,2652,2653,2654,2655,2656,2657,2658,2659,2660,2661,2662,2663,2664,2665,2666,2667,2668,2671,
 --   2324,2325,2579,2580,2229)
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -291,35 +284,34 @@ select top 100 *from coactivo where id_tipo_coactivo=4  order by 1 desc
 ----------------------------------------------------------------------
 ------------------Calendarización-------------------------------------
 ----------------------------------------------------------------------
+--2024/01/02
 
---codigo_plantilla
+--PROCESO: Calendarización
 
 --FALLO_CALEND_FIRMA 2697
---APERTURA_ANU_CAL 2698
---APERT_ANUCAL_SIN_TER 2699
+--APERTURA_ANU_CAL 2698   *
+--APERT_ANUCAL_SIN_TER 2699 *
 --DOC_INCOMPLETA_CAL 2694
 --RECH_FALTA_SOPOR_CAL 2695
 
 --(2697,2698,2699,2694,2695)
 
+--con incidencia
 
+--APERT_ANUCAL_SIN_TER
+--APERTURA_ANU_CAL
 ------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------
---------------------------Registro fallo --------------------------
-
+----------------------------PROCESO: Calendarizacion fallo x1--------------------------
+--2024/01/02
+--PROCESO: Calendarizacion fallo x1
 --	REGISTRO_FALLO_CAL 2700
 --(2700)
 ------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------
 
---------20/12/20223----------------------------------------------------------------------------------------------------
-----------------------------------Devolucion de valores--------------------------------------------------------------------------
---Nota a dos plantillas con el mismo nombre en el modulo de documentos APERT_DEV_SIN_TERC
---APERT_DEV_SIN_TERC 2709
---CIERRE_PRUEBAS_DEVOL 2708
 
---(2709,2708)
 
 --------------------------------------Devolucion sin solución inmediata----------------------------------------------------------------------
 --AUTO_INICIAL_DEVO 2710
@@ -328,7 +320,10 @@ select top 100 *from coactivo where id_tipo_coactivo=4  order by 1 desc
 ------------------------------------------------------------------------------------------------------------
 --------------------------------Devolucion Fallo----------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------
+
+--  PROCESO:Devolucion Fallo
 --	REGISTRO_FALLO_DEV 2711
+
 
 ------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------
@@ -363,8 +358,6 @@ select top 100 *from coactivo where id_tipo_coactivo=4  order by 1 desc
 ------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------
-
 
 ------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------
@@ -378,21 +371,9 @@ select top 100 *from coactivo where id_tipo_coactivo=4  order by 1 desc
 
 --(2646,2657) ACTA_POSESION_DEP ACTA_DE_POSESION_P
 
-
-----21/12/2023------------26/12/2023--------------------------------------------------------------------------------------------
---PROCESO---------------------------Impugnación sin solución inmediata-----------------------------------------
+------------------------------------------------------------------------------------------
 
 
---AI_EXV_SGPS_TP 2686
---MTV_SP_DCT_NO_MEMO 2687
---COA_A_EV_AU 2688
---COA_PPI_AU_PP 2689 
---AUTO_INICIAL_PRUEBA 2690
---COA_EXC_VEL_INF_ATD 2691
---COA_EXC_VEL_FDS 2692
---COA_VACT_PP_AI 2693
-
---(2686,2687,2688,2689,2690,2691,2692,2693) Impugnación sin solución inmediata
 
 ------------------------------------------------------------------------------------------
 select *from [documentos].[dbo].[plantilla] where id_plantilla=2685--2663
@@ -436,12 +417,129 @@ select top 5 *from [documentos].[dbo].[documento] order by 1 desc
 --ACTA_REC_FIR_RUB (2067 Crear new version) 2670 *
 ---------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------
+
+
+---------------------------------------------------------------------------------------------------------------
+--------------------------------------Impugnación cierre de pruebasX2------------------------------------------
+---------------------------------------------------------------------------------------------------------------
+--Impugnación cierre de pruebas	COA - Cierre de pruebas	COA_CP	11777
+--Impugnación cierre de pruebas	Cierre de pruebas	CIERRE_PRUEBAS	3
+
+
+--COA_CP 2624
+--CIERRE_PRUEBAS 2618
+
+--(2624,2618) Impugnación cierre de pruebasX2
 --------------------------------------------------------------------------------------------------------
 
+
+--------------------------------------------------------------------------------------------------------
+-----------------------------Impugnación sin solución inmediata----------------------------------------
+--------------------------------------------------------------------------------------------------------
+--22/11/2023
+--02/01/2024
+
+--COA_A_I_R_D  id_plantilla=2631
+--COA_FM_AI id_plantilla=2632
+--COA_AUTO_INC_FDS id_plantilla=2633
+--COA_AU_EV_PP id_plantilla=2634
+--COA_FOT_PP_PP id_plantilla=2635
+--COAMTVACT_DP_SPP id_plantilla=2636
+--COA_MTV_MDCT_SPP id_plantilla=2637
+
+--COA_A_I_R_D
+--COA_FM_AI
+--COA_AUTO_INC_FDS
+--COA_AU_EV_PP
+--COA_FOT_PP_PP
+--COAMTVACT_DP_SPP
+--COA_MTV_MDCT_SPP
+
+--(2631,2632,2633,2634,2635,2636,2637)
+
+----21/12/2023------------26/12/2023--------------------------------------------------------------------------------------------
+--PROCESO---------------------------Impugnación sin solución inmediata PAQUETE 2 PLANTILLAS SIN ENVIAR-----------------------------------------
+
+
+--AI_EXV_SGPS_TP 2686
+--MTV_SP_DCT_NO_MEMO 2687
+--COA_A_EV_AU 2688
+--COA_PPI_AU_PP 2689 
+--AUTO_INICIAL_PRUEBA 2690
+--COA_EXC_VEL_INF_ATD 2691
+--COA_EXC_VEL_FDS 2692
+--COA_VACT_PP_AI 2693
+
+--(2686,2687,2688,2689,2690,2691,2692,2693) Impugnación sin solución inmediata
+
+
+-- Total (2631,2632,2633,2634,2635,2636,2637,2686,2687,2688,2689,2690,2691,2692,2693)
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------Coactivo----------------------------------------------
+
+--Coactivo	Providencia por pago	PROVIDENCIA_PAGO 2645
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------
+------------------------------------Recurso apelacion------------------------------------------------------------------------
+
+--Recurso apelacion	PRIMER AUTO	PRIMER_AUTO	740
+--Recurso apelacion	PRIMER AUTO RESORTEO	PRIMER_AUTO_RESORTEO	38
+
+--PRIMER_AUTO 2713
+--PRIMER_AUTO_RESORTEO 2714
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+---------------------------Paso a produccion------------------------------------
+--------------------------------------------------------------------------------
+
+--APERT_IMPUG_SIN_TERC 2620 2724
+--APERTURA_IMPUGNACION 2669 2725
+
+
+--------------------------------------------------------------------------------
+------------------Calendarización-------------------------------------
+----------------------------------------------------------------------
+--2024/01/02
+
+--PROCESO: Calendarización
+
+--FALLO_CALEND_FIRMA 2697
+--APERTURA_ANU_CAL 2698   *
+--APERT_ANUCAL_SIN_TER 2699 *
+--DOC_INCOMPLETA_CAL 2694
+--RECH_FALTA_SOPOR_CAL 2695
+
+--(2697,2698,2699,2694,2695)
+
+--con incidencia
+
+--APERT_ANUCAL_SIN_TER
+--APERTURA_ANU_CAL
+------------------------------------------------------------------------------------------------------------
+--------20/12/20223----------------------------------------------------------------------------------------------------
+----------------------------------Devolucion de valores--------------------------------------------------------------------------
+--Nota a dos plantillas con el mismo nombre en el modulo de documentos APERT_DEV_SIN_TERC
+
+--04/01/2024
+
+--PROCESO: Devolucion de valores
+--APERT_DEV_SIN_TERC 2709
+--CIERRE_PRUEBAS_DEVOL 2708
+--(2709,2708)
 ---------------------------Consulta CODIGOS_PLANTILLAS-----------------------------------------------------------------------------
 
 declare @codigoPlantilla varchar(20);
-set @codigoPlantilla = 'APERTURA_IMPUGNACION';
+set @codigoPlantilla = 'CIERRE_PRUEBAS_DEVOL';
 select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla
 select * from documentos..plantilla_configuracion where id_plantilla in (select id_plantilla from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 select * from documentos..proceso where id_proceso IN (select id_proceso from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
@@ -516,7 +614,10 @@ begin tran
 --update documentos..plantilla set fecha_inicio='2023-12-20' where id_plantilla in(2712,2713,2714,2715) --FUSION Recaudo, Recaudo apelacion y Ubicabilidad (2712,2713,2714,2715)
 --update documentos..plantilla set fecha_inicio='2023-12-21' where id_plantilla in(2646,2657)-- proceso coactivo (2646,2657) ACTA_POSESION_DEP ACTA_DE_POSESION_P
 --update documentos..plantilla set fecha_inicio='2023-12-25' where id_plantilla in(2646,2657) --ACTA_POSESION_DEP ACTA_DE_POSESION_P 
-update documentos..plantilla set fecha_inicio='2023-12-27' where id_plantilla in(2680,2681,2682,2683,2684,2723)--Sentar Razón
+--update documentos..plantilla set fecha_inicio='2023-12-27' where id_plantilla in(2680,2681,2682,2683,2684,2723)--Sentar Razón
+--update documentos..plantilla set fecha_inicio='2024-01-01' where id_plantilla in(2624,2618) --Impugnación cierre de pruebasX2
+--update documentos..plantilla set fecha_inicio='2024-01-03' where id_plantilla in(2697,2698,2699,2694,2695)
+update documentos..plantilla set fecha_inicio='2024-01-03' where id_plantilla in(2709,2708)
 commit tran
 
 ------------------------------------------------------------------------------------------------------------
