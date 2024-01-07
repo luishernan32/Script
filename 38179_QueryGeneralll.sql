@@ -536,10 +536,32 @@ select top 5 *from [documentos].[dbo].[documento] order by 1 desc
 --APERT_DEV_SIN_TERC 2709
 --CIERRE_PRUEBAS_DEVOL 2708
 --(2709,2708)
+
+
+
+
+--Impugnación sin solución inmediataX15
+
+--x7 Certificados QA
+--COA_A_I_R_D  id_plantilla=2631*
+--COA_FM_AI id_plantilla=2632*
+--COA_AUTO_INC_FDS id_plantilla=2633*
+--COA_AU_EV_PP id_plantilla=2634*
+--COA_FOT_PP_PP id_plantilla=2635*
+--COAMTVACT_DP_SPP id_plantilla=2636*
+--COA_MTV_MDCT_SPP id_plantilla=2637*
+
+--(2631,2632,2633,2634,2635,2636,2637)
+
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
 ---------------------------Consulta CODIGOS_PLANTILLAS-----------------------------------------------------------------------------
 
+
+
 declare @codigoPlantilla varchar(20);
-set @codigoPlantilla = 'CIERRE_PRUEBAS_DEVOL';
+set @codigoPlantilla = 'COAMTVACT_DP_SPP';
 select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla
 select * from documentos..plantilla_configuracion where id_plantilla in (select id_plantilla from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 select * from documentos..proceso where id_proceso IN (select id_proceso from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
@@ -587,7 +609,7 @@ select *from  documentos..plantilla where codigo_plantilla like '%Resol%'--=@cod
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 begin tran
 --update documentos..plantilla set fecha_fin='2022-03-11' where id_plantilla=2080   --2532
---update documentos..plantilla set fecha_fin=null where id_plantilla=2623
+update documentos..plantilla set fecha_fin=null where id_plantilla=2636
 --update documentos..plantilla set fecha_inicio='2023-11-17' where id_plantilla=2619  --2604 --2602 --2609 --2610 --2611 --2622 --2623
 --update documentos..plantilla set fecha_inicio='2023-11-21' where id_plantilla in(2631,2632,2633,2634,2635,2636,2637) 
 --update documentos..plantilla set fecha_inicio='2023-11-22' where id_plantilla in(2638,2639) 
@@ -617,7 +639,7 @@ begin tran
 --update documentos..plantilla set fecha_inicio='2023-12-27' where id_plantilla in(2680,2681,2682,2683,2684,2723)--Sentar Razón
 --update documentos..plantilla set fecha_inicio='2024-01-01' where id_plantilla in(2624,2618) --Impugnación cierre de pruebasX2
 --update documentos..plantilla set fecha_inicio='2024-01-03' where id_plantilla in(2697,2698,2699,2694,2695)
-update documentos..plantilla set fecha_inicio='2024-01-03' where id_plantilla in(2709,2708)
+update documentos..plantilla set fecha_inicio='2024-01-04' where id_plantilla in(2709,2708)
 commit tran
 
 ------------------------------------------------------------------------------------------------------------
@@ -630,25 +652,29 @@ commit tran
 --QUERY GENERAR  eliminar 2650
 ---------------------------------------------------------------
 begin tran
-delete from documentos..plantilla   where id_plantilla=2650
+delete from documentos..plantilla   where id_plantilla=2731
 commit tran
 ---------------------------------------------------------------
 begin tran
-delete from documentos..jasper_plantilla   where id_plantilla=2650
+delete from documentos..jasper_plantilla   where id_plantilla=2731
 commit tran
 
 begin tran
-delete from documentos..xml_plantilla   where id_xml_plantilla=2650
+delete from documentos..xml_plantilla   where id_xml_plantilla=2731
 commit tran
 
 begin tran
-delete from documentos..variable_plantilla   where id_plantilla=2650
+delete from documentos..variable_plantilla   where id_plantilla=2731
 commit tran
 
+
+begin tran
+delete from documentos..firma_plantilla   where id_plantilla=2731
+commit tran
 
 -----------------------------------------------------------------
 begin tran--Afecta varias rows
-delete from documentos..documento   where id_plantilla=2650
+delete from documentos..documento   where id_plantilla=2731
 commit tran
 
 begin tran
