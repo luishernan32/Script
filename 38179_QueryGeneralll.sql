@@ -507,24 +507,8 @@ select top 5 *from [documentos].[dbo].[documento] order by 1 desc
 
 
 --------------------------------------------------------------------------------
-------------------Calendarización-------------------------------------
-----------------------------------------------------------------------
---2024/01/02
 
---PROCESO: Calendarización
 
---FALLO_CALEND_FIRMA 2697
---APERTURA_ANU_CAL 2698   *
---APERT_ANUCAL_SIN_TER 2699 *
---DOC_INCOMPLETA_CAL 2694
---RECH_FALTA_SOPOR_CAL 2695
-
---(2697,2698,2699,2694,2695)
-
---con incidencia
-
---APERT_ANUCAL_SIN_TER
---APERTURA_ANU_CAL
 ------------------------------------------------------------------------------------------------------------
 --------20/12/20223----------------------------------------------------------------------------------------------------
 ----------------------------------Devolucion de valores--------------------------------------------------------------------------
@@ -554,6 +538,25 @@ select top 5 *from [documentos].[dbo].[documento] order by 1 desc
 --(2631,2632,2633,2634,2635,2636,2637)
 
 ------------------------------------------------------------------------------------------------------------
+------------------Calendarización-------------------------------------
+----------------------------------------------------------------------
+--2024/01/02
+--2024/01/10
+--PROCESO: Calendarización
+
+--FALLO_CALEND_FIRMA 2697
+--APERTURA_ANU_CAL 2698   *
+--APERT_ANUCAL_SIN_TER 2699 *
+--DOC_INCOMPLETA_CAL 2694
+--RECH_FALTA_SOPOR_CAL 2695
+
+--(2697,2698,2699,2694,2695)
+
+--con incidencia
+
+--APERT_ANUCAL_SIN_TER
+--APERTURA_ANU_CAL
+
 ------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------
 ---------------------------Consulta CODIGOS_PLANTILLAS-----------------------------------------------------------------------------
@@ -638,8 +641,8 @@ update documentos..plantilla set fecha_fin=null where id_plantilla=2636
 --update documentos..plantilla set fecha_inicio='2023-12-25' where id_plantilla in(2646,2657) --ACTA_POSESION_DEP ACTA_DE_POSESION_P 
 --update documentos..plantilla set fecha_inicio='2023-12-27' where id_plantilla in(2680,2681,2682,2683,2684,2723)--Sentar Razón
 --update documentos..plantilla set fecha_inicio='2024-01-01' where id_plantilla in(2624,2618) --Impugnación cierre de pruebasX2
---update documentos..plantilla set fecha_inicio='2024-01-03' where id_plantilla in(2697,2698,2699,2694,2695)
-update documentos..plantilla set fecha_inicio='2024-01-04' where id_plantilla in(2709,2708)
+update documentos..plantilla set fecha_inicio='2024-01-11' where id_plantilla in(2697,2698,2699,2694,2695) --Calendarizacion
+--update documentos..plantilla set fecha_inicio='2024-01-04' where id_plantilla in(2709,2708)
 commit tran
 
 ------------------------------------------------------------------------------------------------------------
