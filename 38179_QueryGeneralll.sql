@@ -55,12 +55,9 @@ select top 100 *from coactivo where id_tipo_coactivo=4  order by 1 desc
 
 
 ----------------------------------------------------------------------------------------------------
---REVISION
- 
---COA_CP 2624 *
---CIERRE_PRUEBAS 2618 *
---ACT_PERSONA_JUR 2625 *
---APERT_IMPUG_SIN_TERC 2620 * la firma queda en una sola hoja y hay una hoja en blanco
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------Pilas con estos datos-----------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -511,15 +508,6 @@ select top 5 *from [documentos].[dbo].[documento] order by 1 desc
 
 ------------------------------------------------------------------------------------------------------------
 --------20/12/20223----------------------------------------------------------------------------------------------------
-----------------------------------Devolucion de valores--------------------------------------------------------------------------
---Nota a dos plantillas con el mismo nombre en el modulo de documentos APERT_DEV_SIN_TERC
-
---04/01/2024
-
---PROCESO: Devolucion de valores
---APERT_DEV_SIN_TERC 2709
---CIERRE_PRUEBAS_DEVOL 2708
---(2709,2708)
 
 
 
@@ -558,13 +546,83 @@ select top 5 *from [documentos].[dbo].[documento] order by 1 desc
 --APERTURA_ANU_CAL
 
 ------------------------------------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------
+-- REGISTRO_FALLO  ok   id_plantilla=2619
+--APELACION_REG_FALLO ok id_plantilla=2604
+--ARCH_DESIST_COND ok id_plantilla=2602
+--COA_JUNIO_2019 ok id_plantilla=2608
+--REG_FALL_CONS_PP ok id_plantilla=2609
+--COA_SV_ACT_FC id_plantilla=2611
+
+----------------------Proceso------------Impugnación de comparendo------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+--17/01/2024
+
+--	'Apertura impugnación sin tercero'	APERT_IMPUG_SIN_TERC 2620  version creada por rafa 2724
+--	'Apertura de impugnación'	APERTURA_IMPUGNACION version 2669 creada por rafa 2725
+
+
+-- Impugnación de comparendo
+--APERT_IMPUG_SIN_TERC 2620
+--APERTURA_IMPUGNACION 2669
+--ACTA_REC_FIR_RUB 2670
+--(2724,2725,2670)
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+-----Impugnación cierre de pruebas-----------------------Proceso produccion-----------------------------------------------------------------------
+--18/01/2024
+--COA - Cierre de pruebas	COA_CP 2738 2741 *******cambios en producción
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+---------------------Proceso Produccion------------Impugnación proceso de pruebas-----------------------------------------------------------------------------------------------------
+
+--18/01/2024	
+	--Memo solicitud de pruebas	MEMO_SOLICIT_PRUEBAS	 2739
+	--Oficio de solicitud de pruebas	OFICIO_SOLIC_PRUEBAS	2740   *******cambios en producción
+
+
+	--(2738,2739,2740)
+
+--------------------------------------------------------------------------------------------------------------------------------------
+--APERT_DEV_SIN_TERC
+--------------------------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------Devolucion de valores--------------------------------------------------------------------------
+--Nota a dos plantillas con el mismo nombre en el modulo de documentos APERT_DEV_SIN_TERC
+
+--04/01/2024
+--23/01/2024
+
+--PROCESO: Devolucion de valores
+--APERT_DEV_SIN_TERC 2709  ****Presenta errores
+--CIERRE_PRUEBAS_DEVOL 2708
+--(2709,2708)
+
+------------------------------------------------------------------------------------
+
+--31/01/2024 creación de la new Plantilla
+--ACTA_RESORTEO   proceso:impugnacion cierre de pruebas
+--RAZON_SI_PRUEBAS   proceso: Sentar razón
+--COA_CP proceso:impugnacion cierre de pruebas 
+--AUTO_PAGO_PATIO ejemplo Rafael 
+
+--IMPUGNACION_CIERRE_PRUEBAS("13", "/c2/Impugnacion_Cierre_Pruebas"), //
+------------------------------------------------------------------------------------
+
+select * from documentos..plantilla where codigo_plantilla='ACTA_RESORTEO'
 ---------------------------Consulta CODIGOS_PLANTILLAS-----------------------------------------------------------------------------
 
 
 
 declare @codigoPlantilla varchar(20);
-set @codigoPlantilla = 'COAMTVACT_DP_SPP';
+set @codigoPlantilla = 'ACTA_RESORTEO';
 select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla
 select * from documentos..plantilla_configuracion where id_plantilla in (select id_plantilla from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 select * from documentos..proceso where id_proceso IN (select id_proceso from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
@@ -641,8 +699,10 @@ update documentos..plantilla set fecha_fin=null where id_plantilla=2636
 --update documentos..plantilla set fecha_inicio='2023-12-25' where id_plantilla in(2646,2657) --ACTA_POSESION_DEP ACTA_DE_POSESION_P 
 --update documentos..plantilla set fecha_inicio='2023-12-27' where id_plantilla in(2680,2681,2682,2683,2684,2723)--Sentar Razón
 --update documentos..plantilla set fecha_inicio='2024-01-01' where id_plantilla in(2624,2618) --Impugnación cierre de pruebasX2
-update documentos..plantilla set fecha_inicio='2024-01-11' where id_plantilla in(2697,2698,2699,2694,2695) --Calendarizacion
+--update documentos..plantilla set fecha_inicio='2024-01-11' where id_plantilla in(2697,2698,2699,2694,2695) --Calendarizacion
 --update documentos..plantilla set fecha_inicio='2024-01-04' where id_plantilla in(2709,2708)
+--update documentos..plantilla set fecha_inicio='2024-01-20' where id_plantilla=2738 in(2741,2739,2740)
+update documentos..plantilla set fecha_inicio='2024-01-22' where id_plantilla=2709
 commit tran
 
 ------------------------------------------------------------------------------------------------------------
@@ -1081,7 +1141,56 @@ where id_cargo=11 and fecha_final_vigencia is null
 --COA_SV_ACT_FC SI okkk ---id_plantilla_config=10185 ** id_plantilla=1412 mirar NICOLAS   impugnacion fallo
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+select v.* from documentos..variable_plantilla vp
+join documentos..variable v on v.id_variable=vp.id_variable
+where vp.id_plantilla=2740
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
+--Generando datos prueba
+
+select top 10000 pe.numero_identificacion, numero_coactivo, numero_obligacion, co.fecha_notificacion,c.id_tramite, op.nombre, co.codigo_medio_imposicion, * from proceso p
+--inner join trazabilidad_proceso tp on tp.id_proceso=p.id_proceso and tp.id_estado_proceso=38
+inner join coactivo c on p.id_proceso=c.id_proceso
+inner join obligacion_coactivo oc on c.id_coactivo=oc.id_coactivo
+inner join persona pe on c.id_deudor=pe.id_persona
+inner join comparendo co on convert(varchar,co.id_factura_axis)=oc.numero_obligacion
+inner join configuracion_infraccion ci on co.id_infraccion=ci.id_infraccion
+inner join ordenamiento_pais op on ci.id_ordenamiento_pais=op.id_ordenamiento_pais
+--inner join cartera ca on ca.nombre=co.id_factura_axis
+where p.id_estado_proceso in(29) and anio=2022
+--and ci.id_ordenamiento_pais=2
+and c.id_tipo_coactivo=1
+and c.cantidad_obligaciones=1
+--and oc.valor_obligacion=425
+--and c.fecha_notificacion is null
+--and oc.valor_interes_moratorios>0
+--and oc.valor_costas_procesales>0
+and ci.fecha_fin_vigencia is null
+--and exists (select * from obligacion_coactivo_historico och where och.id_obligacion_coactivo=oc.id_obligacion_coactivo)
+and not exists (select 1 from circulemos2.dbo.trazabilidad_proceso tp where tp.id_proceso = p.id_proceso and tp.id_estado_proceso = 36)
+order by p.fecha_inicio desc
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--Datos --APERT_DEV_SIN_TERC
+select distinct top 10000 numero_identificacion,fecha_infraccion,fecha_notificacion, c.id_factura_axis,c.numero_citacion,c.* from comparendo c inner join
+comparendo_persona cp on c.cicomparendo=cp.cicomparendo
+where c.id_estado_comparendo in(3,17,19,20)
+and fecha_infraccion>'2019-12-31'
+order by c.fecha_infraccion asc
+
+-------------------Revisar la generacion de las plantillas---------------------------------
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+select *from [documentos].[dbo].[plantilla] where id_plantilla=2685--2663
+
+select top 100 *from [documentos].[dbo].[documento] order by 1 desc
+
+
+select top 100 *from [documentos].[dbo].[documento] where id_plantilla='2750' order by 1 desc
