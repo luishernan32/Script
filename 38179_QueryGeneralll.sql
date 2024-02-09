@@ -613,21 +613,43 @@ select top 5 *from [documentos].[dbo].[documento] order by 1 desc
 --COA_CP proceso:impugnacion cierre de pruebas 
 --AUTO_PAGO_PATIO ejemplo Rafael 
 
+--RAZON_NOTI_RES_ADMIN proceso:Sentar Razón
+--MEMO_SOLICIT_PRUEBAS trae la firma de andrea
+
 --IMPUGNACION_CIERRE_PRUEBAS("13", "/c2/Impugnacion_Cierre_Pruebas"), //
 ------------------------------------------------------------------------------------
 
 select * from documentos..plantilla where codigo_plantilla='ACTA_RESORTEO'
+
+--2739
+select * from documentos..plantilla where id_plantilla=2739
 ---------------------------Consulta CODIGOS_PLANTILLAS-----------------------------------------------------------------------------
 
+--numero_consecutivo,NOMBRE_COMPLETO,CORREO_ELECTRONICO_INFRACTOR,anio_apertura_proceso,NOMBRE_ABOGADO,PLACA_VEHICULO,NOMBRE_DELEGADO,  CARGO_DELEGADO,IMAGEN_FIRMA,MEMO_DELEGADO,FECHA_DELEGADO,TEXTO_NOMBRE_2
+--NUMERO_EXPEDIENTE,FECHA_ACTUAL,HORA_ACTUAL,NOMBRE_DELEGADO,IMAGEN_FIRMA
+--CONSECUTIVO_PRUEBAS,numero_consecutivo,NOMBRE_INFRACTOR,anio_apertura_proceso,FECHA_SOLICITUD,DESCRIPCION_PRUEBA,PARA,CARACTERISTICA_PRUEBA,fecha_apertura_impug
+--CIERRE_PRUEBAS_MANUA
 
+select *from [documentos].[dbo].[plantilla] where id_plantilla=2574--2663
+select top 5 *from [documentos].[dbo].[documento] order by 1 desc
+select top 100 *from [documentos].[dbo].[documento] where id_plantilla='2690' order by 1 desc
+
+--12032705 
+--Impugnacion cierre de pruebas
+--CIERRE_PRUEBAS
+--COA_CP
+--CIERRE_PRUEBAS_MANUA
 
 declare @codigoPlantilla varchar(20);
-set @codigoPlantilla = 'ACTA_RESORTEO';
+set @codigoPlantilla = 'COA_CP';
 select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla
 select * from documentos..plantilla_configuracion where id_plantilla in (select id_plantilla from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 select * from documentos..proceso where id_proceso IN (select id_proceso from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+--NUMERO_EXPEDIENTE,FECHA_ACTUAL,HORA_ACTUAL,NOMBRE_DELEGADO,IMAGEN_FIRMA
+--NUMERO_EXPEDIENTE,FECHA_ACTUAL,HORA_ACTUAL,NOMBRE_DELEGADO,IMAGEN_FIRMA
+--NUMERO_EXPEDIENTE,FECHA_ACTUAL,HORA_ACTUAL,NOMBRE_DELEGADO,IMAGEN_FIRMA
+--NUMERO_EXPEDIENTE,FECHA_ACTUAL,HORA_ACTUAL,NOMBRE_DELEGADO,IMAGEN_FIRMA
 begin tran
 update documentos.dbo.plantilla set marca_agua=1
 where id_plantilla=2623
@@ -659,7 +681,7 @@ update documentos.dbo.plantilla set marca_agua=1
 --where id_plantilla in(2697,2698,2699,2694,2695)
 --where id_plantilla in(2709,2708,2710,2711)
 --where id_plantilla in(2712,2713,2714,2715) --FUSION Recaudo, Recaudo apelacion y Ubicabilidad (2712,2713,2714,2715)
-where id_plantilla in(2680,2681,2682,2683,2684,2723)--Sentar Razón
+where id_plantilla in(2680,2681,2682,2683,2684,2723,2750)--Sentar Razón
 
 
 
@@ -1190,7 +1212,9 @@ order by c.fecha_infraccion asc
 ------------------------------------------------------------------------------------------
 select *from [documentos].[dbo].[plantilla] where id_plantilla=2685--2663
 
-select top 100 *from [documentos].[dbo].[documento] order by 1 desc
+select top 5 *from [documentos].[dbo].[documento] order by 1 desc
 
 
-select top 100 *from [documentos].[dbo].[documento] where id_plantilla='2750' order by 1 desc
+select top 100 *from [documentos].[dbo].[documento] where id_plantilla='2739' order by 1 desc
+
+--12032705
