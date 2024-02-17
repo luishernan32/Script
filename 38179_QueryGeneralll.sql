@@ -638,10 +638,10 @@ select top 100 *from [documentos].[dbo].[documento] where id_plantilla='2690' or
 --Impugnacion cierre de pruebas
 --CIERRE_PRUEBAS
 --COA_CP
---CIERRE_PRUEBAS_MANUA
+--CIERRE_PRUEBAS_MANUA FALLO_CALEND_FIRMA
 
 declare @codigoPlantilla varchar(20);
-set @codigoPlantilla = 'COA_CP';
+set @codigoPlantilla = 'REGISTRO_FALLO_CAL';
 select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla
 select * from documentos..plantilla_configuracion where id_plantilla in (select id_plantilla from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 select * from documentos..proceso where id_proceso IN (select id_proceso from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
@@ -650,6 +650,10 @@ select * from documentos..proceso where id_proceso IN (select id_proceso from do
 --NUMERO_EXPEDIENTE,FECHA_ACTUAL,HORA_ACTUAL,NOMBRE_DELEGADO,IMAGEN_FIRMA
 --NUMERO_EXPEDIENTE,FECHA_ACTUAL,HORA_ACTUAL,NOMBRE_DELEGADO,IMAGEN_FIRMA
 --NUMERO_EXPEDIENTE,FECHA_ACTUAL,HORA_ACTUAL,NOMBRE_DELEGADO,IMAGEN_FIRMA
+select * from documentos..plantilla_configuracion where id_plantilla_config='10202' --131
+select * from documentos..plantilla where id_plantilla='2750'
+
+
 begin tran
 update documentos.dbo.plantilla set marca_agua=1
 where id_plantilla=2623
