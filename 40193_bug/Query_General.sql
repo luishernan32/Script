@@ -25,7 +25,11 @@ order by p.fecha_inicio asc
 --0918533597* 0958134421* 0958134421* 0926207671*  0919680033
 
 ---------------------------------------------------------------------
-
+--****************************************************
+----------------FINANCIACIÓN--------------------------
+--****************************************************
+-- De aquí va a salir el <id_tramite> para hace el pago de cuota inicial
+--RECAUDO___RealizarPagoTDC
 Select top 9 * from financiacion f
 join proceso p on f.id_proceso=p.id_proceso 
 where 1=1
@@ -37,11 +41,117 @@ order by id_financiacion desc
 
 --533476
 -----------------------------------------------
+--Paso 2
+-----------------------------------------------
+--****************************************************
+-----REPLICAR EL PAGO POR MEDIO DE LOS SPS------------
+--****************************************************
+---------------------------------------------------------------
+--SPS para replica de pagos
+exec integracion_terceros.dbo.dba_axis_info_v_pagos_pre
+exec integracion_terceros.dbo.dba_axis_info_v_detalles_pagos_pre
+exec integracion_terceros.dbo.obtenerPagos '11001'
+------------------------------------------------------------------
 
-Select top 100 * from integracion_terceros..it_recaudo order by 1 desc
-update integracion_terceros..it_recaudo set numero_recaudo='5935442xx' where id_recaudo in(3310474)
+------------------------------------------------------------------
+-----------------------------------------------
+--Paso 3
+-----------------------------------------------
+--Despues de ejecutar el SPS revisar el numero_recaudo
+Select top 100 * from integracion_terceros..it_recaudo order by 1 desc --Validar que el número de recaudo no se repita
+--If se repite tomar el mas antiguo y actualizarlo
+Select top 100 * from integracion_terceros..it_recaudo where numero_recaudo='5935456' order by 1 desc
+update integracion_terceros..it_recaudo set numero_recaudo='5935455xx' where id_recaudo in(3310479)
 
---------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------
+--Paso 4
+-----------------------------------------------
+--Ejecutar el jobReplicarPago pag3 VA A LLEGAR UN CORREO
+--Admon___Tareas automaticas
+--Al ejecutar el jobReplicarPago el estado de lectura pasa a ser 2
+----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------
+--Paso 5
+-----------------------------------------------
+--Se vuelve a ejecutar está query y se revisa que el estado de lectura sea = 2
+Select top 100 * from integracion_terceros..it_recaudo where numero_recaudo='5935456' order by 1 desc
+----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------
+--Paso 6
+-----------------------------------------------
+-- Se vuelve a ejecutar está consulta y ver que el convenio pase a firme (campo observación EN FIRME)
+Select top 9 * from financiacion f
+join proceso p on f.id_proceso=p.id_proceso 
+where 1=1
+--and valor_total_intereses_moratorios=0
+--and id_tipo_financiacion in(3,4) 
+--and id_estado_proceso=16
+--and numero_financiacion=533476 
+order by id_financiacion desc
+
+----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------
+--Paso 7
+-----------------------------------------------
+--**Se va a incumplir la cuota #1
+
+--El id_financiación lo voy a sacar de la consulta anterior
+
+select * from trazabilidad_proceso tp join estado_proceso ep on ep.id_estado_proceso=tp.id_estado_proceso where id_proceso in(select id_proceso from financiacion where id_financiacion=344973)
+select * from acumulado_financiaciones where id_financiacion=344973 order by 3,4 asc
+select * from detalle_financiacion where id_financiacion=344973
+select * from obligacion_financiacion where id_financiacion=344973
+select * from cartera where nombre in (select numero_obligacion from obligacion_financiacion where id_financiacion=344973)
+select * from cartera where nombre in (select numero_financiacion from financiacion where id_financiacion=344973)
+
+--Tomar el id_detalle_financiación tomar el id_detalle_financiacion de la cuota 1
+
+--QUERYS INCUMPLIMIENTO DE CONVENIOS
+	select * from detalle_financiacion
+	where id_financiacion=344969
+ 
+	begin tran
+	update circulemos2.dbo.detalle_financiacion
+	set fecha_pago_oportuno = '2024-01-31'
+	--set fecha_pago_oportuno = '2024-01-15'
+	where id_detalle_financiacion = 1525734;
+	commit
+
+
+----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------
+--Paso 7
+-----------------------------------------------
+--Lanzar el jobNotificarConveniosIncumplidos pag2
+
+----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------
+--Paso 8
+-----------------------------------------------
+--Contiene las notificaciones de la cuota "ver cuotas incumplidas" 
+--Pasan 5 días habiles para que se intente liquidar el convenio
+--El bug en general es que no se está guardando la informacion en está tabla <trazabilidad_financiacion_incumplida>
+select *from trazabilidad_financiacion_incumplida  
+where numero_de_convenio=533487--533490 --
+order by 1 desc
+--Se guarda el error y no se realiza la liquidación se cumple el imcumplimiento para la segunda cuota #2,
+--El job encuentra un error con estado=1 no se está tomanto para notificarlo y hay está el problema
+
+
+begin tran
+delete trazabilidad_financiacion_incumplida  --El error se guarda en está tabla, está tabla contiene las notificaciones de la cuota
+where id_trazabilidad_financiacion=688546
+commit tran
+----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+
 
 --QUERYS INCUMPLIMIENTO DE CONVENIOS
 	select * from detalle_financiacion
@@ -53,17 +163,18 @@ update integracion_terceros..it_recaudo set numero_recaudo='5935442xx' where id_
 	where id_detalle_financiacion = 1525734;
 	commit
 
----------------------------------
---SPS para replica de pagos
-exec integracion_terceros.dbo.dba_axis_info_v_pagos_pre
-exec integracion_terceros.dbo.dba_axis_info_v_detalles_pagos_pre
-exec integracion_terceros.dbo.obtenerPagos '11001'
+
+
+
+
+
 ------------------------------------------------------------------
-Select top 100 * from integracion_terceros..it_recaudo order by 1 desc --Validar que el número de recaudo no se repita
-Select top 100 * from integracion_terceros..it_recaudo where numero_recaudo='5935456' order by 1 desc
-update integracion_terceros..it_recaudo set numero_recaudo='5935455xx' where id_recaudo in(3310479)
 
+--Despues de ejecutar los SP hay que consultar está tabla
+Select top 100 * from integracion_terceros..it_recaudo order by 1 desc
+update integracion_terceros..it_recaudo set numero_recaudo='5935442xx' where id_recaudo in(3310474)
 
+--------------------------------------------------------------------
 
 ---------------------------------------------------------
 -----------PasosAdicionales------------------------------
