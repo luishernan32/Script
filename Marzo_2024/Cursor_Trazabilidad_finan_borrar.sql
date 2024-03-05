@@ -32,8 +32,23 @@ DECLARE cDatos CURSOR FOR
 		-- NULL AS ID_COACTIVO,
 		-- GETDATE() AS FECHA_REGISTRO_MARCACION
 		------------a.*,b.*--numero_financiacion,FECHA_REGISTRO
- from integracion_terceros.dbo.v_financiaciones_pre a INNER JOIN integracion_terceros.dbo.V_CUOTASFINANCIACION_pre AS b
-      ON a.numero_financiacion = b.numero_financiacion
+
+
+ --from integracion_terceros.dbo.v_financiaciones_pre a INNER JOIN integracion_terceros.dbo.V_CUOTASFINANCIACION_pre AS b
+ --     ON a.numero_financiacion = b.numero_financiacion
+
+from  
+  integracion_terceros.dbo.v_all_financiaciones a 
+  JOIN integracion_terceros.dbo.v_all_detallefinanciacion df ON a.numero_financiacion = df.numero_financiacion 
+  inner join circulemos2.dbo.persona p on p.numero_identificacion = a.IDENTIFICACION
+  inner join integracion_terceros.dbo.V_CUOTASFINANCIACION_pre b on b.numero_financiacion=df.numero_financiacion
+  --WHERE 
+  --a.fecha_registro BETWEEN '2023-12-01' AND '2024-02-23'
+  ----and exists (select distinct 1 from integracion_terceros.dbo.v_all_detallefinanciacion df where TIPO_OBLICACION='COA') 
+  --AND df.TIPO_OBLICACION = 'COA' --Nicolai = 'FAQ', Oscar = 'COA'
+ 
+ORDER BY 
+  a.fecha_inicio_deuda;
 
 
 OPEN cDatos
@@ -76,53 +91,15 @@ DEALLOCATE cDatos --Liberar la memoria del cursor
 
 
 
---SELECT *
---FROM #tblTemporal
+SELECT *
+FROM #tblTemporal
+
+
+--       #tblTemporal
+
+--Preguntar
+--Dónde se creo la tabla
 
 
 
 
---select *from integracion_terceros.dbo.v_financiaciones_pre 
-
-
---select *from integracion_terceros.dbo.V_CUOTASFINANCIACION_pre
-
-
-
-------------------------------------------
-
---SELECT COLUMN_NAME
---FROM INFORMATION_SCHEMA.COLUMNS
---WHERE TABLE_NAME = 'V_CUOTASFINANCIACION_pre';
-
---SELECT 
---    OBJECT_NAME(object_id) AS vista_nombre,
---    definition AS vista_query
---FROM 
---    sys.sql_modules
---WHERE 
---    OBJECT_NAME(object_id) = 'V_CUOTASFINANCIACION_pre';
-
-
---	select *
---from integracion_terceros.dbo.V_FINANCIACIONES
-
---------------------------------------------------------------------
-
---select *
---from circulemos2.dbo.trazabilidad_financiacion_incumplida
-
---select *
---from V_FINANCIACIONES.FECHA_REGISTRO
-
-
-select *from circulemos2.dbo.trazabilidad_financiacion_incumplida
-
-WHERE f.fecha_registro BETWEEN '2023-12-01' AND '2024-02-23'
-
-
-where fecha_de_convenio is not null
-
-select *from circulemos2.dbo.trazabilidad_envio_correo
-
-select *from coactivo
