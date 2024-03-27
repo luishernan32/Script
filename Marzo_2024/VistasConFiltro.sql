@@ -57,3 +57,35 @@ select *from
 
 
 select *from integracion_terceros.dbo.v_financiaciones_rec  --Ya se tiene el id_tramite
+
+select *from integracion_terceros.dbo.v_detallefinanciacion_rec
+
+------------------------------------------------------
+
+select *from integracion_terceros.dbo.v_all_financiaciones --Reemplazar por integracion_terceros.dbo.v_financiaciones_rec
+WHERE fecha_registro BETWEEN '2023-12-01' AND '2024-02-23'
+order by FECHA_REGISTRO asc
+------------------------------------------------------
+
+select *from integracion_terceros.dbo.v_financiaciones_rec
+
+select *from integracion_terceros.dbo.v_detallefinanciacion_rec
+WHERE fecha_registro BETWEEN '2023-12-01' AND '2024-02-23'
+order by FECHA_REGISTRO asc
+
+select *from integracion_terceros.dbo.V_CUOTASFINANCIACION_pre
+
+-------------------------------------------------------------------------
+--Envio Alexander 06/03/2024
+select *
+into integracion_terceros.dbo.v_pagos_embargos_axis_hist
+from   [10.6.30.36].integracion_terceros.dbo.v_pagos_embargos_axis_hist
+ 
+select *
+into integracion_terceros.dbo.v_pagos_embargos_coactivos_rec
+from   [10.6.30.36].integracion_terceros.dbo.v_pagos_embargos_coactivos_rec
+
+select *from v_pagos_embargos_axis_hist.dbo.v_pagos_embargos_axis_hist
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------

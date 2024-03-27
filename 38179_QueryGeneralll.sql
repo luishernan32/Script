@@ -641,10 +641,43 @@ select top 100 *from [documentos].[dbo].[documento] where id_plantilla='2690' or
 --CIERRE_PRUEBAS_MANUA FALLO_CALEND_FIRMA
 
 declare @codigoPlantilla varchar(20);
-set @codigoPlantilla = 'REGISTRO_FALLO_CAL';
+set @codigoPlantilla = 'COA_ORDEN_PAGO_P';
 select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla
 select * from documentos..plantilla_configuracion where id_plantilla in (select id_plantilla from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 select * from documentos..proceso where id_proceso IN (select id_proceso from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
+
+------------------------------------------------------------------------------
+--Ver los documentos generados
+
+--ORDEN_COBRO_ORDE_ELE--La dañe
+------------------------------------------------------------------------------------------
+
+--Puedo revisar el codigo de la plantilla que se acabo de generar
+
+select *from [documentos].[dbo].[plantilla] where id_plantilla=2254  --2413--2596--2597  --2324--2596--2413--2596--2597--2685--2663
+
+select top 5 *from [documentos].[dbo].[documento] order by 1 desc
+
+
+select top 100 *from [documentos].[dbo].[documento] where id_plantilla='2739' order by 1 desc
+
+
+select *from parametro
+select upper(nombre) cargo(NOLOCK) where id_cargo==11
+
+select (valor_parametro_defecto) from parametro
+where codigo_parametro=434
+
+-------------------------------------------------
+(SELECT valor_parametro_defecto
+        FROM   parametro(nolock)
+        WHERE  codigo_parametro = 436) 
+
+
+
+--12032705
+--ACTA_DE_POSESION_P   --RADICAR COBRO COACTIVO
+--AUTO_PAGO_PATIO_V2    --RADICAR COBRO COACTIVO
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --NUMERO_EXPEDIENTE,FECHA_ACTUAL,HORA_ACTUAL,NOMBRE_DELEGADO,IMAGEN_FIRMA
 --NUMERO_EXPEDIENTE,FECHA_ACTUAL,HORA_ACTUAL,NOMBRE_DELEGADO,IMAGEN_FIRMA
@@ -728,7 +761,7 @@ update documentos..plantilla set fecha_fin=null where id_plantilla=2636
 --update documentos..plantilla set fecha_inicio='2024-01-11' where id_plantilla in(2697,2698,2699,2694,2695) --Calendarizacion
 --update documentos..plantilla set fecha_inicio='2024-01-04' where id_plantilla in(2709,2708)
 --update documentos..plantilla set fecha_inicio='2024-01-20' where id_plantilla=2738 in(2741,2739,2740)
-update documentos..plantilla set fecha_inicio='2024-01-22' where id_plantilla=2709
+update documentos..plantilla set fecha_inicio='2024-03-25' where id_plantilla=2610
 commit tran
 
 ------------------------------------------------------------------------------------------------------------
@@ -813,6 +846,13 @@ select *from documentos..firma_plantilla
 where id_plantilla=2639
 
 
+
+ (SELECT SUBSTRING(valor, 1, CHARINDEX('DIRECTOR(A)', valor) + LEN('DIRECTOR(A)') - 1) AS valor_parametro_defecto
+      FROM (
+       SELECT valor_parametro_defecto AS valor
+        FROM   parametro(nolock)
+        WHERE  codigo_parametro = 436
+       )) AS cargo_delegado
 
 
 
@@ -1213,12 +1253,3 @@ order by c.fecha_infraccion asc
 
 
 
-------------------------------------------------------------------------------------------
-select *from [documentos].[dbo].[plantilla] where id_plantilla=2685--2663
-
-select top 5 *from [documentos].[dbo].[documento] order by 1 desc
-
-
-select top 100 *from [documentos].[dbo].[documento] where id_plantilla='2739' order by 1 desc
-
---12032705

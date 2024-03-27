@@ -2,10 +2,8 @@ DECLARE @tipo_de_financiacion INT,
 		@numero_de_convenio INT,
 		@fecha_de_convenio DATE,
 		@ID_ESTADO_DE_INCUMPLIMIENTO INT,
-		@estado_de_convenio varchar(30),
-		@CUOTAS_INCUMPLIDAS int,
-		@VALOR_CUOTAS_INCUMPLIDAS decimal(5,2),
-		@FECHA_PAGO_OPORTUNO date
+		@estado_de_convenio varchar(30)
+		
 		
 IF OBJECT_ID('tempdb..#tblTemporal') IS NOT NULL
 BEGIN
@@ -17,17 +15,19 @@ BEGIN
 	from circulemos2.dbo.trazabilidad_financiacion_incumplida
 	where 1= 2
 END
-		
+
+--------------------------------
+-- Declaración del cursor
+--------------------------------	
+
 DECLARE cDatos CURSOR FOR
  select 
         1 as tipo_de_financiacion,----------------------------------------
 		a.numero_financiacion as numero_de_convenio,
 		CAST(a.fecha_registro AS DATE) as fecha_de_convenio,
 		'INCUMPLIDO' as estado_de_convenio,-------------------------------
-		2 as ID_ESTADO_DE_INCUMPLIMIENTO,-------------------------------
-		b.NRO_CUOTA AS CUOTAS_INCUMPLIDAS,
-		b.VALOR_CUOTA AS VALOR_CUOTAS_INCUMPLIDAS,-------------------------
-		b.VENCIMIENTO_CUOTA AS FECHA_PAGO_OPORTUNO
+		2 as ID_ESTADO_DE_INCUMPLIMIENTO------------------------------
+		
 		-- 0 AS ID_FINANCIACION,
 		-- NULL AS ID_COACTIVO,
 		-- GETDATE() AS FECHA_REGISTRO_MARCACION
@@ -38,23 +38,30 @@ DECLARE cDatos CURSOR FOR
  --     ON a.numero_financiacion = b.numero_financiacion
 
 from  
-  integracion_terceros.dbo.v_all_financiaciones a 
-  JOIN integracion_terceros.dbo.v_all_detallefinanciacion df ON a.numero_financiacion = df.numero_financiacion 
-  inner join circulemos2.dbo.persona p on p.numero_identificacion = a.IDENTIFICACION
+  integracion_terceros.dbo.v_financiaciones_rec a
+  JOIN integracion_terceros.dbo.v_detallefinanciacion_rec df on a.numero_financiacion=df.numero_financiacion
   inner join integracion_terceros.dbo.V_CUOTASFINANCIACION_pre b on b.numero_financiacion=df.numero_financiacion
   --WHERE 
-  --a.fecha_registro BETWEEN '2023-12-01' AND '2024-02-23'
-  ----and exists (select distinct 1 from integracion_terceros.dbo.v_all_detallefinanciacion df where TIPO_OBLICACION='COA') 
-  --AND df.TIPO_OBLICACION = 'COA' --Nicolai = 'FAQ', Oscar = 'COA'
+  --df.fecha_registro BETWEEN '2023-12-01' AND '2024-02-23'
  
 ORDER BY 
   a.fecha_inicio_deuda;
-   
+    
+---------------------------
+-- Apertura del cursor-----
+---------------------------
 
 OPEN cDatos
 
-FETCH NEXT FROM cDatos INTO @tipo_de_financiacion, @numero_de_convenio,@fecha_de_convenio,@estado_de_convenio,@ID_ESTADO_DE_INCUMPLIMIENTO,
-                                    @CUOTAS_INCUMPLIDAS,@VALOR_CUOTAS_INCUMPLIDAS ,	@FECHA_PAGO_OPORTUNO 
+---------------------------
+-- Bucle de procesamiento
+---------------------------
+
+-----------------------------
+-- Obtener la siguiente fila
+-----------------------------
+FETCH NEXT FROM cDatos INTO @tipo_de_financiacion, @numero_de_convenio,@fecha_de_convenio,@estado_de_convenio,@ID_ESTADO_DE_INCUMPLIMIENTO
+                                     
 WHILE @@FETCH_STATUS = 0
 BEGIN
     -- Procesar la fila actual
@@ -69,30 +76,30 @@ insert into #tblTemporal (
 ,[fecha_de_convenio]
 ,[estado_de_convenio]
 ,[id_estado_de_incumplimiento]
-,[cuotas_incumplidas]
-,[valor_cuotas_incumplidas]
 ,[fecha_pago_oportuno]
 ,[id_financiacion]---------???
 ,[id_coactivo]
 ,[fecha_registro_marcacion]
 	  )
 	  VALUES 
-	  ( @tipo_de_financiacion, @numero_de_convenio,@fecha_de_convenio,@estado_de_convenio,@ID_ESTADO_DE_INCUMPLIMIENTO,
-       @CUOTAS_INCUMPLIDAS,@VALOR_CUOTAS_INCUMPLIDAS ,	@FECHA_PAGO_OPORTUNO
+	  ( @tipo_de_financiacion, @numero_de_convenio,@fecha_de_convenio,@estado_de_convenio,@ID_ESTADO_DE_INCUMPLIMIENTO
 	   ,0,0,GETDATE()---- IMPLEMENTAR SEGUN LO QUE SE PREGUNTA
 	  )
 
-    FETCH NEXT FROM cDatos INTO @tipo_de_financiacion, @numero_de_convenio,@fecha_de_convenio,@estado_de_convenio,@ID_ESTADO_DE_INCUMPLIMIENTO,
-										@CUOTAS_INCUMPLIDAS,@VALOR_CUOTAS_INCUMPLIDAS ,	@FECHA_PAGO_OPORTUNO 
+    FETCH NEXT FROM cDatos INTO @tipo_de_financiacion, @numero_de_convenio,@fecha_de_convenio,@estado_de_convenio,@ID_ESTADO_DE_INCUMPLIMIENTO
+
 END
 
+-------------------------------
+------ Cierre del cursor ------
+-------------------------------
 CLOSE cDatos
 DEALLOCATE cDatos --Liberar la memoria del cursor
 
 
 
-SELECT *
-FROM #tblTemporal
+--SELECT *
+--FROM #tblTemporal
 
 
 --       #tblTemporal

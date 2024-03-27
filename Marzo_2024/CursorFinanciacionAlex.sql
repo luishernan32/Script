@@ -121,6 +121,10 @@ WHEN f.ID_TIPO_CONVENIO = 'CRV' THEN 'FINANCIACION CRV' END TIPO_CONVENIO,
 INTO #tmp_v_financiaciones_rec
 from v_financiaciones_rec f
 
+-------------------------------------
+---Declaracion del cursor
+------------------------------------
+
 DECLARE cursor_datos CURSOR FOR
 SELECT top 6
   f.numero_financiacion AS numero_financiacion, 
@@ -145,6 +149,10 @@ SELECT top 6
   0 as numero_referencia_terceros, --Se asigna en el cursor
   f.ID_TRAMITE as id_tramite, --pendiente de entrega por parte de alexander
   1 as id_tipo_financiacion --Nicolai = 1, Oscar = 2
+
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+
 FROM #tmp_v_financiaciones_rec f 
   WHERE 
   f.fecha_registro BETWEEN '2023-12-01' AND '2024-02-16'
@@ -154,9 +162,18 @@ FROM #tmp_v_financiaciones_rec f
   AND F.NUMERO_FINANCIACION = 532577
 ORDER BY 
   f.numero_financiacion ;
+
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
  
- 
+--------------------------------------
+--------- Apertura del cursor--------- 
+--------------------------------------
 OPEN cursor_datos;
+
+--------------------------------------
+-- Bucle de procesamiento------------
+-------------------------------------
 
 	FETCH NEXT FROM cursor_datos INTO 
 		  @numero_financiacion, @numero_cuotas, @anio, @fechaRegistro,
@@ -366,6 +383,10 @@ OPEN cursor_datos;
 			null as nueva_fecha_pago 
 			*/
 
+			--------------------------------------------------------------
+			-- Obtener la siguiente fila
+			--------------------------------------------------------------
+
 			--pasando al siguiente registro del cursor_detalle_financiacion
 			fetch next from cursor_detalle_financiacion into 
 			@df_numero_financiacion,@df_nro_cuota,@df_inicio_cuota,@df_vencimiento_cuota,
@@ -373,6 +394,10 @@ OPEN cursor_datos;
 			@df_estado_lectura,@df_fecha_registro
 
 			end
+        ----------------------------------------------
+		-- Cierre del cursor-------------------------
+		----------------------------------------------
+
 		close cursor_detalle_financiacion
 		deallocate cursor_detalle_financiacion
 
@@ -403,7 +428,9 @@ OPEN cursor_datos;
 
 		-- insertar la cartera del convenio
 		-- 
- 
+---------------------------------------------------------------------------
+			-- Obtener la siguiente fila
+---------------------------------------------------------------------------
 		FETCH NEXT FROM cursor_datos INTO 
 		  @numero_financiacion, @numero_cuotas, @anio, @fechaRegistro,
 		  @id_deudor, @id_codeudor,@codigo_organismo, 
@@ -416,6 +443,11 @@ OPEN cursor_datos;
 		  @numero_referencia_terceros,@id_tramite,
 		  @id_tipo_financiacion;
 	END;
- 
+
+ ----------------------------------------------
+		-- Cierre del cursor-------------------------
+		---------------------------------------------- 
 CLOSE cursor_datos;
 DEALLOCATE cursor_datos;
+
+--Según este desarrollo hay dos cursores cursor_datos y cursor_detalle_financiacion
