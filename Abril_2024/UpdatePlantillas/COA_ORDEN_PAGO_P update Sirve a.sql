@@ -149,7 +149,10 @@ SELECT c.numero_coactivo,
         WHERE  id_periodo = :periodo)
        + p.recargos_moratorio
        AS suma,
-       p.recargos_moratorio
+       p.recargos_moratorio,
+	   (SELECT SUBSTRING(valor_parametro_defecto,1,58)
+        FROM   parametro(nolock)
+        WHERE  codigo_parametro = 436)                     AS cargo_delegado
 FROM   precoactivo p
        INNER JOIN coactivo c
                ON c.id_deudor = p.id_deudor

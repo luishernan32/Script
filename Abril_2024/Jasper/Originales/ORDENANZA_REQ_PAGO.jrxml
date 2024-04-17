@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ORD_COIP_SIN_IMPUG" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9a4b655b-0f69-40d7-8ec3-560c3a2c6bd9">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="1152"/>
+	<parameter name="IMAGE_DIR_KEY" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR_KEY" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PREVIEW_KEY" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[false]]></defaultValueExpression>
+	</parameter>
+	<parameter name="NOW_YEAR" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new Date().getYear()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="NOW_MONTH" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new Date().getMonth()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="NOW_DAY" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new Date().getDay()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="NOW_HOUR" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new Date().getHours() +" : "+ new Date().getMinutes()+" : "+new Date().getSeconds()]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="DELEGADO_TITULONOMBRE_" class="java.lang.String"/>
+	<field name="NOMBRE_INFRACTOR" class="java.lang.String"/>
+	<field name="T_DOCUMENTO_INFRACTOR" class="java.lang.String"/>
+	<field name="N_DOCUMENTO_INFRACTOR" class="java.lang.String"/>
+	<field name="VALOR_MULTA" class="java.lang.String"/>
+	<field name="CIUDAD_INFRACCION" class="java.lang.String"/>
+	<field name="FECHA_INFRACCION" class="java.lang.String"/>
+	<field name="numero_citacion" class="java.lang.String"/>
+	<field name="DESCRIPCION_INFRACCION" class="java.lang.String"/>
+	<field name="PLACA_VEHICULO" class="java.lang.String"/>
+	<field name="DIRECCION_INFRACCION" class="java.lang.String"/>
+	<field name="NOMBRE_AGENTE" class="java.lang.String"/>
+	<field name="PLACA_AGENTE" class="java.lang.String"/>
+	<field name="FIRMA_AGENTE" class="java.lang.String"/>
+	<field name="FIRMA_FUNCIONARIO_" class="java.lang.String"/>
+	<field name="FECHA_SOLICITUD" class="java.lang.String"/>
+	<field name="LogoATM_variable" class="java.lang.String"/>
+	<field name="UBICACION_INFRACTOR" class="java.lang.String"/>
+	<field name="DESCRIPCION_MULTAS" class="java.lang.String"/>
+	<field name="PARRAFO_1" class="java.lang.String"/>
+	<field name="PARRAFO_2" class="java.lang.String"/>
+	<field name="CARGO_DELEGADO" class="java.lang.String"/>
+	<field name="CODIGO_CAMARA" class="java.lang.String"/>
+	<field name="FECHA_CALIBRACION" class="java.lang.String"/>
+	<field name="VELOCIDAD_PERMITIDA" class="java.lang.String"/>
+	<field name="VELOCIDAD_INFRACCION" class="java.lang.String"/>
+	<field name="FECHA_GENERACION" class="java.lang.String"/>
+	<field name="CODIGO_AGENTE" class="java.lang.String"/>
+	<field name="NUMERO_FACTURA" class="java.lang.String"/>
+	<background>
+		<band height="752" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{PREVIEW_KEY}.booleanValue()]]></printWhenExpression>
+			<image scaleImage="FillFrame" isUsingCache="false" isLazy="true" onErrorType="Blank">
+				<reportElement x="-28" y="0" width="612" height="736" isPrintWhenDetailOverflows="true" uuid="b85a9754-25c9-4880-8d6c-025da15abd5e">
+					<printWhenExpression><![CDATA[$P{PREVIEW_KEY}]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{IMAGE_DIR_KEY} + "marca_preliminar.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<pageHeader>
+		<band height="71" splitType="Stretch">
+			<image isLazy="true" onErrorType="Blank">
+				<reportElement stretchType="RelativeToBandHeight" x="210" y="0" width="118" height="71" uuid="7cb811f8-655a-4f77-a04d-3d0e554465d9"/>
+				<imageExpression><![CDATA[$F{LogoATM_variable}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="631">
+			<textField>
+				<reportElement x="0" y="159" width="558" height="234" uuid="b31cbe20-a92b-47f0-91de-319b6d8f3388"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PARRAFO_1}+"\n\n"+$F{PARRAFO_2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="5" width="538" height="14" uuid="06bdf64a-109d-4a62-8c26-309835825201"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["REQUERIMIENTO DE PAGO VOLUNTARIO"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="30" width="558" height="14" uuid="88a76b23-9c8b-45d4-8a1e-70cfd1ac5f56">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TÍTULO DE CRÉDITO No.: "+$F{numero_citacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="472" width="559" height="15" uuid="a0042072-825b-452a-ba36-f0538775f519"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Lo que comunico a Usted para los fines pertinentes]]></text>
+			</staticText>
+			<image isLazy="true" onErrorType="Blank">
+				<reportElement x="23" y="512" width="180" height="61" uuid="04ef15dc-1a0b-4bbf-905f-5d6c1f39d885"/>
+				<imageExpression><![CDATA[$F{FIRMA_FUNCIONARIO_}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="0" y="63" width="558" height="14" uuid="9b9e2088-0439-47e0-9cdd-164bc2909747">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Número de identificación: "+$F{T_DOCUMENTO_INFRACTOR}+" "+$F{N_DOCUMENTO_INFRACTOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="78" width="558" height="14" uuid="320fa873-13af-4688-ac18-f580dfaab36a">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dirección: "+$F{UBICACION_INFRACTOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="93" width="558" height="14" uuid="b22cd962-b895-4df4-8bc8-5b675547f3c5">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Guayaquil, a los "+$F{FECHA_GENERACION}+"."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="112" width="558" height="41" uuid="42644561-475e-471c-878f-68ee6002106f">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dentro del expediente de Citación N°: "+ $F{numero_citacion} + ", una vez vencido el plazo de suspensión de los procesos coactivos establecido en la Disposición Vigésima Tercera de la Ley Orgánica de Apoyo Humanitario, se le hace saber a usted lo siguiente:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="393" width="558" height="79" uuid="d058d051-745c-45ac-8afc-030e063e707f"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Por lo antes mencionado, requerimos de usted el pago de la multa por concepto de '"+ $F{DESCRIPCION_INFRACCION} +"' por el valor de $" + $F{VALOR_MULTA} +" más los recargos de ley, que deberá efectuarlo dentro de los 10 días contados desde la fecha de la presente notificación."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="569" width="558" height="13" uuid="ac87deb1-a9b4-4015-9602-a58f59928d58"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DELEGADO_TITULONOMBRE_}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="595" width="558" height="16" uuid="9632be70-7c3c-4569-a925-ad82169425e6"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AGENCIA DE TRÁNSITO Y MOVILIDAD]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="582" width="558" height="13" uuid="d89bb219-12be-4ae2-9208-fd75e874bd49"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CARGO_DELEGADO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="47" width="558" height="14" uuid="f3e51a88-ee4c-4da7-8039-9f82db3a016e">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Nombre de deudor: "+($F{NOMBRE_INFRACTOR} == null ? "" :$F{NOMBRE_INFRACTOR})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="610" width="558" height="13" uuid="6e76e421-cdb4-44b2-99cb-7f03fa0a7b7d"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NUMERO_FACTURA}==null?"":$F{NUMERO_FACTURA}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="601">
+			<frame>
+				<reportElement x="2" y="17" width="558" height="520" uuid="0d5af0b6-b692-4c8e-a884-25388eae20e7"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<image isLazy="true" onErrorType="Blank">
+					<reportElement x="51" y="9" width="69" height="63" uuid="eaaba776-0456-4ae9-94b7-04c18fb271e9"/>
+					<imageExpression><![CDATA[$F{LogoATM_variable}]]></imageExpression>
+				</image>
+				<textField>
+					<reportElement x="11" y="81" width="476" height="26" uuid="fba6c184-e600-4883-ab32-d3ad01aaba17"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Título de crédito No. " + "\n" + $F{numero_citacion}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="12" y="107" width="524" height="264" uuid="d52cb98e-730e-46e6-ae95-040fb6fa9f81"/>
+					<textElement textAlignment="Justified" markup="styled">
+						<font fontName="Arial" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<style isBold='true'>"+"1. ADMINISTRACIÓN PÚBLICA ACREEDORA: " + "</style>" + "Empresa Pública de Tránsito y Movilidad de Guayaquil EP"+"\n"+
+"<style isBold='true'>"+"2. DEUDOR (A):  " + "</style>" + ($F{NOMBRE_INFRACTOR} == null ? "" :$F{NOMBRE_INFRACTOR}) +"\n"+
+"<style isBold='true'>"+"3. IDENTIFICACIÓN: NO. "+"</style>" + ($F{N_DOCUMENTO_INFRACTOR} == null ? "": $F{N_DOCUMENTO_INFRACTOR}) +"\n"+
+"<style isBold='true'>"+"4. FECHA Y HORA:  "+"</style>"+($F{FECHA_INFRACCION}== null ? "": $F{FECHA_INFRACCION})+". \n"+
+"<style isBold='true'>"+"5. VEHICULO PLACA: "+"</style>" +($F{PLACA_VEHICULO}== null ? "":$F{PLACA_VEHICULO})+"\n"+
+"<style isBold='true'>"+"6. LUGAR: " + "</style>" +($F{DIRECCION_INFRACCION}== null ? "":$F{DIRECCION_INFRACCION})+"\n"+
+"<style isBold='true'>"+"7. VALOR DE LA MULTA: $"+"</style>" +($F{VALOR_MULTA}== null ? "0":$F{VALOR_MULTA})+"\n"+
+"<style isBold='true'>"+"8. CONCEPTO: "+ "</style>" +" Contravención de Tránsito "+ ($F{DESCRIPCION_INFRACCION}== null ? "": $F{DESCRIPCION_INFRACCION}) +"\n"+
+"<style isBold='true'>9. </style>Se requiere que la o el deudor pague voluntariamente la obligación por el valor de $" + ($F{VALOR_MULTA}== null ? "0":$F{VALOR_MULTA})+ " más los recargos de ley dentro de los 10 días hábiles, contados desde la fecha de la presente notificación.  Vencido ese plazo,  se generará el recargo respectivo calculado en base a la Tasa Activa Referencial para 90 días establecida por el Banco Central del Ecuador desde la fecha de su exigibilidad hasta la de su extensión. En caso de no estar de acuerdo, podrá impugnarlo dentro de los 3 días hábiles posteriores a su notificación. En caso de incumplimiento, se dará inicio al procedimiento de ejecución coactiva." +"\n"+
+($F{CODIGO_CAMARA} == null ? "": "<style isBold='true'>" + "10. CÓDIGO DE CÁMARA: " + "</style>" + $F{CODIGO_CAMARA}+ "\n FECHA CALIBRACIÓN:"+ $F{FECHA_CALIBRACION}+" \n VELOCIDAD PERMITIDA: "+ $F{VELOCIDAD_PERMITIDA} +" km/h \n VELOCIDAD GENERA INFRACCIÓN:"+ $F{VELOCIDAD_INFRACCION}+" km/h \n")+
+"<style isBold='true'>" + "AGENTE CIVIL DE TRÁNSITO " + "</style>\n"+
+" NOMBRE: " + ($F{NOMBRE_AGENTE} == null ? "":$F{NOMBRE_AGENTE}) + "\n"+
+" CÓDIGO: "+($F{CODIGO_AGENTE} == null ? "" : $F{CODIGO_AGENTE})+"UNIFORMADO NO. " + ($F{PLACA_AGENTE} == null ? "":$F{PLACA_AGENTE})+"\n"]]></textFieldExpression>
+				</textField>
+				<image isLazy="true" onErrorType="Blank">
+					<reportElement stretchType="RelativeToBandHeight" x="12" y="345" width="148" height="37" uuid="74412a3e-df04-4eb3-845a-7a7cf1568dfe"/>
+					<imageExpression><![CDATA[$F{FIRMA_AGENTE}]]></imageExpression>
+				</image>
+				<textField>
+					<reportElement x="11" y="382" width="525" height="20" uuid="26a7430a-f778-4c0e-80bb-bc6773e51330"/>
+					<textElement>
+						<font fontName="Arial" size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["FIRMA AGENTE DIRECCIÓN DE CONTROL DE TRÁNSITO"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="12" y="402" width="524" height="24" uuid="84a8d003-a1c5-4863-b860-5bc723c7bb11"/>
+					<textElement>
+						<font fontName="Arial" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["AV. CARLOS JULIO AROSEMENA, GUAYAQUIL – GUAYAS LOCAL 65 TEL: (593) (4) 3902290 GUAYAQUIL - ECUADOR"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="11" y="426" width="525" height="87" uuid="fc9c6094-2b9d-451a-a5cd-2ee78c2963c3"/>
+					<textElement>
+						<font fontName="Arial" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["EL PAGO DE LA MULTA POR CONCEPTO "+ $F{DESCRIPCION_INFRACCION}+ "POR EL VALOR DE $"+$F{VALOR_MULTA}+", DEBERÁ EFECTUARLO DENTRO DE LOS 10 DÍAS CONTADOS DESDE LA FECHA DE ESTA NOTIFICACIÓN. EL INFRACTOR DE SER EL CASO PODRÁ DENTRO DEL TÉRMINO DE 3 DÍAS HÁBILES IMPUGNAR ESTA CITACIÓN DE TRÁNSITO ANTE LA AUTORIDAD COMPETENTE."]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

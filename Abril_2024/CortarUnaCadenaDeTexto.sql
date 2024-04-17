@@ -32,3 +32,5 @@ SELECT valor_parametro_defecto
         FROM   parametro(nolock)
         WHERE  codigo_parametro = 436
 ) AS valor_parametro_defecto
+
+SELECT SUBSTRING('Hola Mundo', 1, 4) AS Resultado;

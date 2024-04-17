@@ -80,3 +80,6 @@ where id_tipo_imagen = 1
 --Se tienen que relacionar numero_imagen con codigo_imagen
 -- 4.- crear 2 registros en la tabla data_documento
 select * from gestor_docs.dbo.data_documento where codigo_documento = 259154776
+
+
+select *from documentos.dbo.variable
