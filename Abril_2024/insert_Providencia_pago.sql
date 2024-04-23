@@ -2,14 +2,14 @@
 INSERT INTO integracion_terceros.dbo.it_recaudo (codigo_organismo ,fecha_transaccion ,hora_transaccion ,numero_recaudo ,numero_cuenta ,codigo_tipo_cuenta,
 codigo_banco ,total_efectivo ,total_cheque ,total_recaudo, codigo_tipo_identificacion ,numero_identificacion ,estado_lectura ,numero_obligacion,
 valor_obligacion ,numero_cuota ,codigo_tipo_recaudo ,fecha_creacion ,usuario,total_tcr) VALUES
-(11001,'2024-04-16' ,'08:08:00.0000000',67767776814090, --nro recaudo ir aumentando, que no se repita
+(11001,'2024-04-18' ,'08:08:00.0000000',67767776814101, --nro recaudo ir aumentando, que no se repita
 NULL,NULL,'BPA',
 NULL, --total pago
-NULL,100.86, --total pago
-NULL,NULL,1,12148915, --factura finan --4007661 3087948
-100.86, --total pago
+NULL,123.75, --total pago
+NULL,NULL,1,14026270, --factura finan --4007661 3087948
+123.75, --total pago
 0, --cuota
 '02', -- tipo recaudo -- 01 recaudo de citacion 02 coactivo 05 recaudo de patios
 getdate(),
 'axis',
-100.86) ---total_tcr
+123.75) ---total_tcr
