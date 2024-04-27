@@ -1,13 +1,18 @@
 --SENTAR RAZON
 --https://www.youtube.com/watch?v=mMJns0A5pCo
+--HACER UNA IMPUGNACION
+--Hay primero que realizar un impugnación del min 6  "Procesos Juridicos:impugnaciones:Gestionar Impugnaciones administrativas" Script consultaDatos
+--"Gestion personas:persona:Administrar persona" añadir el correo electronico de interes
+--**********************************
+--Procesos Juridicos: Sentar Razón *
+--**********************************
 
-
---RAZON_NOTI_RES_ADMIN 2649 78
---RAZON_NOTI_CORREO 2650 9
---RAZON_NO_PRUEBAS 2651 76
---RAZON_NOTI_TRA_ADMIN 2652 10157
---RAZON_SI_PRUEBAS 2653 10094
---RAZON_CIER_SUBS_CAL 2457 10156 no se deja crear nueva version
+--RAZON_NOTI_RES_ADMIN 2649 78 ok
+--RAZON_NOTI_CORREO 2650 9  OK
+--RAZON_NO_PRUEBAS 2651 76 ok
+--RAZON_NOTI_TRA_ADMIN 2652 10157 ok
+--RAZON_SI_PRUEBAS 2653 10094 ok
+--RAZON_CIER_SUBS_CAL 2457 10156 no se deja crear nueva version tambien al editarla PENDIENTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
 
 --(2649,2650,2651,2652,2653)
 
@@ -20,8 +25,8 @@ select * from documentos..proceso where id_proceso IN (select id_proceso from do
 begin tran
 --update documentos..plantilla set fecha_fin='2022-03-11' where id_plantilla=2080   --2532
 update documentos..plantilla set fecha_fin='2024-03-20' where id_plantilla=2611
---TODAS LAS PLANTILLAS DE COACTIVO
-update documentos..plantilla set fecha_inicio='2024-04-20' where id_plantilla in(2649,2650,2651,2652,2653)
+--TODAS LAS PLANTILLAS DE SENTAR RAZÓN
+update documentos..plantilla set fecha_inicio='2024-04-23' where id_plantilla in(2649,2650,2651,2652,2653,2457)
 --update documentos..plantilla set fecha_inicio='2024-04-11' where id_plantilla in(2616,2617,2618,2620,2624,2625,2626,2634,2636,2638,2639)
 commit tran
 
@@ -41,7 +46,8 @@ commit tran
 ------------------------------------------------------------------------------------------
 
 --************************************REVISIÓN DE LAS PLANTILLAS GENERADAS**************************************************************
-select *from [documentos].[dbo].[plantilla] where id_plantilla=2648--2604  -    *
+select *from [documentos].[dbo].[plantilla] where id_plantilla=2628--2648--2604  -    *
+--Impugnación de comparendo	Apertura impugnación sin tercero	APERT_IMPUG_SIN_TERC
 																																	   *
 select top 200 *from [documentos].[dbo].[documento] order by 1 desc																	   *
 --**************************************************************************************************************************************

@@ -195,12 +195,19 @@ SELECT upper(SUBSTRING(valor_parametro_defecto,18,62))
 begin tran
 UPDATE documentos..plantilla_configuracion
 SET    consulta=   ''               
-	   
-WHERE  id_plantilla_config=10104
-
+	   , orden_variables=''
+WHERE  id_plantilla_config=10202
 
 commit tran
 ----------------------------------------------
+
+begin tran
+UPDATE documentos..plantilla_configuracion
+SET    consulta=   ''               
+	   , orden_variables=''
+WHERE  id_plantilla_config=909090
+
+commit tran
 ----------------------------------------------
 ----------------------------------------------
 ----------------------------------------------
