@@ -125,9 +125,9 @@ commit tran
 
 
 --************************************REVISIÓN DE LAS PLANTILLAS GENERADAS**************************************************************
-select *from [documentos].[dbo].[plantilla] where id_plantilla=2582  --2413--2596--2597  --2324--2596--2413--2596--2597--2685--2663    *
+select *from [documentos].[dbo].[plantilla] where id_plantilla=2626  --2413--2596--2597  --2324--2596--2413--2596--2597--2685--2663    *
 																																	   *
-select top 10 *from [documentos].[dbo].[documento] order by 1 desc																	   *
+select top 20 *from [documentos].[dbo].[documento] order by 1 desc																	   *
 --**************************************************************************************************************************************
 
 select top 100 *from [documentos].[dbo].[documento] where id_plantilla='2608' order by 1 desc

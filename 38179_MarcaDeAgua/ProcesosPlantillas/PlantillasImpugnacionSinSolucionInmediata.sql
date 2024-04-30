@@ -77,5 +77,44 @@ order by 1 desc
 
 select *from interes
 
+------------------------------------------------------------------------------------
+--Query para traer esté texto
+--EMPRESA PÚBLICA MUNICIPAL DE TRÁNSITO Y MOVILIDAD DE GUAYAQUIL EP.
+SELECT valor_parametro_defecto
+        FROM   parametro(nolock)
+        WHERE  codigo_parametro = 439
+
+--TITULO_PLANTILLAS
+--EMPRESA PÚBLICA MUNICIPAL DE TRÁNSITO Y MOVILIDAD DE GUAYAQUIL EP.
+
+
+------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+--Query para traer esté texto
+--EMPRESA PÚBLICA MUNICIPAL DE TRÁNSITO Y MOVILIDAD DE GUAYAQUIL EP.
+SELECT valor_parametro_defecto
+        FROM   parametro(nolock)
+        WHERE  codigo_parametro = 439
+
+--TITULO_PLANTILLAS
+--EMPRESA PÚBLICA MUNICIPAL DE TRÁNSITO Y MOVILIDAD DE GUAYAQUIL EP.
+
+
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+
+begin tran
+UPDATE documentos..plantilla_configuracion
+SET    consulta=   ''               
+	   , orden_variables=''
+WHERE  id_plantilla_config=10076xx
+
+commit tran
+
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+
 
 

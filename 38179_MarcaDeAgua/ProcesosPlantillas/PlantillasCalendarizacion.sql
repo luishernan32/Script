@@ -1,12 +1,25 @@
---IMPUGNACION COMPARENDO
+--Todas las plantillas salen de este video : https://www.youtube.com/watch?v=8_0XGwFcpyY
 
---APERT_IMPUG_SIN_TERC  se genera al realizar la impugnacion 2659 54
---APERTURA_IMPUGNACION 2660 27
---ACTA_REC_FIR_RUB 2661 10076
---(2659,2660,2661)
+--FALLO_CALEND_FIRMA 2643 10158 ok
+
+--APERTURA_ANU_CAL 2644 10145 Darle unos espacios en la segunda hoja cedula que va a pedir 0917206658 ok
+
+--APERT_ANUCAL_SIN_TER 2645 10144 min 10  tiene justificacion para insertar datos https://www.youtube.com/watch?v=8_0XGwFcpyY en el  min 31 es tiempo perdido ok
+
+--DOC_INCOMPLETA_CAL 2646 10153 no se deja descargar se toma como un virus ok
+
+
+--RECH_FALTA_SOPOR_CAL 2647 10154 pendiente
+
+--(2643,2644,2645,2646,2647)
+
+--**********************************
+--REGISTRO_FALLO_CAL 2648 10146 ok
+--(2648)
+--**********************************
 
 declare @codigoPlantilla varchar(20);
-set @codigoPlantilla = 'ACTA_REC_FIR_RUB';--AUTO_PAGO_PATIO
+set @codigoPlantilla = 'REGISTRO_FALLO_CAL';--AUTO_PAGO_PATIO
 select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla
 select * from documentos..plantilla_configuracion where id_plantilla in (select id_plantilla from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 select * from documentos..proceso where id_proceso IN (select id_proceso from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
@@ -14,8 +27,8 @@ select * from documentos..proceso where id_proceso IN (select id_proceso from do
 begin tran
 --update documentos..plantilla set fecha_fin='2022-03-11' where id_plantilla=2080   --2532
 update documentos..plantilla set fecha_fin='2024-03-20' where id_plantilla=2611
---TODAS LAS PLANTILLAS DE IMPUGNACION COMPARENDO
-update documentos..plantilla set fecha_inicio='2024-04-27' where id_plantilla in(2659,2660,2661)
+--TODAS LAS PLANTILLAS DE COACTIVO
+update documentos..plantilla set fecha_inicio='2024-04-20' where id_plantilla in(2643,2644,2645,2646,2647,2648)--(2616,2617,2618,2619,2620,2621,2622,2623,2624,2625,2626,2627,2628,2629,2630,2631,2632,2633,2634,2635,2636,2637,2638,2639,2640,2641,2642)
 --update documentos..plantilla set fecha_inicio='2024-04-11' where id_plantilla in(2616,2617,2618,2620,2624,2625,2626,2634,2636,2638,2639)
 commit tran
 
@@ -27,7 +40,8 @@ commit tran
 -- Códigos de plantillas afectados "APERT_IMPUG_SIN_TERC APERTURA_IMPUGNACION"
 begin tran
 update documentos.dbo.plantilla set marca_agua=1
-where id_plantilla in(2659,2660,2661)
+--where id_plantilla in(2612,2611,2610,2609)
+where id_plantilla in(2643,2644,2645,2646,2647,2648)--(2324,2325,2581,2582,2229)--(2616,2617,2618,2619,2620,2621,2622,2623,2624,2625,2626,2627,2628,2629,2630,2631,2632,2633,2634,2635,2636,2637,2638,2639,2640,2641,2642)
 
 commit tran
 
@@ -35,8 +49,7 @@ commit tran
 ------------------------------------------------------------------------------------------
 
 --************************************REVISIÓN DE LAS PLANTILLAS GENERADAS**************************************************************
-select *from [documentos].[dbo].[plantilla] where id_plantilla=2602--2648--2604  -    *
---Impugnación de comparendo	Apertura impugnación sin tercero	APERT_IMPUG_SIN_TERC
+select *from [documentos].[dbo].[plantilla] where id_plantilla=2650--2648--2604  -    *
 																																	   *
 select top 200 *from [documentos].[dbo].[documento] order by 1 desc																	   *
 --**************************************************************************************************************************************
@@ -70,6 +83,11 @@ order by 1 desc
 --GIK0109 *
 --GRW7830 x
 ------------------------------------------------------------------------------------
+
+select *from interes
+
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
 --Query para traer esté texto
 --EMPRESA PÚBLICA MUNICIPAL DE TRÁNSITO Y MOVILIDAD DE GUAYAQUIL EP.
 SELECT valor_parametro_defecto
@@ -81,21 +99,7 @@ SELECT valor_parametro_defecto
 
 
 ------------------------------------------------------------------------------------
-
-
-begin tran
-UPDATE documentos..plantilla_configuracion
-SET    consulta=   ''               
-	   
-WHERE  id_plantilla_config=54
-
-
-commit tran
-
--------------------------------------------------------------------------------
-
-
-
+------------------------------------------------------------------------------------
 
 begin tran
 UPDATE documentos..plantilla_configuracion
@@ -104,3 +108,9 @@ SET    consulta=   ''
 WHERE  id_plantilla_config=10076xx
 
 commit tran
+
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+
+
+
