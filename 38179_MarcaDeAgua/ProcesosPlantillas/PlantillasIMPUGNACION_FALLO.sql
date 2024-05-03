@@ -12,11 +12,11 @@
 --COA_D_P_F_ABS 2668  no tiene id_plantilla config Tiene AUTORIDAD DE TRÁNSISTO MUNICIPAL
 --COA_IMCL_SN_DC_P  2669  no tiene id_plantilla config Tiene AUTORIDAD DE TRÁNSISTO MUNICIPAL
 --***********************************************************************************************
---COA_ACT_NV_FA 2672 10199
+--COA_ACT_NV_FA 2672 10199 AUTORIDAD DE TRÁNSISTO MUNICIPAL variable ok +query Generada
 
 
 
---(2662,2663,2664,2665,2666,2667,2668,2669)
+--(2662,2663,2664,2665,2666,2667,2668,2669,2672)
 
 --********************************************************/
 --************************importante**********************/
@@ -32,8 +32,12 @@
 --COA - Sí vino ACT - Fallo condenatorio	                                   COA_SV_ACT_FC
 --COA - Docs de prueba - Fallo absolutorio	                                   COA_D_P_F_ABS
 --COA - Imagen clara sin docs de prueba - Fallo condenatorio	               COA_IMCL_SN_DC_P
---Impugnación fallo	COA - ACT no vino - Fallo absolutorio	                   COA_ACT_NV_FA
+--COA - ACT no vino - Fallo absolutorio	                                       COA_ACT_NV_FA
 
+
+--***********************************************************************************************************************
+--OBSERVACIONES: APELACION_REG_FALLO presenta error y las plantillas COA_D_P_F_ABS y COA_IMCL_SN_DC_P no tienen id_config
+--***********************************************************************************************************************
 
 
 --TITULO_PLANTILLAS
@@ -49,7 +53,7 @@ begin tran
 --update documentos..plantilla set fecha_fin='2022-03-11' where id_plantilla=2080   --2532
 update documentos..plantilla set fecha_fin='2024-03-20' where id_plantilla=2611
 --TODAS LAS PLANTILLAS DE SENTAR RAZÓN
-update documentos..plantilla set fecha_inicio='2024-04-26' where id_plantilla in(2662,2663,2664,2665,2666,2667,2668,2669)
+update documentos..plantilla set fecha_inicio='2024-04-30' where id_plantilla in(2662,2663,2664,2665,2666,2667,2668,2669,2672)
 --update documentos..plantilla set fecha_inicio='2024-04-11' where id_plantilla in(2616,2617,2618,2620,2624,2625,2626,2634,2636,2638,2639)
 commit tran
 
@@ -58,7 +62,7 @@ commit tran
 -- Códigos de plantillas afectados "APERT_IMPUG_SIN_TERC APERTURA_IMPUGNACION"
 begin tran
 update documentos.dbo.plantilla set marca_agua=1
-where id_plantilla in(2662,2663,2664,2665,2666,2667,2668,2669)
+where id_plantilla in(2662,2663,2664,2665,2666,2667,2668,2669,2672)
 
 commit tran
 
@@ -66,7 +70,7 @@ commit tran
 ------------------------------------------------------------------------------------------
 
 --************************************REVISIÓN DE LAS PLANTILLAS GENERADAS**************************************************************
-select *from [documentos].[dbo].[plantilla] where id_plantilla=2667--2666--2664--2659--2633--2664--2659--2662--2659--2648--2604  -    *
+select *from [documentos].[dbo].[plantilla] where id_plantilla=2672--2667--2666--2664--2659--2633--2664--2659--2662--2659--2648--2604  -    *
 --Impugnación de comparendo	Apertura impugnación sin tercero	APERT_IMPUG_SIN_TERC
 																																	   *
 select top 20 *from [documentos].[dbo].[documento] order by 1 desc																	   *
@@ -153,9 +157,10 @@ begin tran
 UPDATE documentos..plantilla_configuracion
 SET    consulta=   ''               
 	   , orden_variables=',TITULO_PLANTILLAS'
-WHERE  id_plantilla_config=10076xx
+WHERE  id_plantilla_config=10199xx
 
 commit tran
 
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
+
