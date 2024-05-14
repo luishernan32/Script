@@ -1,5 +1,9 @@
 --COACTIVOSOLICITUD_OFICIO_BIEN_SEPS
 
+-- Hay que registrar un bien (DISPONER EMBARGO-----RAZON DE NO PAGO)
+--Tambien se generarn 2623 2625 2624
+--Regitrando un bien y tomando la opcion SEPT se genera 2639 2638 2623
+
 
 --**********************************************************************************
 --OFICIO_BANCO_CARTA 2616 Presenta error									   Ok https://www.youtube.com/watch?v=zc557WYlBn4
@@ -65,7 +69,7 @@
 
 
 --OFICIO_EMBARGO_SEPS 2638                                   Lista para pruebas min 9 Opcion SEPS admon bien  https://www.youtube.com/watch?v=qLKO0mnxLEE
---ORDEN_EMBARGO_SEPS 2639                                    Lista Para pruebas min 9 Opcion SEPS admon bien  https://www.youtube.com/watch?v=qLKO0mnxLEE
+--ORDEN_EMBARGO_SEPS 2639                                    Lista Para pruebas min 9 Opcion SEPS admon bien  https://www.youtube.com/watch?v=qLKO0mnxLEE  Hay que registrar un bien
 --ORDEN_COBRO_ORDE_ELE jasper								 min 1 https://www.youtube.com/watch?v=WH7phU6c0Xg
 
 --ACTA_DE_POSESION_P 2640   Es del grupo de 8 de Rafael      Acomodar probar https://www.youtube.com/watch?v=1RRltFt0Iss  
