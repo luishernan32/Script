@@ -53,4 +53,4 @@ and c.cantidad_obligaciones=1
 and ci.fecha_fin_vigencia is null
 --and exists (select * from obligacion_coactivo_historico och where och.id_obligacion_coactivo=oc.id_obligacion_coactivo)
 and not exists (select 1 from circulemos2.dbo.trazabilidad_proceso tp where tp.id_proceso = p.id_proceso and tp.id_estado_proceso = 36)
-order by p.fecha_inicio desc
+order by p.fecha_inicio desc  
