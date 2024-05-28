@@ -1,41 +1,26 @@
---CALENDARIZACION
---Todas tienen la variable cambio
+--PROCESO: Devolucion Fallo	Devolucion fallo	REGISTRO_FALLO_DEV	4707	 10126
+
+
+
+--REGISTRO_FALLO_DEV	4707	 10126
+
+
+--Devolucion Fallo	Devolucion fallo	REGISTRO_FALLO_DEV	39	
+
+
+
+
 -- https://tomeko.net/online_tools/hex_to_file.php?lang=en
 -- https://www.dpriver.com/pp/sqlformat.htm
 
 
---Todas las plantillas salen de este video : https://www.youtube.com/watch?v=8_0XGwFcpyY   desde el min 8 empieza CALENDARIZACIÓN
 
---FALLO_CALEND_FIRMA 2643 10158 ok  +++
-
---APERTURA_ANU_CAL 2644 10145 Darle unos espacios en la segunda hoja cedula que va a pedir 0917206658 ok  ++
-
---APERT_ANUCAL_SIN_TER 2645 10144 min 10  tiene justificacion para insertar datos https://www.youtube.com/watch?v=8_0XGwFcpyY en el  min 31 es tiempo perdido ok +++
-
---DOC_INCOMPLETA_CAL 2646 10153 no se deja descargar se toma como un virus ok   ++++
-
-
---RECH_FALTA_SOPOR_CAL 2647 10154 pendiente
-
---(2643,2644,2645,2646,2647)
-
---**********************************
---REGISTRO_FALLO_CAL 2648 10146 ok
---(2648)
---**********************************
-
---APERT_ANUCAL_SIN_TER	GRY7811	- El título sigue siendo Autoridad de tránsito municipal 2645 10144 calendarizacion <Sin Abs> OK
---DOC_INCOMPLETA_CAL	GRY7811	- El título sigue siendo Autoridad de tránsito municipal - No muestra el "Abg." en la firma 2646 10153 calendarizacion  OK r
---RECH_FALTA_SOPOR_CAL	GRY7811	- El título sigue siendo Autoridad de tránsito municipal - No muestra el "Abg." en la firma 2647  10154   calendarizacion ok
---APERTURA_ANU_CAL	HB161I  - El título sigue siendo Autoridad de tránsito municipal - El texto se cruza con el logo   <Sin Abs> ok
---REGISTRO_FALLO_CAL	HB161I  - El título sigue siendo Autoridad de tránsito municipal - No muestra el "Abg." en la firma <Calendarizacion Fallo>
---FALLO_CALEND_FIRMA	HB161I  - El título sigue siendo Autoridad de tránsito municipal - No muestra el "Abg." en la firma   Ok r
 
 
 --PROVIDENCIA_PAGO
 --PROVIDENCIA_ANULAR
 declare @codigoPlantilla varchar(20);
-set @codigoPlantilla = 'REGISTRO_FALLO_CAL';--AUTO_PAGO_PATIO
+set @codigoPlantilla = 'REGISTRO_FALLO_DEV';--AUTO_PAGO_PATIO
 select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla
 select * from documentos..plantilla_configuracion where id_plantilla in (select id_plantilla from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 select * from documentos..proceso where id_proceso IN (select id_proceso from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
@@ -44,7 +29,7 @@ begin tran
 --update documentos..plantilla set fecha_fin='2022-03-11' where id_plantilla=2080   --2532
 update documentos..plantilla set fecha_fin='2024-03-20' where id_plantilla=2611
 --TODAS LAS PLANTILLAS DE COACTIVO
-update documentos..plantilla set fecha_inicio='2024-05-26' where id_plantilla in(2643,2644,2645,2646,2647,2648)
+update documentos..plantilla set fecha_inicio='2024-05-26' where id_plantilla in(4707)
 --update documentos..plantilla set fecha_inicio='2024-04-11' where id_plantilla in(2616,2617,2618,2620,2624,2625,2626,2634,2636,2638,2639)
 commit tran
 
@@ -53,8 +38,7 @@ commit tran
 begin tran
 update documentos.dbo.plantilla set marca_agua=1
 --where id_plantilla in(2612,2611,2610,2609)
-where id_plantilla in(2643,2644,2645,2646,2647,2648)--(2324,2325,2581,2582,2229)--(2616,2617,2618,2619,2620,2621,2622,2623,2624,2625,2626,2627,2628,2629,2630,2631,2632,2633,2634,2635,2636,2637,2638,2639,2640,2641,2642)
-
+where id_plantilla in(4707)
 commit tran
 
 
@@ -85,7 +69,7 @@ order by 1 desc
 --gqh0010
 --GNA0319
 --RTB0950
---GPN0289 +
+--GPN0289
 --GBL0616
 --HZ370D
 --GS09740
@@ -135,7 +119,7 @@ begin tran
 UPDATE documentos..plantilla_configuracion
 SET    consulta=   ''               
 	   , orden_variables=',TITULO_PLANTILLAS'
-WHERE  id_plantilla_config=10146xxx
+WHERE  id_plantilla_config=10154xxx
 
 commit tran
 

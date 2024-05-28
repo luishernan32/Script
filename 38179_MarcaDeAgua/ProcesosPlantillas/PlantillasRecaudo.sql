@@ -22,7 +22,7 @@ https://gacetamultas.atm.gob.ec/imagenes/img/background_certificado_virtual_v2.p
 --admin2017*
 --Admin2017*
 --***********************************************************************************************************************
---REC_TRA_ATM
+--REC_TRA_ATM 4702 68  https://www.youtube.com/watch?v=eS2HGSUyVBI
 
 --Sí, justamente. Solamente consultas el trámite y haces el pago, ahí se genera
 
@@ -64,7 +64,7 @@ https://gacetamultas.atm.gob.ec/imagenes/img/background_certificado_virtual_v2.p
 
 --****************************************************************************************************************************************************************
 declare @codigoPlantilla varchar(20);
-set @codigoPlantilla ='CARAT_CURSO_VIRTU'--'OFIC_BAN_CARTA_SEPS'-- 'AI_EXV_SGPS_TP';--AUTO_PAGO_PATIO  
+set @codigoPlantilla ='REC_TRA_ATM'--'OFIC_BAN_CARTA_SEPS'-- 'AI_EXV_SGPS_TP';--AUTO_PAGO_PATIO  
 select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla
 select * from documentos..plantilla_configuracion where id_plantilla in (select id_plantilla from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 select * from documentos..proceso where id_proceso IN (select id_proceso from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
@@ -74,7 +74,7 @@ begin tran
 --update documentos..plantilla set fecha_fin='2022-03-11' where id_plantilla=2080   --2532
 update documentos..plantilla set fecha_fin='2024-03-20' where id_plantilla=2611
 --TODAS LAS PLANTILLAS DE SENTAR RAZÓN
-update documentos..plantilla set fecha_inicio='2024-05-19' where id_plantilla in(4697,4698,4699)
+update documentos..plantilla set fecha_inicio='2024-05-22' where id_plantilla in(4702)
 --update documentos..plantilla set fecha_inicio='2024-04-11' where id_plantilla in(2616,2617,2618,2620,2624,2625,2626,2634,2636,2638,2639)
 commit tran
 
@@ -86,7 +86,7 @@ commit tran
 -- Códigos de plantillas afectados "APERT_IMPUG_SIN_TERC APERTURA_IMPUGNACION"
 begin tran
 update documentos.dbo.plantilla set marca_agua=1
-where id_plantilla in(4697,4698,4699)--(2231,2235,2466,2467,2232,2234,2233) 
+where id_plantilla in(4702)--(2231,2235,2466,2467,2232,2234,2233) 
 
 commit tran
 
@@ -94,7 +94,7 @@ commit tran
 ------------------------------------------------------------------------------------------
 
 --************************************REVISIÓN DE LAS PLANTILLAS GENERADAS**************************************************************
-select *from [documentos].[dbo].[plantilla] where id_plantilla=2498--2324--2258--2258--2259--2289--2287--2288--2287--2286--2639--2625--2258--2258--3692--3690--
+select *from [documentos].[dbo].[plantilla] where id_plantilla=4702--1389--2324--2258--2258--2259--2289--2287--2288--2287--2286--2639--2625--2258--2258--3692--3690--
 --Impugnación de comparendo	Apertura impugnación sin tercero	APERT_IMPUG_SIN_TERC
 																																	   *
 select top 20 *from [documentos].[dbo].[documento] order by 1 desc																	   *
@@ -178,7 +178,7 @@ commit tran
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
---------------------INSERT----------------------------------------------------------
+------------------------------------------------------------------------INSERT----------------------------------------------------------------------------
 
 --INSERT DE PAGOS TDC
 INSERT INTO integracion_terceros.dbo.it_recaudo (codigo_organismo ,fecha_transaccion ,hora_transaccion ,numero_recaudo ,numero_cuenta ,codigo_tipo_cuenta,
@@ -188,7 +188,7 @@ valor_obligacion ,numero_cuota ,codigo_tipo_recaudo ,fecha_creacion ,usuario,tot
 NULL,NULL,'BPA',
 NULL, --total pago
 NULL,35.57, --total pago
-NULL,NULL,1,11903541, --factura finan --4007661 3087948
+NULL,NULL,1,12148768, --factura finan --4007661 3087948
 35.57, --total pago
 0, --cuota
 '02', -- tipo recaudo -- 01 recaudo de citacion 02 coactivo 05 recaudo de patios
@@ -196,7 +196,7 @@ getdate(),
 'axis',
 35.57) ---total_tcr
 
-------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 ------------------------------------------------------------------------
