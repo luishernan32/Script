@@ -4,6 +4,11 @@
 -- https://www.dpriver.com/pp/sqlformat.htm
 
 
+
+
+--APERT_ANUCAL_SIN_TER  El titulo de la variable no sale en negrilla
+
+
 --Todas las plantillas salen de este video : https://www.youtube.com/watch?v=8_0XGwFcpyY   desde el min 8 empieza CALENDARIZACIÓN
 
 --FALLO_CALEND_FIRMA 2643 10158 ok  +++
@@ -32,6 +37,15 @@
 --FALLO_CALEND_FIRMA	HB161I  - El título sigue siendo Autoridad de tránsito municipal - No muestra el "Abg." en la firma   Ok r
 
 
+--**********************************************************************************
+--INCIDENCIAS
+
+
+
+
+--**********************************************************************************
+
+
 --PROVIDENCIA_PAGO
 --PROVIDENCIA_ANULAR
 declare @codigoPlantilla varchar(20);
@@ -44,7 +58,7 @@ begin tran
 --update documentos..plantilla set fecha_fin='2022-03-11' where id_plantilla=2080   --2532
 update documentos..plantilla set fecha_fin='2024-03-20' where id_plantilla=2611
 --TODAS LAS PLANTILLAS DE COACTIVO
-update documentos..plantilla set fecha_inicio='2024-05-26' where id_plantilla in(2643,2644,2645,2646,2647,2648)
+update documentos..plantilla set fecha_inicio='2024-05-28' where id_plantilla in(2643,2644,2645,2646,2647,2648)
 --update documentos..plantilla set fecha_inicio='2024-04-11' where id_plantilla in(2616,2617,2618,2620,2624,2625,2626,2634,2636,2638,2639)
 commit tran
 
@@ -61,7 +75,7 @@ commit tran
 ------------------------------------------------------------------------------------------
 
 --************************************REVISIÓN DE LAS PLANTILLAS GENERADAS**************************************************************
-select *from [documentos].[dbo].[plantilla] where id_plantilla=2650--2648--2604  -    *
+select *from [documentos].[dbo].[plantilla] where id_plantilla=2652--2648--2645--2650--2648--2604  -    *
 																																	   *
 select top 200 *from [documentos].[dbo].[documento] order by 1 desc																	   *
 --**************************************************************************************************************************************

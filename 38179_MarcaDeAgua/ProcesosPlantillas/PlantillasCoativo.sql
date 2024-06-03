@@ -1,3 +1,6 @@
+--COACTIVO
+
+
 --COACTIVOSOLICITUD_OFICIO_BIEN_SEPS
 
 -- Hay que registrar un bien (DISPONER EMBARGO-----RAZON DE NO PAGO)
@@ -22,14 +25,8 @@
 
 --**********************************************************************************
 
-
-
-
 --NOTIFICACION_COAC 2621                                    acomodar probar   radio button "ENVIO NOTIFICACION"1:30  https://www.youtube.com/watch?v=qLKO0mnxLEE
 --ACTA_EMBARGO_COACTIV 2622                                 acomodar probar /
-
-
-
 
 
 --**********************************************************************************
@@ -74,7 +71,7 @@
 
 --ACTA_DE_POSESION_P 2640   Es del grupo de 8 de Rafael      Acomodar probar https://www.youtube.com/watch?v=1RRltFt0Iss  
 --AUTO_PAGO_PATIO_V2 2641                                    Acomodar probar https://www.youtube.com/watch?v=1RRltFt0Iss
---COA_ORDEN_PAGO_P 2642                                      Acomodar probar https://www.youtube.com/watch?v=1RRltFt0Iss
+--COA_ORDEN_PAGO_P 2642                                      Acomodar probar https://www.youtube.com/watch?v=1RRltFt0Iss  JobProcesarCoactivoPatios ejecutar + query    select top 100 *from coactivo order by 1 desc
 --ORDENANZA_REQ_PAGO jasper                                  COMPLICADA AÚN NO SE SABE GENERAR
 
 --(2616,2617,2618,2619,2620,2621,2622,2623,2624,2625,2626,2627,2628,2629,2630,2631,2632,2633,2634,2635,2636,2637,2638,2639,2640,2641,2642)
@@ -87,10 +84,18 @@
 --ORDENANZA_REQ_PAGO 2229  10104
 --(2324,2325,2581,2582)
 
+--**********************************************************************************
+--INCIDENCIAS
 
+--COA_TITULO_CREDITO		 - Parte de la segunda página está saliendo en la primera
+--COA_ORDEN_PAGO_P	306314	 - Se está generando en dos páginas. Toda la información debe quedar en la primera    https://www.youtube.com/watch?v=evJbQ-vznzA
+
+--**********************************************************************************
+--**********************************************************************************
+--**********************************************************************************
 
 declare @codigoPlantilla varchar(20);
-set @codigoPlantilla = 'ORDENANZA_REQ_PAGO';--AUTO_PAGO_PATIO
+set @codigoPlantilla = 'COA_TITULO_CREDITO';--AUTO_PAGO_PATIO
 select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla
 select * from documentos..plantilla_configuracion where id_plantilla in (select id_plantilla from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 select * from documentos..proceso where id_proceso IN (select id_proceso from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
@@ -99,12 +104,9 @@ begin tran
 --update documentos..plantilla set fecha_fin='2022-03-11' where id_plantilla=2080   --2532
 update documentos..plantilla set fecha_fin='2024-03-20' where id_plantilla=2611
 --TODAS LAS PLANTILLAS DE COACTIVO
-update documentos..plantilla set fecha_inicio='2024-04-17' where id_plantilla in(2616,2617,2618,2619,2620,2621,2622,2623,2624,2625,2626,2627,2628,2629,2630,2631,2632,2633,2634,2635,2636,2637,2638,2639,2640,2641,2642)
+update documentos..plantilla set fecha_inicio='2024-06-01' where id_plantilla in(2616,2617,2618,2619,2620,2621,2622,2623,2624,2625,2626,2627,2628,2629,2630,2631,2632,2633,2634,2635,2636,2637,2638,2639,2640,2641,2642)
 --update documentos..plantilla set fecha_inicio='2024-04-11' where id_plantilla in(2616,2617,2618,2620,2624,2625,2626,2634,2636,2638,2639)
 commit tran
-
-
-
 
 
 
@@ -129,7 +131,7 @@ commit tran
 
 
 --************************************REVISIÓN DE LAS PLANTILLAS GENERADAS**************************************************************
-select *from [documentos].[dbo].[plantilla] where id_plantilla=2626  --2413--2596--2597  --2324--2596--2413--2596--2597--2685--2663    *
+select *from [documentos].[dbo].[plantilla] where id_plantilla=2628--4707--2659--2626  --2413--2596--2597  --2324--2596--2413--2596--2597--2685--2663    *
 																																	   *
 select top 20 *from [documentos].[dbo].[documento] order by 1 desc																	   *
 --**************************************************************************************************************************************
@@ -271,3 +273,93 @@ join trazabilid
 --ACTA_EMBARGO_COACTIV
 --LEV_MED_RET_PAGO_PAR
 --LEVANTAMIENT_EMBARGO
+
+
+
+------------------------------------------------------------------------------------
+--Query para traer esté texto
+--EMPRESA PÚBLICA MUNICIPAL DE TRÁNSITO Y MOVILIDAD DE GUAYAQUIL EP.
+SELECT valor_parametro_defecto
+        FROM   parametro(nolock)
+        WHERE  codigo_parametro = 439
+
+
+(SELECT valor_parametro_defecto
+        FROM   parametro(nolock)
+        WHERE  codigo_parametro = 439)AS TITULO_PLANTILLAS
+
+--TITULO_PLANTILLAS
+--EMPRESA PÚBLICA MUNICIPAL DE TRÁNSITO Y MOVILIDAD DE GUAYAQUIL EP.
+
+
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+
+begin tran
+UPDATE documentos..plantilla_configuracion
+SET    consulta=   ''               
+	   , orden_variables=',TITULO_PLANTILLAS'
+WHERE  id_plantilla_config=10146xxx
+
+commit tran
+
+------------------------------------------------------------------------------------
+--************************************************************************************
+--Cambio para el titulo del delegado
+
+Concat(f.titulo_obtenido, ' ',per.nombre1, ' ', per.nombre2, ' ', per.apellido1, ' ',
+       per.apellido2) AS
+       nombreAbogadoFirma,
+
+--************************************************************************************
+------------------------------------------------------------------------------------
+
+
+
+
+--************************************************************************************
+------------------------------------------------------------------------------------
+
+
+--COA_TITULO_CREDITO
+--PRECOACTIVOS VÁLIDOS PARA COURIER - TÍTULO CRÉDITO   datos para generar está plantilla
+select pp.*, t.* from precoactivo p
+inner join periodo_precoactivo pp on pp.id_precoactivo=p.id_precoactivo
+inner join titulo_credito t on t.id_periodo_precoactivo=pp.id_periodo
+where  p.id_estado_vehiculo_patio=2
+and pp.estado_periodo in('activo','inactivo')
+and t.fecha_notificacion is null 
+and fecha_notificacion_titulo is null
+and exists (select * from integracion_terceros..ubicabilidad_courier_validada u where u.id_persona=p.id_deudor)
+and (select top 1 estado_periodo from periodo_precoactivo where id_precoactivo=pp.id_precoactivo and estado_periodo<>'ANULADO' order by id_periodo desc) = 'activo' 
+order by pp.id_precoactivo desc
+
+--Formato cargue courier
+--Numero servicio;Numero periodo
+--GP-220230085236;2
+
+--------------------------------------------------------------
+
+--COA_ORDEN_PAGO_P https://www.youtube.com/watch?v=evJbQ-vznzA
+
+-- Lanzar el job: JobProcesarCoactivoPatios
+
+--CONSULTA QUE HACE EL JOB DE COACTIVO PATIOS
+select distinct top(1000) p.*,per.*,t.idProceso, pp.id_periodo from precoactivo p 
+inner join periodo_precoactivo pp on pp.id_precoactivo=p.id_precoactivo
+inner join titulo_credito t on t.id_periodo_precoactivo=pp.id_periodo
+inner join persona per on per.id_persona=p.id_deudor 
+where /*t.fecha_notificacion is not null and*/ pp.estado_periodo in ('activo','inactivo')
+/*and pp.fecha_notificacion_titulo is not null*/ and idCoactivo=0 and id_estado_vehiculo_patio=2
+and cast(GETDATE() as date)>=(select dbo.sumar_dias_habiles(t.fecha_notificacion,8))
+and (select top 1 estado_periodo from periodo_precoactivo where id_precoactivo=pp.id_precoactivo and estado_periodo<>'ANULADO' order by fecha_fin_periodo desc) = 'activo'
+order by p.id_precoactivo asc
+update periodo_precoactivo set fecha_notificacion_titulo='2024-05-01' where id_periodo=46759
+update titulo_credito set fecha_notificacion='2024-05-01' where id_periodo_precoactivo=46759
+ 
+select top 1000 * from coactivo c
+join proceso p on c.id_proceso=p.id_proceso 
+join trazabilidad_proceso tp on p.id_proceso=tp.id_proceso and tp.id_estado_proceso=24 and tp.fecha_fin is null 
+where id_tipo_coactivo=4 
+--and tp.id_estado_proceso=70 
+order by tp.fecha_inicio desc

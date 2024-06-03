@@ -12,25 +12,35 @@
 --RAZON_NO_PRUEBAS 2651 76 ok
 --RAZON_NOTI_TRA_ADMIN 2652 10157 ok
 --RAZON_SI_PRUEBAS 2653 10094 ok
---RAZON_CIER_SUBS_CAL 2457 10156 no se deja crear nueva version tambien al editarla PENDIENTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+--RAZON_CIER_SUBS_CAL 2457 10156 no se deja crear nueva version tambien al editarla PENDIENTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 4735 10156
 
---(2649,2650,2651,2652,2653)
+--(2649,2650,2651,2652,2653,4735)
 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 declare @codigoPlantilla varchar(20);
 set @codigoPlantilla = 'RAZON_CIER_SUBS_CAL';--AUTO_PAGO_PATIO
 select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla
 select * from documentos..plantilla_configuracion where id_plantilla in (select id_plantilla from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 select * from documentos..proceso where id_proceso IN (select id_proceso from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 
+--
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 begin tran
 --update documentos..plantilla set fecha_fin='2022-03-11' where id_plantilla=2080   --2532
 update documentos..plantilla set fecha_fin='2024-03-20' where id_plantilla=2611
 --TODAS LAS PLANTILLAS DE SENTAR RAZÓN
-update documentos..plantilla set fecha_inicio='2024-04-23' where id_plantilla in(2649,2650,2651,2652,2653,2457)
+update documentos..plantilla set fecha_inicio='2024-05-29' where id_plantilla in(2649,2650,2651,2652,2653,2457,4735)--(2649,2650,2651,2652,2653,2457)
 --update documentos..plantilla set fecha_inicio='2024-04-11' where id_plantilla in(2616,2617,2618,2620,2624,2625,2626,2634,2636,2638,2639)
 commit tran
-
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -38,7 +48,7 @@ commit tran
 -- Códigos de plantillas afectados "APERT_IMPUG_SIN_TERC APERTURA_IMPUGNACION"
 begin tran
 update documentos.dbo.plantilla set marca_agua=1
-where id_plantilla in(2649,2650,2651,2652,2653)
+where id_plantilla in(2649,2650,2651,2652,2653,2457,4735)--(2649,2650,2651,2652,2653)
 
 commit tran
 

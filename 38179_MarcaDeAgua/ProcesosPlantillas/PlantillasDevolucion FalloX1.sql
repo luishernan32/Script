@@ -2,7 +2,7 @@
 
 
 
---REGISTRO_FALLO_DEV	4707	 10126
+--REGISTRO_FALLO_DEV	4707	 10126     https://www.youtube.com/watch?v=4aCIxd8RC4I
 
 
 --Devolucion Fallo	Devolucion fallo	REGISTRO_FALLO_DEV	39	
@@ -45,7 +45,7 @@ commit tran
 ------------------------------------------------------------------------------------------
 
 --************************************REVISIÓN DE LAS PLANTILLAS GENERADAS**************************************************************
-select *from [documentos].[dbo].[plantilla] where id_plantilla=2650--2648--2604  -    *
+select *from [documentos].[dbo].[plantilla] where id_plantilla=4707--2650--2648--2604  -    *
 																																	   *
 select top 200 *from [documentos].[dbo].[documento] order by 1 desc																	   *
 --**************************************************************************************************************************************
@@ -119,7 +119,7 @@ begin tran
 UPDATE documentos..plantilla_configuracion
 SET    consulta=   ''               
 	   , orden_variables=',TITULO_PLANTILLAS'
-WHERE  id_plantilla_config=10154xxx
+WHERE  id_plantilla_config=10126xxx
 
 commit tran
 
@@ -157,3 +157,37 @@ where id_cargo=11 and fecha_final_vigencia is null
 select *from funcionario f
 join persona p on f.id_persona=p.id_persona
 where nombre1 ='FELIPE'
+
+
+
+
+
+--[15:04] Nicolas Montañez Rozo
+--Devolución de valores
+
+select distinct top 10000 numero_identificacion, fecha_infraccion, fecha_notificacion, c.id_factura_axis, c.numero_citacion, c.* from comparendo c inner join
+
+comparendo_persona cp on c.cicomparendo=cp.cicomparendo
+
+where c.id_estado_comparendo in(3,17,19,20)
+
+and fecha_infraccion>'2019-12-31'
+
+order by c.fecha_infraccion asc
+
+
+
+------------------------------------------------
+
+
+--Devolución de valores
+
+select distinct top 10000 numero_identificacion, fecha_infraccion, fecha_notificacion, c.id_factura_axis, c.numero_citacion, c.* from comparendo c inner join
+
+comparendo_persona cp on c.cicomparendo=cp.cicomparendo
+
+where c.id_estado_comparendo in(3,17,19,20)
+
+and fecha_infraccion>'2019-12-31'
+
+order by c.fecha_infraccion asc
