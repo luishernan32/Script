@@ -65,7 +65,7 @@
 
 --Impugnación sin solución inmediata	COA - MTV Memo DCT - sin período de prueba	                                              COA_MTV_MDCT_SPP <12>
 
---Impugnación sin solución inmediata	Exceso de velocidad - sistema GPS - Transporte Público	                                  AI_EXV_SGPS_TP  ok 
+--Impugnación sin solución inmediata	Exceso de velocidad - sistema GPS - Transporte Público	                                  AI_EXV_SGPS_TP  ok X2
 
 
 --Impugnación sin solución inmediata	MTV SIN PERIODO DE PRUEBA NO MEMO DCT	                                                  MTV_SP_DCT_NO_MEMO ok
@@ -73,7 +73,7 @@
 --Impugnación sin solución inmediata	COA - Pruebas pertinentes - Período prueba	                                              COA_PPI_AU_PP  ok
 
 
---Impugnación sin solución inmediata	Auto inicial	                                                                          AUTO_INICIAL_PRUEBA  *     AUTO_INICIAL_PRUEBA_10183
+--Impugnación sin solución inmediata	Auto inicial	                                                                          AUTO_INICIAL_PRUEBA  *     AUTO_INICIAL_PRUEBA_10183 X2
 
 
 --Impugnación sin solución inmediata	COA EXCESO DE VELOCIDAD INFORMÁTICA	                                                      COA_EXC_VEL_INF_ATD sin id_plantilla_config <12>
@@ -119,7 +119,7 @@ commit tran
 select *from [documentos].[dbo].[plantilla] where id_plantilla=3686--3687--3688--3686--3673--3684--3682--3681--3678--3675--
 --Impugnación de comparendo	Apertura impugnación sin tercero	APERT_IMPUG_SIN_TERC
 																																	   *
-select top 200 *from [documentos].[dbo].[documento] order by 1 desc																	   *
+select top 5 *from [documentos].[dbo].[documento] order by 1 desc																	   *
 --**************************************************************************************************************************************
 
 select top 100 *from [documentos].[dbo].[documento] where id_plantilla='2647' order by 1 desc
@@ -166,7 +166,9 @@ SELECT valor_parametro_defecto
 
 
 ------------------------------------------------------------------------------------
-
+,(SELECT valor_parametro_defecto
+        FROM   parametro(nolock)
+        WHERE  codigo_parametro = 439) AS TITULO_PLANTILLAS
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
 --Query para traer esté texto

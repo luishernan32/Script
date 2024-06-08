@@ -477,3 +477,42 @@ commit tran
 259187105
 ---------
 259187099
+
+
+------------------
+
+
+USE [circulemos2]
+GO
+
+INSERT INTO [dbo].[parametro]
+           ([codigo_parametro]
+           ,[codigo_modulo]
+           ,[nombre_parametro]
+           ,[codigo_tipo_variable]
+           ,[valor_parametro_defecto]
+           ,[codigo_unidad_parametro]
+           ,[formato]
+           ,[editable_organismo])
+     VALUES
+           (439
+           ,4
+           ,'Texto empresa publica'
+           ,4
+           ,'EMPRESA PÚBLICA MUNICIPAL DE TRÁNSITO Y MOVILIDAD DE GUAYAQUIL EP.'
+           ,null,null,1)
+
+
+
+
+SELECT * --into #testParam--valor_parametro_defecto
+FROM   parametro(nolock)
+WHERE  codigo_parametro = 439 --and 1=2
+
+union all
+
+select *
+from #testParam
+
+
+--Empresa pública de tránsito y movilidad de Guayaquil. EP.

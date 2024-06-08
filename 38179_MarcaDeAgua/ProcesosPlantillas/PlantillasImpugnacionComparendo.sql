@@ -25,7 +25,7 @@ begin tran
 --update documentos..plantilla set fecha_fin='2022-03-11' where id_plantilla=2080   --2532
 update documentos..plantilla set fecha_fin='2024-03-20' where id_plantilla=2611
 --TODAS LAS PLANTILLAS DE IMPUGNACION COMPARENDO
-update documentos..plantilla set fecha_inicio='2024-05-30' where id_plantilla in(2659,2660,2661)
+update documentos..plantilla set fecha_inicio='2024-06-03' where id_plantilla in(2659,2660,2661)
 --update documentos..plantilla set fecha_inicio='2024-04-11' where id_plantilla in(2616,2617,2618,2620,2624,2625,2626,2634,2636,2638,2639)
 commit tran
 

@@ -141,7 +141,15 @@ SELECT valor_parametro_defecto
 --TITULO_PLANTILLAS
 --EMPRESA PÚBLICA MUNICIPAL DE TRÁNSITO Y MOVILIDAD DE GUAYAQUIL EP.
 
+begin tran
+update parametro
+set valor_parametro_defecto='EMPRESA PÚBLICA DE TRÁNSITO Y MOVILIDAD DE GUAYAQUIL. EP.'
+WHERE  codigo_parametro = 439
+commit tran
 
+--EMPRESA PÚBLICA DE TRÁNSITO Y MOVILIDAD DE GUAYAQUIL. EP.
+--EMPRESA PÚBLICA DE TRÁNSITO Y MOVILIDAD DE GUAYAQUIL. EP.
+--EMPRESA PÚBLICA MUNICIPAL DE TRÁNSITO Y MOVILIDAD DE GUAYAQUIL EP.
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
 
