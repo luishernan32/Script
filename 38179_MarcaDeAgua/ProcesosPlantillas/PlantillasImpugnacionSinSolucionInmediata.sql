@@ -58,10 +58,10 @@
 --***********************************************************************************************************************
 --Impugnación sin solución inmediata	COA - Auto inicial	                                                                      COA_A_I_R_D Ok con id_plantilla_config=10178
 --Impugnación sin solución inmediata	COA - FOTOMULTAS - Auto inicial	                                                          COA_FM_AI    ok
---Impugnación sin solución inmediata	COA AUTO INICIAL FDS	                                                                  COA_AUTO_INC_FDS ok
+--Impugnación sin solución inmediata	COA AUTO INICIAL FDS	                                                                  COA_AUTO_INC_FDS ok   x2 "revisar bien" 
 --Impugnación sin solución inmediata	COA - Exc. Vel. / Pruebas pertinentes	                                                  COA_AU_EV_PP Ok
---Impugnación sin solución inmediata	COA - FOTOMULTAS pruebas pertinentes - Período prueba	                                  COA_FOT_PP_PP  ok
---Impugnación sin solución inmediata	COA - MTV ACT dio paso - sin período de prueba	                                          COAMTVACT_DP_SPP * COAMTVACT_DP_SPP ok
+--Impugnación sin solución inmediata	COA - FOTOMULTAS pruebas pertinentes - Período prueba	                                  COA_FOT_PP_PP  ok  
+--Impugnación sin solución inmediata	COA - MTV ACT dio paso - sin período de prueba	                                          COAMTVACT_DP_SPP * COAMTVACT_DP_SPP ok  
 
 --Impugnación sin solución inmediata	COA - MTV Memo DCT - sin período de prueba	                                              COA_MTV_MDCT_SPP <12>
 
@@ -82,6 +82,7 @@
 
 --***********************************************************************************************************************
 --OBSERVACIONES: APELACION_REG_FALLO presenta error y las plantillas COA_D_P_F_ABS y COA_IMCL_SN_DC_P no tienen id_config
+--Hay dos funcionearios que firma CONNY Y ALEXIS "COA_AUTO_INC_FDS firmo Alexis y no se ha comprobado el cargo de el a pesar que se actualizo"
 --***********************************************************************************************************************
 
 --****************************************************************************************************************************************************************
@@ -96,7 +97,7 @@ begin tran
 --update documentos..plantilla set fecha_fin='2022-03-11' where id_plantilla=2080   --2532
 update documentos..plantilla set fecha_fin='2024-03-20' where id_plantilla=2611
 --TODAS LAS PLANTILLAS DE SENTAR RAZÓN
-update documentos..plantilla set fecha_inicio='2024-05-01' where id_plantilla in(3673,3674,3675,3676,3677,3678,3680,3681,3682,3683,3684,3685,3686,3687,3688)
+update documentos..plantilla set fecha_inicio='2024-06-09' where id_plantilla in(3673,3674,3675,3676,3677,3678,3680,3681,3682,3683,3684,3685,3686,3687,3688)
 --update documentos..plantilla set fecha_inicio='2024-04-11' where id_plantilla in(2616,2617,2618,2620,2624,2625,2626,2634,2636,2638,2639)
 commit tran
 
@@ -116,7 +117,7 @@ commit tran
 ------------------------------------------------------------------------------------------
 
 --************************************REVISIÓN DE LAS PLANTILLAS GENERADAS**************************************************************
-select *from [documentos].[dbo].[plantilla] where id_plantilla=3686--3687--3688--3686--3673--3684--3682--3681--3678--3675--
+select *from [documentos].[dbo].[plantilla] where id_plantilla=3676--3685--3686--3687--3688--3686--3673--3684--3682--3681--3678--3675--
 --Impugnación de comparendo	Apertura impugnación sin tercero	APERT_IMPUG_SIN_TERC
 																																	   *
 select top 5 *from [documentos].[dbo].[documento] order by 1 desc																	   *
@@ -267,8 +268,10 @@ order by 1 desc
 --DELEGADO DEL DIRECTOR DE GESTIÓN DE INFRACCIONES Y SERVICIOS DE TRÁNSITO
 --DE INFRACCIONES Y SERVICIOS DE TRÁNSITO 136 cony
 
+--ALEXIS 
 
-
+--Cambio para que aparezca el titulo del funcionario
+--fu.titulo_obtenido, ' ',  
 ------------------------------------------------------------------
 
 
@@ -279,3 +282,28 @@ where id_plantilla
 select *from plantilla_configuracion
 order by id_plantilla  desc
 where id_plantilla=1430
+--------------------------------------
+
+select *from funcionario f
+join persona p on f.id_persona=p.id_persona
+where nombre1 ='FELIPE'
+
+--------------------------------------------------------
+select *from funcionario f
+join persona p on f.id_persona=p.id_persona
+where nombre1 ='ALEXIS'
+
+--------------------------------------------------------
+--ABG.
+select --titulo_obtenido
+*from funcionario f
+join persona p on f.id_persona=p.id_persona
+where nombre1 ='conny' 
+
+
+begin tran
+update funcionario 
+set titulo_obtenido='ABG.'
+where id_funcionario=182--154 conny y alexis no tienen cargo
+commit  tran
+--------------------------------------------------

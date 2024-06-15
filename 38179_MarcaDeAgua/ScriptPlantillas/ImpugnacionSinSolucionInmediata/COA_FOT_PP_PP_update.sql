@@ -29,7 +29,7 @@ tpf.id_trazabilidad_proceso,
 cv.placa_vehiculo,
 fu.memo_nombramiento,
 fu.fecha_nombramiento,
-Concat(per.nombre1, '' '', per.nombre2, '' '', per.apellido1, '' '', per.apellido2) AS
+Concat(fu.titulo_obtenido, '' '',per.nombre1, '' '', per.nombre2, '' '', per.apellido1, '' '', per.apellido2) AS
 nombreAbogadoFirma,
 car.nombre                                                                    AS
        NombreCargo,
@@ -51,9 +51,8 @@ FROM   funcionario f (nolock)
    ON f.id_persona = p.id_persona
 WHERE  id_cargo = 11
  AND fecha_final_vigencia IS NULL)                                     AS
-       nombreDirector,
-
-	   (SELECT valor_parametro_defecto
+       nombreDirector
+	   ,(SELECT valor_parametro_defecto
         FROM   parametro(nolock)
         WHERE  codigo_parametro = 439) AS TITULO_PLANTILLAS
 FROM   proceso pr (nolock)
@@ -110,7 +109,7 @@ commit tran
 
 -------------------------------------------------------------------------------------------------
 
---MODIFICAR
+--MODIFICARFICAR
 SELECT CASE pe.id_tipo_identificacion
          WHEN '2' THEN pj.nombre_comercial
          ELSE Upper(Concat
@@ -140,7 +139,7 @@ tpf.id_trazabilidad_proceso,
 cv.placa_vehiculo,
 fu.memo_nombramiento,
 fu.fecha_nombramiento,
-Concat(per.nombre1, ' ', per.nombre2, ' ', per.apellido1, ' ', per.apellido2) AS
+Concat(fu.titulo_obtenido, ' ',per.nombre1, ' ', per.nombre2, ' ', per.apellido1, ' ', per.apellido2) AS
 nombreAbogadoFirma,
 car.nombre                                                                    AS
        NombreCargo,
@@ -163,6 +162,9 @@ FROM   funcionario f (nolock)
 WHERE  id_cargo = 11
  AND fecha_final_vigencia IS NULL)                                     AS
        nombreDirector
+	   ,(SELECT valor_parametro_defecto
+        FROM   parametro(nolock)
+        WHERE  codigo_parametro = 439) AS TITULO_PLANTILLAS
 FROM   proceso pr (nolock)
        JOIN comparendo_proceso cp (nolock)
          ON cp.id_proceso = pr.id_proceso

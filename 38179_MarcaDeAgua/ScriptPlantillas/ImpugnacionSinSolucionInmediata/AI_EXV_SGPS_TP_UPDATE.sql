@@ -29,7 +29,7 @@ tpf.id_trazabilidad_proceso,
 cv.placa_vehiculo,
 fu.memo_nombramiento,
 fu.fecha_nombramiento,
-Concat(per.nombre1, '' '', per.nombre2, '' '', per.apellido1, '' '', per.apellido2) AS
+Concat(fu.titulo_obtenido, '' '',per.nombre1, '' '', per.nombre2, '' '', per.apellido1, '' '', per.apellido2) AS
 nombreAbogadoFirma,
 car.nombre                                                                    AS
        NombreCargo,
@@ -51,8 +51,8 @@ FROM   funcionario f (nolock)
    ON f.id_persona = p.id_persona
 WHERE  id_cargo = 11
  AND fecha_final_vigencia IS NULL)                                     AS
-       nombreDirector,
-	   (SELECT valor_parametro_defecto
+       nombreDirector
+	   ,(SELECT valor_parametro_defecto
         FROM   parametro(nolock)
         WHERE  codigo_parametro = 439) AS TITULO_PLANTILLAS
 FROM   proceso pr (nolock)
@@ -100,7 +100,8 @@ FROM   proceso pr (nolock)
        JOIN persona per (nolock)
          ON per.id_persona = fu.id_persona
 WHERE  pr.id_proceso = :idProceso
-ORDER  BY tpf.id_trazabilidad_proceso DESC '               
+ORDER  BY tpf.id_trazabilidad_proceso DESC 
+'               
 	   , orden_variables='NOMBRE_INFRACTOR,numero_consecutivo,T_DOCUMENTO_INFRACTOR,DOCUMENTO_INFRACTOR,fecha_apertura_impug,anio_apertura_proceso,FECHA_IMPOSICION_COMPARENDO,HORA_IMPOSICION_COMPARENDO,ARTICULO,DESCRIPCION_INFRACCION,desc_motivacion,consi_juridica,ESTADO_CITACION,numero_citacion,orden,PLACA_VEHICULO,MEMO_DELEGADO,FECHA_DELEGADO,NOMBRE_DELEGADO,CARGO_DELEGADO,IMAGEN_FIRMA,CORREO_ELECTRONICO_INFRACTOR,TEXTO_NOMBRE_2,TITULO_PLANTILLAS'
 WHERE  id_plantilla_config=10184
 
@@ -163,6 +164,9 @@ FROM   funcionario f (nolock)
 WHERE  id_cargo = 11
  AND fecha_final_vigencia IS NULL)                                     AS
        nombreDirector
+	   ,(SELECT valor_parametro_defecto
+        FROM   parametro(nolock)
+        WHERE  codigo_parametro = 439) AS TITULO_PLANTILLAS
 FROM   proceso pr (nolock)
        JOIN comparendo_proceso cp (nolock)
          ON cp.id_proceso = pr.id_proceso

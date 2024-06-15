@@ -26,10 +26,10 @@
 --***********************************************************************************************************************
 --OBSERVACIONES: 
 --***********************************************************************************************************************
-
+--ACUERDO_PAGO
 --****************************************************************************************************************************************************************
 declare @codigoPlantilla varchar(20);
-set @codigoPlantilla ='AMORTIZACION'--'OFIC_BAN_CARTA_SEPS'-- 'AI_EXV_SGPS_TP';--AUTO_PAGO_PATIO  
+set @codigoPlantilla ='ACUERDO_PAGO'--'OFIC_BAN_CARTA_SEPS'-- 'AI_EXV_SGPS_TP';--AUTO_PAGO_PATIO  
 select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla
 select * from documentos..plantilla_configuracion where id_plantilla in (select id_plantilla from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 select * from documentos..proceso where id_proceso IN (select id_proceso from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
@@ -39,7 +39,7 @@ begin tran
 --update documentos..plantilla set fecha_fin='2022-03-11' where id_plantilla=2080   --2532
 update documentos..plantilla set fecha_fin='2024-03-20' where id_plantilla=2611
 --TODAS LAS PLANTILLAS DE SENTAR RAZÓN
-update documentos..plantilla set fecha_inicio='2024-05-06' where id_plantilla in(3689,3690,3691,3692)
+update documentos..plantilla set fecha_inicio='2024-06-12' where id_plantilla in(3689,3690,3691,3692)
 --update documentos..plantilla set fecha_inicio='2024-04-11' where id_plantilla in(2616,2617,2618,2620,2624,2625,2626,2634,2636,2638,2639)
 commit tran
 
@@ -122,6 +122,10 @@ SELECT valor_parametro_defecto
 --EMPRESA PÚBLICA MUNICIPAL DE TRÁNSITO Y MOVILIDAD DE GUAYAQUIL EP.
 
 
+,(SELECT valor_parametro_defecto
+        FROM   parametro(nolock)
+        WHERE  codigo_parametro = 439) AS TITULO_PLANTILLAS
+
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
 
@@ -129,11 +133,33 @@ begin tran
 UPDATE documentos..plantilla_configuracion
 SET    consulta=   ''               
 	   , orden_variables=',TITULO_PLANTILLAS'
-WHERE  id_plantilla_config=31xx
+WHERE  id_plantilla_config=7xxx
+
+commit tran
+------------------------------------------------------------
+begin tran
+UPDATE documentos..plantilla_configuracion
+SET    consulta=   ''               
+	   , orden_variables='ID_FINANCIACION,NUMERO_FINANCIACION,PRIMER_NOMBRE_INFRACTOR,T_DOCUMENTO_INFRACTOR,DOCUMENTO_INFRACTOR,TELEFONO_INFRACTOR,CORREO_ELECTRONICO_INFRACTOR,DIRECCION_INFRACTOR,CIUDAD_INFRACTOR,NUMERO_TOTAL_CUOTAS,TOTAL_FINANCIADO,PORCENTAJE_CUOTA1,JUSTIFICACION,TITULO_PLANTILLAS'
+WHERE  id_plantilla_config=7xxx
 
 commit tran
 
+begin tran
+UPDATE documentos..plantilla_configuracion
+SET    consulta=   ''               
+	   , orden_variables='NUMERO_CUOTAS,FECHA_PAGO_OPORTUNO,VALOR_CUOTA,TITULO_PLANTILLAS'
+WHERE  id_plantilla_config=22xxx
 
+commit tran
+
+begin tran
+UPDATE documentos..plantilla_configuracion
+SET    consulta=   ''               
+	   , orden_variables='numero_citacion,T_OBLIGACION,fecha_imposicion,DEUDA_CARTERA,NUMERO_OBLIGACION,TITULO_PLANTILLAS'
+WHERE  id_plantilla_config=23xxx
+
+commit tran
 
 
 
@@ -245,3 +271,136 @@ exec integracion_terceros.dbo.dba_axis_info_v_detalles_pagos_pre
 exec integracion_terceros.dbo.obtenerPagos '11001'
 
 -----------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+--------------------ANEXOS----------------------------------------------------------
+------------------------------------------------------------------------------------
+--Se intentarón obtener los titulos
+
+SELECT valor_parametro_defecto
+        FROM   parametro(nolock)
+        WHERE  codigo_parametro = 437
+
+
+			   SELECT Concat(f.titulo_obtenido, ' ', p.nombre1, ' ', p.nombre2, ' ',
+               p.apellido1, ' ',
+                       p.apellido2)
+        FROM   funcionario f (nolock)
+               JOIN persona p (nolock)
+                 ON f.id_persona = p.id_persona
+        WHERE  id_cargo = 11
+               AND fecha_final_vigencia IS NULL
+
+
+--Ab. ERIKA JAQUELINE ZAMBRANO REYNA
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+select *from funcionario
+
+Concat(fu.titulo_obtenido,' ',per.nombre1, ' ', per.nombre2, ' ', per.apellido1, ' ',
+       per.apellido2) AS
+       nombreAbogadoFirma,
+
+
+
+SELECT TOP 1 Concat(fun.titulo_obtenido, ' ', pf.nombre1, ' ',
+                     pf.nombre2, ' ',
+                     pf.apellido1,
+                                   ' ', pf.apellido2)
+        FROM   persona pf
+               INNER JOIN funcionario fun
+                       ON pf.id_persona = fun.id_persona
+        WHERE  fun.id_cargo = 1
+               AND fun.estado = 'Vigente'
+
+--Abg. Esp. FRANCISCO XAVIER ROJAS ESTEVES
+
+----------------------------------------------------------
+
+select --per.nombre1, per.nombre2
+*from funcionario fu
+inner join persona per on per.id_persona=fu.id_persona 
+where id_funcionario=154
+order by 1 desc
+
+
+select per.nombre1, per.nombre2, fu.titulo_obtenido
+from funcionario fu
+inner join persona per on per.id_persona=fu.id_persona 
+where id_funcionario=154
+order by 1 desc
+
+
+--CONNY YANINA ARREGUI MIRANDA
+--DELEGADO DEL DIRECTOR DE GESTIÓN DE INFRACCIONES Y SERVICIOS DE TRÁNSITO
+--DE INFRACCIONES Y SERVICIOS DE TRÁNSITO 136 cony
+
+--ALEXIS 
+
+--Cambio para que aparezca el titulo del funcionario
+--fu.titulo_obtenido, ' ',  
+------------------------------------------------------------------
+
+
+select *from plantilla_configuracion
+where id_plantilla
+
+
+select *from plantilla_configuracion
+order by id_plantilla  desc
+where id_plantilla=1430
+--------------------------------------
+
+select *from funcionario f
+join persona p on f.id_persona=p.id_persona
+where nombre1 ='FELIPE'
+
+--------------------------------------------------------
+select *from funcionario f
+join persona p on f.id_persona=p.id_persona
+where nombre1 ='ALEXIS'
+
+--------------------------------------------------------
+--ABG.
+select --titulo_obtenido
+*from funcionario f
+join persona p on f.id_persona=p.id_persona
+where nombre1 ='conny' 
+
+
+begin tran
+update funcionario 
+set titulo_obtenido='ABG.'
+where id_funcionario=182--154 conny y alexis no tienen cargo
+commit  tran
+--------------------------------------------------

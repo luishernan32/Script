@@ -72,7 +72,7 @@ https://gacetamultas.atm.gob.ec/imagenes/img/background_certificado_virtual_v2.p
 
 --****************************************************************************************************************************************************************
 declare @codigoPlantilla varchar(20);
-set @codigoPlantilla ='CARAT_CURSO_VIRTU'--'OFIC_BAN_CARTA_SEPS'-- 'AI_EXV_SGPS_TP';--AUTO_PAGO_PATIO  
+set @codigoPlantilla ='ACTA_SEG_V_CUL'--'OFIC_BAN_CARTA_SEPS'-- 'AI_EXV_SGPS_TP';--AUTO_PAGO_PATIO  
 select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla
 select * from documentos..plantilla_configuracion where id_plantilla in (select id_plantilla from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 select * from documentos..proceso where id_proceso IN (select id_proceso from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
@@ -359,6 +359,134 @@ commit tran
 
 --COA_CP
 --COA_CP_IMAGEN_FIRMA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+--------------------ANEXOS----------------------------------------------------------
+------------------------------------------------------------------------------------
+--Se intentarón obtener los titulos
+
+SELECT valor_parametro_defecto
+        FROM   parametro(nolock)
+        WHERE  codigo_parametro = 437
+
+
+			   SELECT Concat(f.titulo_obtenido, ' ', p.nombre1, ' ', p.nombre2, ' ',
+               p.apellido1, ' ',
+                       p.apellido2)
+        FROM   funcionario f (nolock)
+               JOIN persona p (nolock)
+                 ON f.id_persona = p.id_persona
+        WHERE  id_cargo = 11
+               AND fecha_final_vigencia IS NULL
+
+
+--Ab. ERIKA JAQUELINE ZAMBRANO REYNA
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+select *from funcionario
+
+Concat(fu.titulo_obtenido,' ',per.nombre1, ' ', per.nombre2, ' ', per.apellido1, ' ',
+       per.apellido2) AS
+       nombreAbogadoFirma,
+
+
+
+SELECT TOP 1 Concat(fun.titulo_obtenido, ' ', pf.nombre1, ' ',
+                     pf.nombre2, ' ',
+                     pf.apellido1,
+                                   ' ', pf.apellido2)
+        FROM   persona pf
+               INNER JOIN funcionario fun
+                       ON pf.id_persona = fun.id_persona
+        WHERE  fun.id_cargo = 1
+               AND fun.estado = 'Vigente'
+
+--Abg. Esp. FRANCISCO XAVIER ROJAS ESTEVES
+
+----------------------------------------------------------
+
+select --per.nombre1, per.nombre2
+*from funcionario fu
+inner join persona per on per.id_persona=fu.id_persona 
+where id_funcionario=154
+order by 1 desc
+
+
+select per.nombre1, per.nombre2, fu.titulo_obtenido
+from funcionario fu
+inner join persona per on per.id_persona=fu.id_persona 
+where id_funcionario=154
+order by 1 desc
+
+
+--CONNY YANINA ARREGUI MIRANDA
+--DELEGADO DEL DIRECTOR DE GESTIÓN DE INFRACCIONES Y SERVICIOS DE TRÁNSITO
+--DE INFRACCIONES Y SERVICIOS DE TRÁNSITO 136 cony
+
+--ALEXIS 
+
+--Cambio para que aparezca el titulo del funcionario
+--fu.titulo_obtenido, ' ',  
+------------------------------------------------------------------
+
+
+select *from plantilla_configuracion
+where id_plantilla
+
+
+select *from plantilla_configuracion
+order by id_plantilla  desc
+where id_plantilla=1430
+--------------------------------------
+
+select *from funcionario f
+join persona p on f.id_persona=p.id_persona
+where nombre1 ='FELIPE'
+
+--------------------------------------------------------
+select *from funcionario f
+join persona p on f.id_persona=p.id_persona
+where nombre1 ='ALEXIS'
+
+--------------------------------------------------------
+--ABG.
+select --titulo_obtenido
+*from funcionario f
+join persona p on f.id_persona=p.id_persona
+where nombre1 ='conny' 
+
+
+begin tran
+update funcionario 
+set titulo_obtenido='ABG.'
+where id_funcionario=182--154 conny y alexis no tienen cargo
+commit  tran
+--------------------------------------------------
 
 
 

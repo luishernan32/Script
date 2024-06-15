@@ -43,15 +43,10 @@ WHERE  cp.estado = 1
  AND cp.id_persona = pe.id_persona
 ORDER  BY cp.fecha_registro DESC)                                            AS
        correos,
-(SELECT Concat(f.titulo_obtenido, '' '', p.nombre1, '' '', p.nombre2, '' '',
- p.apellido1, '' '',
-         p.apellido2)
-FROM   funcionario f (nolock)
- JOIN persona p (nolock)
-   ON f.id_persona = p.id_persona
-WHERE  id_cargo = 11
- AND fecha_final_vigencia IS NULL)                                     AS
-       nombreDirector
+tpf1.fecha_inicio                                                             AS
+       fechaSolicitud,
+tpf1.fecha_inicio                                                             AS
+       horaSolicitud
 	   ,(SELECT valor_parametro_defecto
         FROM   parametro(nolock)
         WHERE  codigo_parametro = 439) AS TITULO_PLANTILLAS
@@ -89,28 +84,38 @@ FROM   proceso pr (nolock)
        LEFT JOIN evaluar_impugnacion eimp (nolock)
               ON eimp.id_trazabilidad_proceso = tpf.id_trazabilidad_proceso
        JOIN funcionario fu (nolock)
-         ON fu.id_funcionario = (SELECT ei.id_funcionario
+         ON fu.id_funcionario = (SELECT TOP 1 ei.id_funcionario
                                  FROM   evaluar_impugnacion ei
                                         INNER JOIN trazabilidad_proceso tp
                                                 ON tp.id_trazabilidad_proceso =
                                                    ei.id_trazabilidad_proceso
-                                 WHERE  tp.id_proceso = pr.id_proceso)
+                                 WHERE  tp.id_proceso = pr.id_proceso
+                                 ORDER  BY ei.id_evaluar_impugnacion DESC)
        JOIN cargo car (nolock)
          ON car.id_cargo = fu.id_cargo
        JOIN persona per (nolock)
          ON per.id_persona = fu.id_persona
+       LEFT JOIN trazabilidad_proceso tpf1
+              ON tpf1.id_proceso = pr.id_proceso
+                 AND tpf1.id_trazabilidad_proceso =
+                     (SELECT Max(tp1.id_trazabilidad_proceso)
+                      FROM   trazabilidad_proceso tp1 (nolock)
+                             INNER JOIN proceso p1 (nolock)
+                                     ON tp1.id_proceso =
+                                        p1.id_proceso
+                                        AND p1.id_proceso =
+                                            pr.id_proceso)
 WHERE  pr.id_proceso = :idProceso
 ORDER  BY tpf.id_trazabilidad_proceso DESC '               
-	   , orden_variables='NOMBRE_INFRACTOR,numero_consecutivo,T_DOCUMENTO_INFRACTOR,DOCUMENTO_INFRACTOR,fecha_apertura_impug,anio_apertura_proceso,FECHA_IMPOSICION_COMPARENDO,HORA_IMPOSICION_COMPARENDO,ARTICULO,DESCRIPCION_INFRACCION,desc_motivacion,consi_juridica,ESTADO_CITACION,numero_citacion,orden,PLACA_VEHICULO,MEMO_DELEGADO,FECHA_DELEGADO,NOMBRE_DELEGADO,CARGO_DELEGADO,IMAGEN_FIRMA,CORREO_ELECTRONICO_INFRACTOR,TEXTO_NOMBRE_2,TITULO_PLANTILLAS'
-WHERE  id_plantilla_config=10185
+	   , orden_variables='NOMBRE_INFRACTOR,numero_consecutivo,T_DOCUMENTO_INFRACTOR,DOCUMENTO_INFRACTOR,fecha_apertura_impug,anio_apertura_proceso,FECHA_IMPOSICION_COMPARENDO,HORA_IMPOSICION_COMPARENDO,ARTICULO,DESCRIPCION_INFRACCION,desc_motivacion,consi_juridica,ESTADO_CITACION,numero_citacion,orden,PLACA_VEHICULO,MEMO_DELEGADO,FECHA_DELEGADO,NOMBRE_DELEGADO,CARGO_DELEGADO,IMAGEN_FIRMA,CORREO_ELECTRONICO_INFRACTOR,FECHA_SOLICITUD,HORA_SOLICITUD,TITULO_PLANTILLAS'
+WHERE  id_plantilla_config=12
 
 commit tran
 
 
------------------------------------------
 
---MODIFICARCAR
-
+---------------------------------
+--Original
 SELECT CASE pe.id_tipo_identificacion
          WHEN '2' THEN pj.nombre_comercial
          ELSE Upper(Concat
@@ -154,15 +159,10 @@ WHERE  cp.estado = 1
  AND cp.id_persona = pe.id_persona
 ORDER  BY cp.fecha_registro DESC)                                            AS
        correos,
-(SELECT Concat(f.titulo_obtenido, ' ', p.nombre1, ' ', p.nombre2, ' ',
- p.apellido1, ' ',
-         p.apellido2)
-FROM   funcionario f (nolock)
- JOIN persona p (nolock)
-   ON f.id_persona = p.id_persona
-WHERE  id_cargo = 11
- AND fecha_final_vigencia IS NULL)                                     AS
-       nombreDirector
+tpf1.fecha_inicio                                                             AS
+       fechaSolicitud,
+tpf1.fecha_inicio                                                             AS
+       horaSolicitud
 	   ,(SELECT valor_parametro_defecto
         FROM   parametro(nolock)
         WHERE  codigo_parametro = 439) AS TITULO_PLANTILLAS
@@ -200,25 +200,43 @@ FROM   proceso pr (nolock)
        LEFT JOIN evaluar_impugnacion eimp (nolock)
               ON eimp.id_trazabilidad_proceso = tpf.id_trazabilidad_proceso
        JOIN funcionario fu (nolock)
-         ON fu.id_funcionario = (SELECT ei.id_funcionario
+         ON fu.id_funcionario = (SELECT TOP 1 ei.id_funcionario
                                  FROM   evaluar_impugnacion ei
                                         INNER JOIN trazabilidad_proceso tp
                                                 ON tp.id_trazabilidad_proceso =
                                                    ei.id_trazabilidad_proceso
-                                 WHERE  tp.id_proceso = pr.id_proceso)
+                                 WHERE  tp.id_proceso = pr.id_proceso
+                                 ORDER  BY ei.id_evaluar_impugnacion DESC)
        JOIN cargo car (nolock)
          ON car.id_cargo = fu.id_cargo
        JOIN persona per (nolock)
          ON per.id_persona = fu.id_persona
+       LEFT JOIN trazabilidad_proceso tpf1
+              ON tpf1.id_proceso = pr.id_proceso
+                 AND tpf1.id_trazabilidad_proceso =
+                     (SELECT Max(tp1.id_trazabilidad_proceso)
+                      FROM   trazabilidad_proceso tp1 (nolock)
+                             INNER JOIN proceso p1 (nolock)
+                                     ON tp1.id_proceso =
+                                        p1.id_proceso
+                                        AND p1.id_proceso =
+                                            pr.id_proceso)
 WHERE  pr.id_proceso = :idProceso
 ORDER  BY tpf.id_trazabilidad_proceso DESC 
 
----------------------------------------------------------
---ORIGINAL
-SELECT CASE pe.id_tipo_identificacion
-         WHEN '2' THEN pj.nombre_comercial
+
+-----------------------
+
+--Prueba
+
+------------------------------------------------------------------
+
+begin tran
+UPDATE documentos..plantilla_configuracion
+SET    consulta=   'SELECT CASE pe.id_tipo_identificacion
+         WHEN ''2'' THEN pj.nombre_comercial
          ELSE Upper(Concat
-(pe.nombre1, ' ', pe.nombre2, ' ', pe.apellido1, ' ', pe.apellido2))
+(pe.nombre1, '' '', pe.nombre2, '' '', pe.apellido1, '' '', pe.apellido2))
 END                                                                           AS
        nombreCompleto,
 pr.numero_proceso,
@@ -230,9 +248,9 @@ Year(pr.fecha_inicio)                                                         AS
 c.fecha_infraccion,
 c.hora_infraccion,
 CASE i.numeral_infraccion
-WHEN ' ' THEN Concat('Art√culo ', ci.articulo, ' - ', nm.nombre)
+WHEN '' '' THEN Concat(''Art√culo '', ci.articulo, '' - '', nm.nombre)
 ELSE
-Concat('Art√culo ', ci.articulo, ', numeral ', i.numeral_infraccion, ' - ', nm.nombre)
+Concat(''Art√culo '', ci.articulo, '', numeral '', i.numeral_infraccion, '' - '', nm.nombre)
 END                                                                           AS
        infraccion,
 ci.descripcion,
@@ -244,7 +262,7 @@ tpf.id_trazabilidad_proceso,
 cv.placa_vehiculo,
 fu.memo_nombramiento,
 fu.fecha_nombramiento,
-Concat(per.nombre1, ' ', per.nombre2, ' ', per.apellido1, ' ', per.apellido2) AS
+Concat(per.nombre1, '' '', per.nombre2, '' '', per.apellido1, '' '', per.apellido2) AS
 nombreAbogadoFirma,
 car.nombre                                                                    AS
        NombreCargo,
@@ -258,15 +276,14 @@ WHERE  cp.estado = 1
  AND cp.id_persona = pe.id_persona
 ORDER  BY cp.fecha_registro DESC)                                            AS
        correos,
-(SELECT Concat(f.titulo_obtenido, ' ', p.nombre1, ' ', p.nombre2, ' ',
- p.apellido1, ' ',
-         p.apellido2)
-FROM   funcionario f (nolock)
- JOIN persona p (nolock)
-   ON f.id_persona = p.id_persona
-WHERE  id_cargo = 11
- AND fecha_final_vigencia IS NULL)                                     AS
-       nombreDirector
+tpf1.fecha_inicio                                                             AS
+       fechaSolicitud,
+tpf1.fecha_inicio                                                             AS
+       horaSolicitud,
+
+	   (SELECT valor_parametro_defecto
+        FROM   parametro(nolock)
+        WHERE  codigo_parametro = 439) AS TITULO_PLANTILLAS
 FROM   proceso pr (nolock)
        JOIN comparendo_proceso cp (nolock)
          ON cp.id_proceso = pr.id_proceso
@@ -301,17 +318,30 @@ FROM   proceso pr (nolock)
        LEFT JOIN evaluar_impugnacion eimp (nolock)
               ON eimp.id_trazabilidad_proceso = tpf.id_trazabilidad_proceso
        JOIN funcionario fu (nolock)
-         ON fu.id_funcionario = (SELECT ei.id_funcionario
+         ON fu.id_funcionario = (SELECT TOP 1 ei.id_funcionario
                                  FROM   evaluar_impugnacion ei
                                         INNER JOIN trazabilidad_proceso tp
                                                 ON tp.id_trazabilidad_proceso =
                                                    ei.id_trazabilidad_proceso
-                                 WHERE  tp.id_proceso = pr.id_proceso)
+                                 WHERE  tp.id_proceso = pr.id_proceso
+                                 ORDER  BY ei.id_evaluar_impugnacion DESC)
        JOIN cargo car (nolock)
          ON car.id_cargo = fu.id_cargo
        JOIN persona per (nolock)
          ON per.id_persona = fu.id_persona
+       LEFT JOIN trazabilidad_proceso tpf1
+              ON tpf1.id_proceso = pr.id_proceso
+                 AND tpf1.id_trazabilidad_proceso =
+                     (SELECT Max(tp1.id_trazabilidad_proceso)
+                      FROM   trazabilidad_proceso tp1 (nolock)
+                             INNER JOIN proceso p1 (nolock)
+                                     ON tp1.id_proceso =
+                                        p1.id_proceso
+                                        AND p1.id_proceso =
+                                            pr.id_proceso)
 WHERE  pr.id_proceso = :idProceso
-ORDER  BY tpf.id_trazabilidad_proceso DESC 
+ORDER  BY tpf.id_trazabilidad_proceso DESC '               
+	   , orden_variables='NOMBRE_INFRACTOR,numero_consecutivo,T_DOCUMENTO_INFRACTOR,DOCUMENTO_INFRACTOR,fecha_apertura_impug,anio_apertura_proceso,FECHA_IMPOSICION_COMPARENDO,HORA_IMPOSICION_COMPARENDO,ARTICULO,DESCRIPCION_INFRACCION,desc_motivacion,consi_juridica,ESTADO_CITACION,numero_citacion,orden,PLACA_VEHICULO,MEMO_DELEGADO,FECHA_DELEGADO,NOMBRE_DELEGADO,CARGO_DELEGADO,IMAGEN_FIRMA,CORREO_ELECTRONICO_INFRACTOR,FECHA_SOLICITUD,HORA_SOLICITUD,TITULO_PLANTILLAS'
+WHERE  id_plantilla_config=12
 
-
+commit tran

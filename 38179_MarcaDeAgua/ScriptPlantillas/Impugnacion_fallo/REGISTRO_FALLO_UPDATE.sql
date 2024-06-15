@@ -213,6 +213,9 @@ cv.placa_vehiculo                                  AS placa,
           ON f.id_persona = p.id_persona
  WHERE  id_cargo = 11
         AND fecha_final_vigencia IS NULL)          AS nombreDirector
+		,(SELECT valor_parametro_defecto
+        FROM   parametro(nolock)
+        WHERE  codigo_parametro = 439) AS TITULO_PLANTILLAS
 FROM   proceso pr(nolock)
        JOIN comparendo_proceso cp(nolock)
          ON cp.id_proceso = pr.id_proceso
@@ -250,7 +253,7 @@ WHERE  ( tp.id_trazabilidad_proceso = (SELECT Max(tz1.id_trazabilidad_proceso)
                                        FROM   trazabilidad_proceso tz1(nolock)
                                        WHERE  tz1.id_proceso = pr.id_proceso) )
        AND pr.id_proceso = :idProceso
-       AND c.id_estado_comparendo != 14 '               
+       AND c.id_estado_comparendo != 14'               
 	   , orden_variables='NOMBRE_INFRACTOR,numero_consecutivo,T_DOCUMENTO_INFRACTOR,DOCUMENTO_INFRACTOR,fecha_apertura_impug,anio_apertura_proceso,FECHA_IMPOSICION_COMPARENDO,HORA_IMPOSICION_COMPARENDO,ARTICULO,DESCRIPCION_INFRACCION,desc_motivacion,consi_juridica,REGISTRO_FALLO,ESTADO_CITACION,numero_citacion,FECHA_EVALUACION,DIRECCION_INFRACCION,PLACA_VEHICULO,VALOR_TOTAL,TOTAL_LETRAS,CARGO_DELEGADO,MEMO_DELEGADO,FECHA_DELEGADO,IMAGEN_FIRMA,NOMBRE_ABOGADO,ABOGADO_PROYECTADO,CORREO_ELECTRONICO_INFRACTOR,IMAGEN_FIRMA_DOS,NOMBRE_SECRETARIO,TEXTO_NOMBRE_1,TEXTO_NOMBRE_2,TITULO_PLANTILLAS'
 WHERE  id_plantilla_config=2
 
@@ -475,6 +478,9 @@ cv.placa_vehiculo                                  AS placa,
           ON f.id_persona = p.id_persona
  WHERE  id_cargo = 11
         AND fecha_final_vigencia IS NULL)          AS nombreDirector
+		,(SELECT valor_parametro_defecto
+        FROM   parametro(nolock)
+        WHERE  codigo_parametro = 439) AS TITULO_PLANTILLAS
 FROM   proceso pr(nolock)
        JOIN comparendo_proceso cp(nolock)
          ON cp.id_proceso = pr.id_proceso
