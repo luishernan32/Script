@@ -13,9 +13,11 @@
 
 --APERT_IMPUG_SIN_TERC 23316-2024 - La segunda página debe quedar en blanco. El nombre de la empresa en la segunda parte de la plantilla está quedando como AUTORIDAD DE TRÁNSITO MUNICIPAL
 
---ACTA_REC_FIR_RUB
+--ACTA_REC_FIR_RUB   https://www.youtube.com/watch?v=VM5hAMo4148
 
---ACTA_REC_FIR_RUB 2661 10076
+--ACTA_REC_FIR_RUB 2661 10076 plantilla de la firma
+
+
 
 --**********************************************************************************
 
@@ -237,10 +239,10 @@ where nombre1 ='ALEXIS'
 
 --------------------------------------------------------
 --ABG.
-select --titulo_obtenido
-*from funcionario f
+select titulo_obtenido
+from funcionario f
 join persona p on f.id_persona=p.id_persona
-where nombre1 ='conny' 
+where nombre1 ='piero' 
 
 
 begin tran

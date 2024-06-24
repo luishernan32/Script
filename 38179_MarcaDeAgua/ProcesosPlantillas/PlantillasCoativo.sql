@@ -86,16 +86,160 @@
 
 --**********************************************************************************
 --INCIDENCIAS
+--Observaciones plantilla coactivo
 
 --COA_TITULO_CREDITO		 - Parte de la segunda página está saliendo en la primera
 --COA_ORDEN_PAGO_P	306314	 - Se está generando en dos páginas. Toda la información debe quedar en la primera    https://www.youtube.com/watch?v=evJbQ-vznzA
 
+--Punto 1
+--ACTA_EMBARGO_COACTIV	ACTA_EMBARGO_COACTIV
+
+
+--Incidencias word cambios por realizar
+--Cambios ACTA_EMBARGO_COACTIV
+--Punto 2
+--ACTA_DE_POSESION 2633 39
+
+--***************************************************************************************************************
+--Punto 3
+--ACTA_DE_POSESION_P
+--Falta hacer un update en la tabla funcionario_coactivo para el campo titulo del funcionario porque esta en null
+--***************************************************************************************************************
+
+--punto: 4
+--Acta posesión depositario	ACTA_POSESION_DEP
+
+--punto: 5
+--Auto de pago	AUTO_PAGO
+-- Revisar lo de la firma
+
+--punto: 6
+--AUTO_PAGO_PATIO
+
+--punto: 7  AUTO_PAGO
+--7. AUTO DE PAGO 2 :(
+--Francisco Xavier Rojas Esteves. Hay que update su titulo
+
+SELECT Concat(f.titulo_obtenido, ' ', Upper(
+               Concat(per.nombre1, ' ', per.nombre2, ' ',
+                       per.apellido1, ' ',
+               per.apellido2)))
+        FROM   funcionario_coactivo f (nolock)
+               INNER JOIN persona per (nolock)
+                       ON f.id_persona = per.id_persona
+        WHERE  f.id_cargo = 1
+               AND f.fecha_inicio_vigencia <= CONVERT(DATE, getdate()
+               --AND f.fecha_final_vigencia >= CONVERT(DATE, getdate()
+                --OR ( f.id_cargo = 1
+                     --AND f.fecha_inicio_vigencia <= CONVERT(DATE, getdate()
+                    -- AND f.fecha_final_vigencia IS NULL 
+					--)
+					)       					 
+					 
+					 --AS
+      -- titulo_nombreFuncionario, --Aquí es------------------------------------------------------------------
+
+	  begin tran
+update funcionario 
+set titulo_obtenido='Abg. Esp.'
+where id_funcionario=180--154 conny y alexis no tienen cargo
+commit  tran
+
+
+--punto: 8
+-- COA_ORDEN_PAGO_P
+--Ok
+
+
+--punto: 9
+
+
+
+--punto: 10
+--DOC_DETERMINACION_DEUDA	COA_DOC_DETER_DEUDA
+--Revisar variable
+
+
+--punto: 11
+--DOC_DETERMINACION_DEUDA_COURIER	DOC_DETER_DEUDA_COU
+
+--punto: 12 
+--Levantamiento medidas de retención y ejecución	LEVANTAMIENT_EMBARGO   El titulo esta quemaddo
+--Ok
+
+--punto: 13
+--Levantamiento por embargo	LEV_MED_RET_PAGO_PAR     El titulo esta quemaddo
+--Ok
+
+--punto: 14
+--Notificación coactivo	NOTIFICACION_COAC
+--Ok
+
+--punto: 15
+--Oficio de bancos carta	OFICIO_BANCO_CARTA
+--Ok
+
+--punto: 16
+--Oficio de bancos carta SEPS	OFIC_BAN_CARTA_SEPS
+
+--punto: 17
+--Oficio de embargo	OFICIO_EMBARGO
+--En dado caso que no funcione es porque los funcionarios tienen el titulo en null
+--Ok
+
+--punto: 18
+--Oficio de embargo SEPS	OFICIO_EMBARGO_SEPS
+--Se soluciona de la misma manera que el punto 17
+--Ok
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--punto: 19
+--Presente error en el sistema
+--ORDEN_COBRO_COIP	ORDEN_COBRO_COIP
+--PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--punto: 20
+--Presente error en el sistema
+--ORDENANZA_REQ_PAGO	ORDENANZA_REQ_PAGO
+--PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--punto: 21
+--Orden de Cobro COIP Electrónica	ORDEN_COBRO_COIP_ELE
+
+--punto: 22
+--Presente error en el sistema
+--Orden de Cobro Ordenanza Electrónica	ORDEN_COBRO_ORDE_ELE
+
+--punto: 23
+--punto: 24
+--punto: 25
+
+--punto: 26
+--Incidencia mas complicada
+--Providencia pago por Embargo	PROVIDENCIA_PAGO_EMB
+
+--punto: 27
+--Providencia por pago	PROVIDENCIA_PAGO
+--Ok
+
+
+--punto: 28
+--PROVIDENCIA RETENCIÓN	PROVIDENCIA_RETENCIO
+--Ok
+
+--punto: 29
+
+--punto: 30
+--Sentar Razon del Pago	SENTAR_RAZON_PAGO
+--Ejecutar Script
 --**********************************************************************************
 --**********************************************************************************
 --**********************************************************************************
 
 declare @codigoPlantilla varchar(20);
-set @codigoPlantilla = 'COA_TITULO_CREDITO';--AUTO_PAGO_PATIO
+set @codigoPlantilla = 'ACTA_DE_POSESION_P';--AUTO_PAGO_PATIO
 select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla
 select * from documentos..plantilla_configuracion where id_plantilla in (select id_plantilla from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 select * from documentos..proceso where id_proceso IN (select id_proceso from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
@@ -104,7 +248,7 @@ begin tran
 --update documentos..plantilla set fecha_fin='2022-03-11' where id_plantilla=2080   --2532
 update documentos..plantilla set fecha_fin='2024-03-20' where id_plantilla=2611
 --TODAS LAS PLANTILLAS DE COACTIVO
-update documentos..plantilla set fecha_inicio='2024-06-01' where id_plantilla in(2616,2617,2618,2619,2620,2621,2622,2623,2624,2625,2626,2627,2628,2629,2630,2631,2632,2633,2634,2635,2636,2637,2638,2639,2640,2641,2642)
+update documentos..plantilla set fecha_inicio='2024-06-25' where id_plantilla in(2616,2617,2618,2619,2620,2621,2622,2623,2624,2625,2626,2627,2628,2629,2630,2631,2632,2633,2634,2635,2636,2637,2638,2639,2640,2641,2642)
 --update documentos..plantilla set fecha_inicio='2024-04-11' where id_plantilla in(2616,2617,2618,2620,2624,2625,2626,2634,2636,2638,2639)
 commit tran
 
@@ -284,7 +428,7 @@ SELECT valor_parametro_defecto
         WHERE  codigo_parametro = 439
 
 
-(SELECT valor_parametro_defecto
+,(SELECT valor_parametro_defecto
         FROM   parametro(nolock)
         WHERE  codigo_parametro = 439)AS TITULO_PLANTILLAS
 
@@ -477,19 +621,41 @@ where nombre1 ='FELIPE'
 --------------------------------------------------------
 select *from funcionario f
 join persona p on f.id_persona=p.id_persona
-where nombre1 ='ALEXIS'
+ where nombre1 ='Xavier'
+--where nombre1 ='ALEXIS'  
 
 --------------------------------------------------------
---ABG.
-select --titulo_obtenido
-*from funcionario f
+select *from funcionario_coactivo f
 join persona p on f.id_persona=p.id_persona
-where nombre1 ='conny' 
-
+ where nombre2 ='Xavier'
+--------------------------------------------------------
+--ABG.
+select nombre1,nombre2, id_funcionario,apellido1,titulo_obtenido
+from funcionario f
+join persona p on f.id_persona=p.id_persona
+where nombre1='Beudys ' and nombre2 ='Xavier' 
+--------------------------------------------------------
 
 begin tran
 update funcionario 
 set titulo_obtenido='ABG.'
-where id_funcionario=182--154 conny y alexis no tienen cargo
+where id_funcionario=55--182--154 conny y alexis no tienen cargo
+commit  tran
+--------------------------------------------------
+
+
+--------------------------------------------------------
+--ABG.
+select 
+--nombre1,nombre2, id_funcionario,apellido1,titulo_obtenido
+*from funcionario_coactivo f
+join persona p on f.id_persona=p.id_persona
+where nombre1='Francisco ' and nombre2 ='Xavier' 
+--------------------------------------------------------
+
+begin tran
+update funcionario_coactivo 
+set titulo_obtenido='Abg. Esp.'
+where id_funcionario=24--154 conny y alexis no tienen cargo
 commit  tran
 --------------------------------------------------

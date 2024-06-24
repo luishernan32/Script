@@ -21,9 +21,9 @@ https://gacetamultas.atm.gob.ec/imagenes/img/background_certificado_virtual_v2.p
 --***********************************************************************************************************************
 
 --JASPER x7
---CARAT_CURSO_VIRTU	2231 10106
---CERTI_CURSO_VIRTU	 2235 10110   Hay que actualizar la URL https://gacetamultas.atm.gob.ec/imagenes/img/background_certificado_virtual_v2.png   https://gacetamultas.atm.gob.ec/imagenes/img/background_certificado_virtual_v4.png  0927547109
---RESOL_CULM_VIRTU_100	2466 10167
+---CARAT_CURSO_VIRTU	2231 10106
+---CERTI_CURSO_VIRTU	 2235 10110   Hay que actualizar la URL https://gacetamultas.atm.gob.ec/imagenes/img/background_certificado_virtual_v2.png   https://gacetamultas.atm.gob.ec/imagenes/img/background_certificado_virtual_v4.png  0927547109
+---RESOL_CULM_VIRTU_100	2466 10167
 --RESOL_INCU_VIRTU_100 2467	 10168
 --RESOL_CULMI_VIRTU	2232 10107
 --VOLANTE_PAGO_CURSOV	2234 10109
@@ -72,7 +72,7 @@ https://gacetamultas.atm.gob.ec/imagenes/img/background_certificado_virtual_v2.p
 
 --****************************************************************************************************************************************************************
 declare @codigoPlantilla varchar(20);
-set @codigoPlantilla ='ACTA_SEG_V_CUL'--'OFIC_BAN_CARTA_SEPS'-- 'AI_EXV_SGPS_TP';--AUTO_PAGO_PATIO  
+set @codigoPlantilla ='CARAT_CURSO_VIRTU'--'OFIC_BAN_CARTA_SEPS'-- 'AI_EXV_SGPS_TP';--AUTO_PAGO_PATIO  
 select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla
 select * from documentos..plantilla_configuracion where id_plantilla in (select id_plantilla from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 select * from documentos..proceso where id_proceso IN (select id_proceso from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
@@ -164,6 +164,10 @@ SELECT valor_parametro_defecto
 --TITULO_PLANTILLAS
 --EMPRESA PÚBLICA MUNICIPAL DE TRÁNSITO Y MOVILIDAD DE GUAYAQUIL EP.
 
+
+,(SELECT valor_parametro_defecto
+        FROM   parametro(nolock)
+        WHERE  codigo_parametro = 439) AS TITULO_PLANTILLAS
 
 ------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
