@@ -156,12 +156,13 @@ commit  tran
 
 
 --punto: 10
---DOC_DETERMINACION_DEUDA	COA_DOC_DETER_DEUDA
+--DOC_DETERMINACION_DEUDA	COA_DOC_DETER_DEUDA 
 --Revisar variable
-
+--Ok
 
 --punto: 11
---DOC_DETERMINACION_DEUDA_COURIER	DOC_DETER_DEUDA_COU
+--DOC_DETERMINACION_DEUDA_COURIER	 DOC_DETER_DEUDA_COU
+--ok
 
 --punto: 12 
 --Levantamiento medidas de retención y ejecución	LEVANTAMIENT_EMBARGO   El titulo esta quemaddo
@@ -179,8 +180,9 @@ commit  tran
 --Oficio de bancos carta	OFICIO_BANCO_CARTA
 --Ok
 
---punto: 16
+--punto: 16 Es de firmas revisar un poco mas
 --Oficio de bancos carta SEPS	OFIC_BAN_CARTA_SEPS
+--Ok
 
 --punto: 17
 --Oficio de embargo	OFICIO_EMBARGO
@@ -192,14 +194,14 @@ commit  tran
 --Se soluciona de la misma manera que el punto 17
 --Ok
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
---punto: 19
+--punto: 19 Jasper
 --Presente error en el sistema
 --ORDEN_COBRO_COIP	ORDEN_COBRO_COIP
 --PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
---punto: 20
+--punto: 20  Jasper
 --Presente error en el sistema
 --ORDENANZA_REQ_PAGO	ORDENANZA_REQ_PAGO
 --PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE
@@ -207,18 +209,22 @@ commit  tran
 
 --punto: 21
 --Orden de Cobro COIP Electrónica	ORDEN_COBRO_COIP_ELE
+--Ok
 
 --punto: 22
 --Presente error en el sistema
 --Orden de Cobro Ordenanza Electrónica	ORDEN_COBRO_ORDE_ELE
-
+--Ok
 --punto: 23
 --punto: 24
 --punto: 25
 
+
+
 --punto: 26
 --Incidencia mas complicada
 --Providencia pago por Embargo	PROVIDENCIA_PAGO_EMB
+--ok tener en el radar
 
 --punto: 27
 --Providencia por pago	PROVIDENCIA_PAGO
@@ -233,7 +239,7 @@ commit  tran
 
 --punto: 30
 --Sentar Razon del Pago	SENTAR_RAZON_PAGO
---Ejecutar Script
+--Ejecutar Script ok
 --**********************************************************************************
 --**********************************************************************************
 --**********************************************************************************
@@ -248,7 +254,7 @@ begin tran
 --update documentos..plantilla set fecha_fin='2022-03-11' where id_plantilla=2080   --2532
 update documentos..plantilla set fecha_fin='2024-03-20' where id_plantilla=2611
 --TODAS LAS PLANTILLAS DE COACTIVO
-update documentos..plantilla set fecha_inicio='2024-06-25' where id_plantilla in(2616,2617,2618,2619,2620,2621,2622,2623,2624,2625,2626,2627,2628,2629,2630,2631,2632,2633,2634,2635,2636,2637,2638,2639,2640,2641,2642)
+update documentos..plantilla set fecha_inicio='2024-06-26' where id_plantilla in(2616,2617,2618,2619,2620,2621,2622,2623,2624,2625,2626,2627,2628,2629,2630,2631,2632,2633,2634,2635,2636,2637,2638,2639,2640,2641,2642)
 --update documentos..plantilla set fecha_inicio='2024-04-11' where id_plantilla in(2616,2617,2618,2620,2624,2625,2626,2634,2636,2638,2639)
 commit tran
 
