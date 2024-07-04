@@ -312,6 +312,8 @@ where id_plantilla='2290'
 
 ----------------------------------
 
+
+--RESOL_CULMI_VIRTU
 --http://10.6.30.176:8080/ComparendoWEB/rest/generarResolucionVirtual
 --POSTMAN
 

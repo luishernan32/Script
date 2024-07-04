@@ -107,7 +107,7 @@
 --***************************************************************************************************************
 
 --punto: 4
---Acta posesión depositario	ACTA_POSESION_DEP
+--Acta posesión depositario	ACTA_POSESION_DEP   NECESITA UNA SEGUNDA REVISIÓN falta generarla
 
 --punto: 5
 --Auto de pago	AUTO_PAGO
@@ -119,6 +119,8 @@
 --punto: 7  AUTO_PAGO
 --7. AUTO DE PAGO 2 :(
 --Francisco Xavier Rojas Esteves. Hay que update su titulo
+--Tiene 3 id_plantilla hay que identificar
+--Generarla
 
 SELECT Concat(f.titulo_obtenido, ' ', Upper(
                Concat(per.nombre1, ' ', per.nombre2, ' ',
@@ -164,9 +166,12 @@ commit  tran
 --DOC_DETERMINACION_DEUDA_COURIER	 DOC_DETER_DEUDA_COU
 --ok
 
+
 --punto: 12 
 --Levantamiento medidas de retención y ejecución	LEVANTAMIENT_EMBARGO   El titulo esta quemaddo
 --Ok
+--Hay que hacer una correcion 
+--Segunda corrección oK
 
 --punto: 13
 --Levantamiento por embargo	LEV_MED_RET_PAGO_PAR     El titulo esta quemaddo
@@ -178,7 +183,7 @@ commit  tran
 
 --punto: 15
 --Oficio de bancos carta	OFICIO_BANCO_CARTA
---Ok
+--Falta generar
 
 --punto: 16 Es de firmas revisar un poco mas
 --Oficio de bancos carta SEPS	OFIC_BAN_CARTA_SEPS
@@ -236,16 +241,20 @@ commit  tran
 --Ok
 
 --punto: 29
+--PROVIDENCI_RET_SEPS 
+--Segunda revisión: Parece estar ok
 
 --punto: 30
 --Sentar Razon del Pago	SENTAR_RAZON_PAGO
+--Segunda revisión: parece estár ok
 --Ejecutar Script ok
 --**********************************************************************************
+--NUMERO_PROCESO,fecha_actual,hora_actual,NOMBRE_INFRACTOR,T_DOCUMENTO_INFRACTOR,N_DOCUMENTO_INFRACTOR,FECHA_GENERACION,  VALOR_SALDO,VALOR_TOTAL_LETRAS,IMAGEN_FIRMA, LogoATM_variable,NOMBRE_DELEGADO,IMAGEN_FIRMA_DOS,CARGO_DELEGADO,TITULO_PLANTILLAS
 --**********************************************************************************
 --**********************************************************************************
 
 declare @codigoPlantilla varchar(20);
-set @codigoPlantilla = 'ACTA_DE_POSESION_P';--AUTO_PAGO_PATIO
+set @codigoPlantilla = 'PROVIDENCI_RET_SEPS';--AUTO_PAGO_PATIO
 select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla
 select * from documentos..plantilla_configuracion where id_plantilla in (select id_plantilla from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 select * from documentos..proceso where id_proceso IN (select id_proceso from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
@@ -254,7 +263,7 @@ begin tran
 --update documentos..plantilla set fecha_fin='2022-03-11' where id_plantilla=2080   --2532
 update documentos..plantilla set fecha_fin='2024-03-20' where id_plantilla=2611
 --TODAS LAS PLANTILLAS DE COACTIVO
-update documentos..plantilla set fecha_inicio='2024-06-26' where id_plantilla in(2616,2617,2618,2619,2620,2621,2622,2623,2624,2625,2626,2627,2628,2629,2630,2631,2632,2633,2634,2635,2636,2637,2638,2639,2640,2641,2642)
+update documentos..plantilla set fecha_inicio='2024-07-03' where id_plantilla in(2616,2617,2618,2619,2620,2621,2622,2623,2624,2625,2626,2627,2628,2629,2630,2631,2632,2633,2634,2635,2636,2637,2638,2639,2640,2641,2642)
 --update documentos..plantilla set fecha_inicio='2024-04-11' where id_plantilla in(2616,2617,2618,2620,2624,2625,2626,2634,2636,2638,2639)
 commit tran
 

@@ -315,7 +315,7 @@ where id_plantilla='2233'
 ----------------------------------
 
 --POSTMAN
-
+--RESOL_INCUMP_VIRTU
 --http://10.6.30.176:8080/ComparendoWEB/rest/generarResolucionVirtual
 --{
 --    "estadoCurso": 4,

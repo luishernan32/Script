@@ -308,7 +308,7 @@ inner join documentos..variable va on va.id_variable=v.id_variable
 where id_plantilla='2290'
 
 ----------------------------------
-
+--RESOL_INCU_VIRTU_100
 --http://10.6.30.176:8080/ComparendoWEB/rest/generarResolucionVirtual
 --postman
 

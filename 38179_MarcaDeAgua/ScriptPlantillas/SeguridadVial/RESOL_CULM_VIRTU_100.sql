@@ -557,11 +557,13 @@ WHERE  c.id_curso = :idCurso
 --*/************************************************************************************************************************************
 
 --postman
---http://10.6.30.176:8080/ComparendoWEB/rest/generarResolucionVirtual
---{
---     "estadoCurso": 4,
---     "consecutivo":null,
---     "idFacturaAxis":13423271
---}
+--RESOL_CULM_VIRTU_100
+--https://base64.guru/converter/decode/file
+http://10.6.30.176:8080/ComparendoWEB/rest/generarResolucionVirtual
+{
+     "estadoCurso": 4,
+     "consecutivo":null,
+     "idFacturaAxis":13423271
+}
 
 --*/************************************************************************************************************************************

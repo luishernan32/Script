@@ -15,7 +15,7 @@
 --COIP_REQ_PAGO 2228 10103   Hay que verla a mas detalle
 --LEV_MED_CAUT_COAC 2286 10129 seleccion: Transpasos mediante carta RADICACION DE COBRO COACTIVO
 --LEV_MED_CAUT_CNV 2289 10132   seleccion: convenio de pago   ****  ok
---SOLIC_IMPUGNACION 2237 10111 Hay que ver a mas detalle    **** https://www.youtube.com/watch?v=wIzlcddw3Go  17:56 corrije el script que causa el error  datos 29
+--SOLIC_IMPUGNACION 2237 10111 Hay que ver a mas detalle    **** https://www.youtube.com/watch?v=wIzlcddw3Go  17:56 corrije el script que causa el error  datos 29 (para su generación) ver el update de alexander por si molesta
 --SENTAR_RAZON_CUMPLE 2239 10113 No se sabe como se genera    *****
 --LEV_MED_CAUT_SAL 2284 10127    ******
 --LEV_MED_CAUT_JUB 2285 10128  seleccion: Cuenta bancaria donde recibe su jubilación se hizo el update hay que buscar un dato <27>  ****
@@ -95,16 +95,34 @@
 --****************************************************************************************************************************************************************
 --Reportadas por Nicolas
 
---LEV_MED_CAUT arreglar Ok
---LEV_MED_CAUT_ANUL Ok
---LEV_MED_CAUT_COAC ok
---LEV_MED_CAUT_CNV  Ok
---LEV_MED_CAUT_SAL
---LEV_MED_CAUT_JUB Ok
---LEV_MED_CAUT_FLL ok
---LEV_MED_CAUT_ALM ok
+--LEV_MED_CAUT arreglar Ok 2258
+--LEV_MED_CAUT_ANUL Ok 2287
+--LEV_MED_CAUT_COAC ok 2286
+--LEV_MED_CAUT_CNV  Ok 2289
+--LEV_MED_CAUT_SAL 2284
+--LEV_MED_CAUT_JUB Ok LEV_MED_CAUT_JUB 2285
+--LEV_MED_CAUT_FLL ok 2288
+--LEV_MED_CAUT_ALM ok 2290
+--(2258,2287,2286,2289,2284,2285,2288,2290)
+
+declare @codigoPlantilla varchar(20);
+set @codigoPlantilla = 'LEV_MED_CAUT_JUB';--AUTO_PAGO_PATIO
+select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla
+select * from documentos..plantilla_configuracion where id_plantilla in (select id_plantilla from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
+select * from documentos..proceso where id_proceso IN (select id_proceso from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
+
+INSERT INTO documentos..variable_plantilla
+SELECT 2258, 285
 
 
+select *from variable
+where nombre_variable='CARGO_DELEGADO'--285
+
+--Ver las variables
+select nombre_variable
+from documentos..variable_plantilla v
+inner join documentos..variable va on va.id_variable=v.id_variable
+where id_plantilla='2290'
 
 --****************************************************************************************************************************************************************
 
@@ -155,9 +173,18 @@ LEV_MED_CAUT_ALM SET LANGUAGE 'Spanish';    SELECT top 1    (SELECT UPPER(nombre
 --28-06-2024
 
 --IMPOSICIÓN DE COMPARENDO
---SOLIC_IMPUGNACION	
+--SOLIC_IMPUGNACION	Ok
+--Hay que cambiar una fecha 
+--Guiarme de la siguiente plantilla:Impugnación fallo	Registro fallo	REGISTRO_FALLO	35864
+
 --SENTAR_RAZON_CUMPLE   https://www.youtube.com/watch?v=xYY7fgMnst0    43:39
 
+
+declare @codigoPlantilla varchar(20);
+set @codigoPlantilla = 'LEV_MED_CAUT_COAC';--AUTO_PAGO_PATIO
+select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla
+select * from documentos..plantilla_configuracion where id_plantilla in (select id_plantilla from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
+select * from documentos..proceso where id_proceso IN (select id_proceso from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 
 
 
@@ -194,7 +221,7 @@ commit tran
 ------------------------------------------------------------------------------------------
 
 --************************************REVISIÓN DE LAS PLANTILLAS GENERADAS**************************************************************
-select *from [documentos].[dbo].[plantilla] where id_plantilla=2285--2285--2286--2288--2498--2324--2258--2258--2259--2289--2287--2288--2287--2286--2639--2625--2258--2258--3692--3690--
+select *from [documentos].[dbo].[plantilla] where id_plantilla=2659--2285--2285--2286--2288--2498--2324--2258--2258--2259--2289--2287--2288--2287--2286--2639--2625--2258--2258--3692--3690--
 --Impugnación de comparendo	Apertura impugnación sin tercero	APERT_IMPUG_SIN_TERC
 																																	   *
 select top 20 *from [documentos].[dbo].[documento] order by 1 desc																	   *
