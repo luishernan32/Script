@@ -15,7 +15,7 @@ SET    consulta=   'SELECT numero_proceso,
        (SELECT Upper(Concat(valor_parametro_defecto,
                      '' PARA EL EJERCICIO DE LA JURISDICCIÓN COACTIVA''))
         FROM   parametro(nolock)
-        WHERE  codigo_parametro = 434) AS cargo_delegado
+        WHERE  codigo_parametro = 441) AS cargo_delegado
 		,(SELECT valor_parametro_defecto
         FROM   parametro(nolock)
         WHERE  codigo_parametro = 439)AS TITULO_PLANTILLAS
@@ -26,7 +26,7 @@ FROM   proceso p
          ON pe.id_persona = c.id_deudor
        LEFT JOIN persona_juridica pj
               ON pj.id_persona_juridica = pe.id_persona
-WHERE  c.id_coactivo = :idCoactivo '               
+WHERE  c.id_coactivo = :idCoactivo'               
 	   , orden_variables='numero_consecutivo,NUMERO_JUICIO,NOMBRE_INFRACTOR,DOCUMENTO_INFRACTOR,CARGO_DELEGADO,TITULO_PLANTILLAS'
 WHERE  id_plantilla_config=61
 
@@ -58,7 +58,7 @@ SELECT numero_proceso,
        (SELECT Upper(Concat(valor_parametro_defecto,
                      ' PARA EL EJERCICIO DE LA JURISDICCIÓN COACTIVA'))
         FROM   parametro(nolock)
-        WHERE  codigo_parametro = 434) AS cargo_delegado
+        WHERE  codigo_parametro = 441) AS cargo_delegado
 		,(SELECT valor_parametro_defecto
         FROM   parametro(nolock)
         WHERE  codigo_parametro = 439)AS TITULO_PLANTILLAS

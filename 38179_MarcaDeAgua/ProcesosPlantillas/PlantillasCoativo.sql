@@ -106,8 +106,13 @@
 --Falta hacer un update en la tabla funcionario_coactivo para el campo titulo del funcionario porque esta en null
 --***************************************************************************************************************
 
---punto: 4
+
+--***************************************************************
+--punto: 4 --Devuelta por Nicolas okkkkk
 --Acta posesión depositario	ACTA_POSESION_DEP   NECESITA UNA SEGUNDA REVISIÓN falta generarla
+
+--Revisar la firma del delegado que aparezca con los titulos
+--***************************************************************
 
 --punto: 5
 --Auto de pago	AUTO_PAGO
@@ -116,11 +121,14 @@
 --punto: 6
 --AUTO_PAGO_PATIO
 
---punto: 7  AUTO_PAGO
+--***************************************************************
+--punto: 7  AUTO_PAGO   --Reportada por Nicolas
 --7. AUTO DE PAGO 2 :(
 --Francisco Xavier Rojas Esteves. Hay que update su titulo
 --Tiene 3 id_plantilla hay que identificar
---Generarla
+--Generarla o revisarla por el script
+
+--***************************************************************
 
 SELECT Concat(f.titulo_obtenido, ' ', Upper(
                Concat(per.nombre1, ' ', per.nombre2, ' ',
@@ -167,33 +175,57 @@ commit  tran
 --ok
 
 
+--***************************************************************
+--Reportada por Nicolas OKKKKK
 --punto: 12 
 --Levantamiento medidas de retención y ejecución	LEVANTAMIENT_EMBARGO   El titulo esta quemaddo
 --Ok
 --Hay que hacer una correcion 
 --Segunda corrección oK
+--Revisar que el script de las plantillas ten TITULO_PLANTILLAS
+--Datos quemados en autoridad de transito municipal
+--Revisarlo por script
 
+--***************************************************************
+
+
+
+--***************************************************************
+--Reportada por Nicolas Okkkk
 --punto: 13
 --Levantamiento por embargo	LEV_MED_RET_PAGO_PAR     El titulo esta quemaddo
---Ok
+--En el script ver que se generen dos titulos diferentes
+--Ok  ok
+--***************************************************************
+
+
 
 --punto: 14
 --Notificación coactivo	NOTIFICACION_COAC
 --Ok
 
---punto: 15
+--***************************************************************
+--punto: 15 reportada por Nicolas okkkkkk
 --Oficio de bancos carta	OFICIO_BANCO_CARTA
 --Falta generar
 
+--***************************************************************
+
+--***************************************************************
+--reportada por Nicolas okkkkkk
 --punto: 16 Es de firmas revisar un poco mas
 --Oficio de bancos carta SEPS	OFIC_BAN_CARTA_SEPS
 --Ok
+--***************************************************************
 
---punto: 17
+
+--********
+--***************************************************************
+--punto: 17 reportada por Nicolas okkkkkk
 --Oficio de embargo	OFICIO_EMBARGO
 --En dado caso que no funcione es porque los funcionarios tienen el titulo en null
---Ok
-
+--Colocar CARGO_DELEGADO y nombre de los titulos están quemados
+--***************************************************************
 --punto: 18
 --Oficio de embargo SEPS	OFICIO_EMBARGO_SEPS
 --Se soluciona de la misma manera que el punto 17
@@ -212,18 +244,32 @@ commit  tran
 --PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
---punto: 21
+--punto: 21  Jasper
 --Orden de Cobro COIP Electrónica	ORDEN_COBRO_COIP_ELE
 --Ok
 
---punto: 22
+--punto: 22  jasper
 --Presente error en el sistema
 --Orden de Cobro Ordenanza Electrónica	ORDEN_COBRO_ORDE_ELE
 --Ok
---punto: 23
---punto: 24
---punto: 25
 
+
+--punto: 23
+--ORDEN_EMBARGO
+
+--punto: 24
+--ORDEN_EMBARGO_SEPS
+select nombre1,nombre2, id_funcionario,titulo_obtenido
+from funcionario f
+join persona p on f.id_persona=p.id_persona
+where nombre1='PABLO ' 
+and nombre2 ='ENRIQUE'
+
+--nombre1	nombre2	id_funcionario	titulo_obtenido
+--PABLO	ENRIQUE	142	NULL
+
+--punto: 25
+--PROVIDENCIA_ANULAR
 
 
 --punto: 26
@@ -248,13 +294,31 @@ commit  tran
 --Sentar Razon del Pago	SENTAR_RAZON_PAGO
 --Segunda revisión: parece estár ok
 --Ejecutar Script ok
+
+
+----------------------------------------------------------------
+
+begin tran
+update parametro
+set valor_parametro_defecto= 'DELEGADO DEL (A) DIRECTOR (A) DE GESTIÓN DE INFRACCIONES Y SERVICIOS DE TRÁNSITO PARA EL EJERCICIO DE LA JURISDICCIÓN COACTIVA DE LA EMPRESA PÚBLICA DE TRÁNSITO Y MOVILIDAD DE GUAYAQUIL,EP.'
+where codigo_parametro = 434
+commit tran
+--Anterio texto
+--DELEGADO del(la) Director(a) de Gestión de Infracciones y Servicios de Tránsito
+
+
+--**********************************************************************************
+--436: DELEGADO FUNCIONARIO EJECUTOR-COACTIVA DEL(LA) DIRECTOR(A) DE INFRACCIONES Y SERVICIOS DE TRÁNSITO DE LA AUTORIDAD DE TRÁNSITO MUNICIPAL
+--441: DELEGADO DEL (A) DIRECTOR (A) DE GESTIÓN DE INFRACCIONES Y SERVICIOS DE TRÁNSITO PARA EL EJERCICIO DE LA JURISDICCIÓN COACTIVA DE LA EMPRESA PÚBLICA DE TRÁNSITO Y MOVILIDAD DE GUAYAQUIL,EP.
+--**********************************************************************************
+
 --**********************************************************************************
 --NUMERO_PROCESO,fecha_actual,hora_actual,NOMBRE_INFRACTOR,T_DOCUMENTO_INFRACTOR,N_DOCUMENTO_INFRACTOR,FECHA_GENERACION,  VALOR_SALDO,VALOR_TOTAL_LETRAS,IMAGEN_FIRMA, LogoATM_variable,NOMBRE_DELEGADO,IMAGEN_FIRMA_DOS,CARGO_DELEGADO,TITULO_PLANTILLAS
 --**********************************************************************************
 --**********************************************************************************
 
 declare @codigoPlantilla varchar(20);
-set @codigoPlantilla = 'PROVIDENCI_RET_SEPS';--AUTO_PAGO_PATIO
+set @codigoPlantilla = 'ORDEN_EMBARGO';--AUTO_PAGO_PATIO
 select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla
 select * from documentos..plantilla_configuracion where id_plantilla in (select id_plantilla from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 select * from documentos..proceso where id_proceso IN (select id_proceso from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
@@ -263,7 +327,7 @@ begin tran
 --update documentos..plantilla set fecha_fin='2022-03-11' where id_plantilla=2080   --2532
 update documentos..plantilla set fecha_fin='2024-03-20' where id_plantilla=2611
 --TODAS LAS PLANTILLAS DE COACTIVO
-update documentos..plantilla set fecha_inicio='2024-07-03' where id_plantilla in(2616,2617,2618,2619,2620,2621,2622,2623,2624,2625,2626,2627,2628,2629,2630,2631,2632,2633,2634,2635,2636,2637,2638,2639,2640,2641,2642)
+update documentos..plantilla set fecha_inicio='2024-07-08' where id_plantilla in(2616,2617,2618,2619,2620,2621,2622,2623,2624,2625,2626,2627,2628,2629,2630,2631,2632,2633,2634,2635,2636,2637,2638,2639,2640,2641,2642)
 --update documentos..plantilla set fecha_inicio='2024-04-11' where id_plantilla in(2616,2617,2618,2620,2624,2625,2626,2634,2636,2638,2639)
 commit tran
 
@@ -290,7 +354,7 @@ commit tran
 
 
 --************************************REVISIÓN DE LAS PLANTILLAS GENERADAS**************************************************************
-select *from [documentos].[dbo].[plantilla] where id_plantilla=2628--4707--2659--2626  --2413--2596--2597  --2324--2596--2413--2596--2597--2685--2663    *
+select *from [documentos].[dbo].[plantilla] where id_plantilla=2625--4745--2628--4707--2659--2626  --2413--2596--2597  --2324--2596--2413--2596--2597--2685--2663    *
 																																	   *
 select top 20 *from [documentos].[dbo].[documento] order by 1 desc																	   *
 --**************************************************************************************************************************************

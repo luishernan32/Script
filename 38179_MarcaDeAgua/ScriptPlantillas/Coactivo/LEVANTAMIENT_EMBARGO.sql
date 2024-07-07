@@ -148,11 +148,11 @@ SET    consulta=   'SELECT TOP 1 ''Superintendencia de bancos del Ecuador''     
              firma_delegado,
              (SELECT valor_parametro_defecto
               FROM   parametro(nolock)
-              WHERE  codigo_parametro = 437)                     AS
+              WHERE  codigo_parametro = 441)                     AS
              cargo_delegado,
              ( Upper((SELECT valor_parametro_defecto
                       FROM   parametro(nolock)
-                      WHERE  codigo_parametro = 437)) )          AS
+                      WHERE  codigo_parametro = 441)) )          AS
              cargo_delegado_mayusculas
 			 ,(SELECT valor_parametro_defecto
         FROM   parametro(nolock)
@@ -187,7 +187,7 @@ FROM   proceso p
             AND cob.id_bien = b.id_bien
        JOIN oficio_bien ob
          ON cob.id_oficio_bien = ob.id_oficio_bien
-WHERE  p.id_proceso = :idProceso '               
+WHERE  p.id_proceso is not null '               
 	   , orden_variables='BANCO,CONSECUTIVO_PRUEBAS,fecha_actual,hora_actual,NOMBRE_INFRACTOR,DOCUMENTO_INFRACTOR,NUMERO_JUICIO,NOMBRE_SECRETARIO,IMAGEN_FIRMA,NOMBRE_DELEGADO,IMAGEN_FIRMA_DOS,CARGO_DELEGADO,PROFESION,TITULO_PLANTILLAS'
 WHERE  id_plantilla_config=10171
 
@@ -294,7 +294,7 @@ FROM   proceso p
             AND cob.id_bien = b.id_bien
        JOIN oficio_bien ob
          ON cob.id_oficio_bien = ob.id_oficio_bien
-WHERE  p.id_proceso = :idProceso 
+WHERE  p.id_proceso is not null 
 -------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------
 --Original
@@ -383,7 +383,7 @@ FROM   proceso p
             AND cob.id_bien = b.id_bien
        JOIN oficio_bien ob
          ON cob.id_oficio_bien = ob.id_oficio_bien
-WHERE  p.id_proceso = :idProceso 
+WHERE  p.id_proceso is not null 
 
 -------------------------------------------------------------------------------------
 --Observaciones:
