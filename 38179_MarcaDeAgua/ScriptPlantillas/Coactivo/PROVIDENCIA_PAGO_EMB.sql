@@ -41,7 +41,7 @@ SET    consulta=   'SELECT Concat(p.numero_proceso, ''-'', c.anio)              
                        Charindex(''Tránsito'', valor_parametro_defecto, 0)
                                                        + Len(''Tránsito'') ))
         FROM   parametro
-        WHERE  codigo_parametro = 441)                      AS cargo_delegado
+        WHERE  codigo_parametro = 437)                      AS cargo_delegado
 		,(SELECT valor_parametro_defecto
         FROM   parametro(nolock)
         WHERE  codigo_parametro = 439)AS TITULO_PLANTILLAS

@@ -56,7 +56,7 @@ WHERE  c.id_cargo = 1
 ORDER  BY fm.fecha_registro DESC)                  firma_funcionario,
 (SELECT valor_parametro_defecto
 FROM   parametro(nolock)
-WHERE  codigo_parametro = 441)                     AS cargo_delegado
+WHERE  codigo_parametro = 437)                     AS cargo_delegado
 ,(SELECT valor_parametro_defecto
         FROM   parametro(nolock)
         WHERE  codigo_parametro = 439)AS TITULO_PLANTILLAS

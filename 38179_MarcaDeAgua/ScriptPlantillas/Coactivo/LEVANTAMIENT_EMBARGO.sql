@@ -148,7 +148,7 @@ SET    consulta=   'SELECT TOP 1 ''Superintendencia de bancos del Ecuador''     
              firma_delegado,
              (SELECT valor_parametro_defecto
               FROM   parametro(nolock)
-              WHERE  codigo_parametro = 441)                     AS
+              WHERE  codigo_parametro = 437)                     AS
              cargo_delegado,
              ( Upper((SELECT valor_parametro_defecto
                       FROM   parametro(nolock)

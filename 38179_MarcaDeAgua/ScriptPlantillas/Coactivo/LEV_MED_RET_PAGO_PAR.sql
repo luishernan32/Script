@@ -71,7 +71,7 @@ SELECT ''Superintendencia de bancos del Ecuador''             AS institucion,
         WHERE  codigo_parametro = 441)                      AS cargo_delegado,
        ( Upper((SELECT valor_parametro_defecto
                 FROM   parametro(nolock)
-                WHERE  codigo_parametro = 441)) )           AS
+                WHERE  codigo_parametro = 437)) )           AS
        cargo_delegado_mayusculas,
        (SELECT valor_parametro_defecto
         FROM   parametro(nolock)

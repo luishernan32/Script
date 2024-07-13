@@ -1,7 +1,7 @@
 --AUTO_PAGO 2632  33 34 35
 --Primera revision: 30-06-2024
 --Necesita segunda revisión
---Hay que identificar el script que hace el cambio en la plantillas
+--Hay que identificar el script que hace el cambio en la plantillas Respuesta dónde hacen hacen los cambios es el de id_config=35
 --1 Identificar el id_plantilla y id_config
 --2. Dejar quemado el query
 
@@ -11,24 +11,6 @@ set @codigoPlantilla = 'AUTO_PAGO';--AUTO_PAGO_PATIO
 select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla
 select * from documentos..plantilla_configuracion where id_plantilla in (select id_plantilla from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 select * from documentos..proceso where id_proceso IN (select id_proceso from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 -------------------------------------------------------------------------------------
 
@@ -198,7 +180,7 @@ FROM   coactivo c (nolock)
          ON fu.id_funcionario = c.id_funcionario
        JOIN persona per (nolock)
          ON per.id_persona = fu.id_persona
-WHERE  c.id_coactivo is not null '               
+WHERE  c.id_coactivo= :idCoactivo '               
 	   , orden_variables='ID_COACTIVO,NUMERO_PROCESO,NOMBRE_INFRACTOR,T_DOCUMENTO_INFRACTOR,DOCUMENTO_INFRACTOR,DIRECCION_INFRACTOR,FECHA_SOLICITUD,numero_citacion,DESCRIPCION_MULTAS,NOMBRE_ABOGADO,DIA_FECHA,HORA_SOLICITUD,IMAGEN_FIRMA,DELEGADO_NOMBRAMIENTO_,DELEGADO_TITULONOMBRE_,IMAGEN_FIRMA_DOS,NORMA,NOMBRE_COMPLETO,PROFESION,CARGO_DELEGADO,TITULO_PLANTILLAS'
 WHERE  id_plantilla_config=33
 
@@ -370,7 +352,7 @@ FROM   coactivo c (nolock)
          ON fu.id_funcionario = c.id_funcionario
        JOIN persona per (nolock)
          ON per.id_persona = fu.id_persona
-WHERE  c.id_coactivo is not null '               
+WHERE  c.id_coactivo = :idCoactivo '               
 	   , orden_variables='ID_COACTIVO,NUMERO_PROCESO,NOMBRE_INFRACTOR,T_DOCUMENTO_INFRACTOR,DOCUMENTO_INFRACTOR,DIRECCION_INFRACTOR,FECHA_SOLICITUD,numero_citacion,DESCRIPCION_MULTAS,NOMBRE_ABOGADO,DIA_FECHA,HORA_SOLICITUD,IMAGEN_FIRMA,DELEGADO_NOMBRAMIENTO_,DELEGADO_TITULONOMBRE_,IMAGEN_FIRMA_DOS,NORMA,NOMBRE_COMPLETO,PROFESION,CARGO_DELEGADO,TITULO_PLANTILLAS'
 WHERE  id_plantilla_config=34
 
@@ -543,7 +525,7 @@ FROM   coactivo c (nolock)
          ON fu.id_funcionario = c.id_funcionario
        JOIN persona per (nolock)
          ON per.id_persona = fu.id_persona
-WHERE  c.id_coactivo is not null '               
+WHERE  c.id_coactivo = :idCoactivo '               
 	   , orden_variables='ID_COACTIVO,NUMERO_PROCESO,NOMBRE_INFRACTOR,T_DOCUMENTO_INFRACTOR,DOCUMENTO_INFRACTOR,DIRECCION_INFRACTOR,FECHA_SOLICITUD,numero_citacion,DESCRIPCION_MULTAS,NOMBRE_ABOGADO,DIA_FECHA,HORA_SOLICITUD,IMAGEN_FIRMA,DELEGADO_NOMBRAMIENTO_,DELEGADO_TITULONOMBRE_,IMAGEN_FIRMA_DOS,NORMA,NOMBRE_COMPLETO,PROFESION,CARGO_DELEGADO,TITULO_PLANTILLAS'
 WHERE  id_plantilla_config=35
 

@@ -15,7 +15,7 @@ SET    consulta=   'SELECT numero_proceso,
        (SELECT Upper(Concat(valor_parametro_defecto,
                      '' PARA EL EJERCICIO DE LA JURISDICCIÓN COACTIVA''))
         FROM   parametro(nolock)
-        WHERE  codigo_parametro = 441) AS cargo_delegado
+        WHERE  codigo_parametro = 437) AS cargo_delegado
 		,(SELECT valor_parametro_defecto
         FROM   parametro(nolock)
         WHERE  codigo_parametro = 439)AS TITULO_PLANTILLAS

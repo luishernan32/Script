@@ -29,7 +29,7 @@ SET    consulta=   'SELECT pro.numero_proceso + ''-''
        p.numero_identificacion                         documento_funcionario,
        ( Upper((SELECT valor_parametro_defecto
                 FROM   parametro(nolock)
-                WHERE  codigo_parametro = 441)) )      AS
+                WHERE  codigo_parametro = 437)) )      AS
        cargo_delegado_mayusculas
 	   ,(SELECT valor_parametro_defecto
         FROM   parametro(nolock)

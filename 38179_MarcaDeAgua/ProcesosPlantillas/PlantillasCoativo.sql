@@ -66,7 +66,7 @@
 
 
 --OFICIO_EMBARGO_SEPS 2638                                   Lista para pruebas min 9 Opcion SEPS admon bien  https://www.youtube.com/watch?v=qLKO0mnxLEE
---ORDEN_EMBARGO_SEPS 2639                                    Lista Para pruebas min 9 Opcion SEPS admon bien  https://www.youtube.com/watch?v=qLKO0mnxLEE  Hay que registrar un bien
+--ORDEN_EMBARGO_SEPS 2639                                    Lista Para pruebas min 9 Opcion SEPS admon bien  https://www.youtube.com/watch?v=qLKO0mnxLEE  Hay que registrar un bien  procesos Juridicos, administración bien <cedula + #juicio> tipo entidad:SEPS  "ver seguimiento" DISPONER EMBARGO
 --ORDEN_COBRO_ORDE_ELE jasper								 min 1 https://www.youtube.com/watch?v=WH7phU6c0Xg
 
 --ACTA_DE_POSESION_P 2640   Es del grupo de 8 de Rafael      Acomodar probar https://www.youtube.com/watch?v=1RRltFt0Iss  
@@ -78,8 +78,12 @@
 
 --ORDEN_COBRO_COIP jasper 2324 10135
 --ORDEN_COBRO_ORDENANZ jasper 2325 10136
---ORDEN_COBRO_COIP_ELE jasper 2581 10200 dato con medio_imposicion=1    https://www.youtube.com/watch?v=WH7phU6c0Xg
---ORDEN_COBRO_ORDE_ELE jasper 2582 10201 dato con medio_imposicion=2   https://www.youtube.com/watch?v=WH7phU6c0Xg
+--ORDEN_COBRO_COIP_ELE jasper 2581 10200 dato con medio_imposicion=1    https://www.youtube.com/watch?v=WH7phU6c0Xg   
+--Procesos Juridicos, consultar cobros coactivos <numero del coactivo> generar documentos "COACTIVO ORDEN DE COBRO COIP" (ver seguimiento) radicar cobro coactivo
+--Se genera con codigo_medio_imposición=2
+--ORDEN_COBRO_ORDE_ELE jasper 2582 10201 dato con medio_imposicion=2    https://www.youtube.com/watch?v=WH7phU6c0Xg
+--Procesos Juridicos, consultar cobros coactivos <numero del coactivo> generar documentos "COACTIVO ORDEN DE COBRO COIP" (ver seguimiento) radicar cobro coactivo
+--Se genera con codigo_medio_imposición=1
 
 --ORDENANZA_REQ_PAGO 2229  10104
 --(2324,2325,2581,2582)
@@ -122,11 +126,17 @@
 --AUTO_PAGO_PATIO
 
 --***************************************************************
---punto: 7  AUTO_PAGO   --Reportada por Nicolas
+--punto: 7  AUTO_PAGO   --Reportada por Nicolas       Generar documentos/COACTIVO_AUTO PAGO_______"Ver seguimiento"/AUTO DE PAGO
 --7. AUTO DE PAGO 2 :(
 --Francisco Xavier Rojas Esteves. Hay que update su titulo
 --Tiene 3 id_plantilla hay que identificar
 --Generarla o revisarla por el script
+
+--Los datos tienen que generarce a travez de está query
+
+select *from coactivo
+where id_tipo_coactivo='4'
+order by id_coactivo desc
 
 --***************************************************************
 
@@ -155,6 +165,10 @@ set titulo_obtenido='Abg. Esp.'
 where id_funcionario=180--154 conny y alexis no tienen cargo
 commit  tran
 
+
+select *from coactivo
+where id_tipo_coactivo='1'
+order by id_coactivo desc
 
 --punto: 8
 -- COA_ORDEN_PAGO_P
@@ -226,12 +240,12 @@ commit  tran
 --En dado caso que no funcione es porque los funcionarios tienen el titulo en null
 --Colocar CARGO_DELEGADO y nombre de los titulos están quemados
 --***************************************************************
---punto: 18
+--punto: 18  <Revisar la firma>
 --Oficio de embargo SEPS	OFICIO_EMBARGO_SEPS
 --Se soluciona de la misma manera que el punto 17
 --Ok
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
---punto: 19 Jasper
+--punto: 19 Jasper   Falta hacer la prueba
 --Presente error en el sistema
 --ORDEN_COBRO_COIP	ORDEN_COBRO_COIP
 --PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE
@@ -327,7 +341,7 @@ begin tran
 --update documentos..plantilla set fecha_fin='2022-03-11' where id_plantilla=2080   --2532
 update documentos..plantilla set fecha_fin='2024-03-20' where id_plantilla=2611
 --TODAS LAS PLANTILLAS DE COACTIVO
-update documentos..plantilla set fecha_inicio='2024-07-08' where id_plantilla in(2616,2617,2618,2619,2620,2621,2622,2623,2624,2625,2626,2627,2628,2629,2630,2631,2632,2633,2634,2635,2636,2637,2638,2639,2640,2641,2642)
+update documentos..plantilla set fecha_inicio='2024-07-09' where id_plantilla in(2616,2617,2618,2619,2620,2621,2622,2623,2624,2625,2626,2627,2628,2629,2630,2631,2632,2633,2634,2635,2636,2637,2638,2639,2640,2641,2642)
 --update documentos..plantilla set fecha_inicio='2024-04-11' where id_plantilla in(2616,2617,2618,2620,2624,2625,2626,2634,2636,2638,2639)
 commit tran
 
@@ -354,7 +368,7 @@ commit tran
 
 
 --************************************REVISIÓN DE LAS PLANTILLAS GENERADAS**************************************************************
-select *from [documentos].[dbo].[plantilla] where id_plantilla=2625--4745--2628--4707--2659--2626  --2413--2596--2597  --2324--2596--2413--2596--2597--2685--2663    *
+select *from [documentos].[dbo].[plantilla] where id_plantilla=2619--2638--2324--2581--2324--2584--2641--2641--2625--4745--2628--4707--2659--2626  --2413--2596--2597  --2324--2596--2413--2596--2597--2685--2663    *
 																																	   *
 select top 20 *from [documentos].[dbo].[documento] order by 1 desc																	   *
 --**************************************************************************************************************************************

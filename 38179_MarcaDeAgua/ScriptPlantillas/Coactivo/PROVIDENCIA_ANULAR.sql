@@ -6,7 +6,7 @@ SET    consulta=   'SELECT p.numero_proceso,
        p.fecha_inicio,
        (SELECT Upper(valor_parametro_defecto)
         FROM   parametro(nolock)
-        WHERE  codigo_parametro = 441) AS cargo_delegado
+        WHERE  codigo_parametro = 437) AS cargo_delegado
 		,(SELECT valor_parametro_defecto
         FROM   parametro(nolock)
         WHERE  codigo_parametro = 439)AS TITULO_PLANTILLAS
