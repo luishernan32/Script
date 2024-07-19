@@ -35,6 +35,7 @@ SET    consulta=   'SELECT pro.numero_proceso + ''-''
         FROM   parametro(nolock)
         WHERE  codigo_parametro = 439)AS TITULO_PLANTILLAS
 
+		
 		,(SELECT Concat(f.titulo_obtenido, '' '', Upper(
                Concat(per.nombre1, '' '', per.nombre2, '' '',
                        per.apellido1, '' '',
@@ -42,8 +43,16 @@ SET    consulta=   'SELECT pro.numero_proceso + ''-''
         FROM   funcionario f (nolock)
                INNER JOIN persona per (nolock)
                        ON f.id_persona = per.id_persona
-        WHERE  f.id_cargo = 11
-               AND f.estado = ''VIGENTE'')                   AS nombre_abogado
+        WHERE  f.id_cargo = 1
+               AND f.estado = ''VIGENTE'')               AS nombre_abogado
+
+		,(SELECT Max(fp.numero_imagen)
+        FROM   funcionario fun (nolock)
+               INNER JOIN firma_persona fp (nolock)
+                       ON fp.id_persona = fun.id_persona
+        WHERE  fun.id_cargo = 1
+               AND fun.estado = ''Vigente'')                 AS FIRMA
+
 
 FROM   coactivo c
        JOIN coactivo_oficio_bien cob
@@ -76,8 +85,8 @@ FROM   coactivo c
 WHERE  c.id_coactivo is not null
        AND e.id_embargo = (SELECT Max(ee.id_embargo) id_embargo
                            FROM   embargo ee
-                           WHERE  ee.id_coactivo = c.id_coactivo)'               
-	   , orden_variables='NUMERAL,FECHA_GENERACION, HORA_IMPOSICION_COMPARENDO, NOMBRE_INFRACTOR, NO_OFICIO,NOMBRE_BIEN,VALOR_SALDO,VALOR_TOTAL_LETRAS,TIPO_BIEN,OTROS,NOMBRE_DEPOSITARIO,N_DOCUMENTO_INFRACTOR,numero_citacion,DOCUMENTO_PARTICIPANTE,CARGO_DELEGADO,TITULO_PLANTILLAS,NOMBRE_ABOGADO'
+                           WHERE  ee.id_coactivo = c.id_coactivo) '               
+	   , orden_variables='NUMERAL,FECHA_GENERACION, HORA_IMPOSICION_COMPARENDO, NOMBRE_INFRACTOR, NO_OFICIO,NOMBRE_BIEN,VALOR_SALDO,VALOR_TOTAL_LETRAS,TIPO_BIEN,OTROS,NOMBRE_DEPOSITARIO,N_DOCUMENTO_INFRACTOR,numero_citacion,DOCUMENTO_PARTICIPANTE,CARGO_DELEGADO,TITULO_PLANTILLAS,NOMBRE_ABOGADO,IMAGEN_FIRMA'
 WHERE  id_plantilla_config=10176
 
 commit tran
@@ -131,6 +140,7 @@ SELECT pro.numero_proceso + '-'
         FROM   parametro(nolock)
         WHERE  codigo_parametro = 439)AS TITULO_PLANTILLAS
 
+		
 		,(SELECT Concat(f.titulo_obtenido, ' ', Upper(
                Concat(per.nombre1, ' ', per.nombre2, ' ',
                        per.apellido1, ' ',
@@ -138,8 +148,16 @@ SELECT pro.numero_proceso + '-'
         FROM   funcionario f (nolock)
                INNER JOIN persona per (nolock)
                        ON f.id_persona = per.id_persona
-        WHERE  f.id_cargo = 11
-               AND f.estado = 'VIGENTE')                   AS nombre_abogado
+        WHERE  f.id_cargo = 1
+               AND f.estado = 'VIGENTE')               AS nombre_abogado
+
+		,(SELECT Max(fp.numero_imagen)
+        FROM   funcionario fun (nolock)
+               INNER JOIN firma_persona fp (nolock)
+                       ON fp.id_persona = fun.id_persona
+        WHERE  fun.id_cargo = 1
+               AND fun.estado = 'Vigente')                 AS FIRMA
+
 
 FROM   coactivo c
        JOIN coactivo_oficio_bien cob

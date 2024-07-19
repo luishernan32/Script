@@ -1,5 +1,28 @@
---COACTIVO
+-- COACTIVO PROCESOS
 
+--Query mas usados
+
+begin tran
+--update documentos..plantilla set fecha_fin='2022-03-11' where id_plantilla=2080   --2532
+--update documentos..plantilla set fecha_fin='2024-03-20' where id_plantilla=2611
+--TODAS LAS PLANTILLAS DE COACTIVO
+begin tran 
+update documentos..plantilla set fecha_inicio='2024-07-17' where id_plantilla in(2616,2617,2618,2619,2620,2621,2622,2623,2624,2625,2626,2627,2628,2629,2630,2631,2632,2633,2634,2635,2636,2637,2638,2639,2640,2641,2642)
+
+--update documentos..plantilla set fecha_inicio='2024-04-11' where id_plantilla in(2616,2617,2618,2620,2624,2625,2626,2634,2636,2638,2639)
+commit tran
+
+
+--************************************REVISIÓN DE LAS PLANTILLAS GENERADAS**************************************************************
+select *from [documentos].[dbo].[plantilla] where id_plantilla=2638--2581--
+																																 -- *
+select top 20 *from [documentos].[dbo].[documento] order by 1 desc																	 --*
+--**************************************************************************************************************************************
+--Plantillas que se generan de la misma manera
+
+
+
+------------------------------------------------------------------------
 
 --COACTIVOSOLICITUD_OFICIO_BIEN_SEPS
 
@@ -64,10 +87,12 @@
 
 --ORDEN_COBRO_COIP_ELE jasper
 
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--Se generan de la misma manera
 --OFICIO_EMBARGO_SEPS 2638                                   Lista para pruebas min 9 Opcion SEPS admon bien  https://www.youtube.com/watch?v=qLKO0mnxLEE
 --ORDEN_EMBARGO_SEPS 2639                                    Lista Para pruebas min 9 Opcion SEPS admon bien  https://www.youtube.com/watch?v=qLKO0mnxLEE  Hay que registrar un bien  procesos Juridicos, administración bien <cedula + #juicio> tipo entidad:SEPS  "ver seguimiento" DISPONER EMBARGO
 --ORDEN_COBRO_ORDE_ELE jasper								 min 1 https://www.youtube.com/watch?v=WH7phU6c0Xg
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 --ACTA_DE_POSESION_P 2640   Es del grupo de 8 de Rafael      Acomodar probar https://www.youtube.com/watch?v=1RRltFt0Iss  
 --AUTO_PAGO_PATIO_V2 2641                                    Acomodar probar https://www.youtube.com/watch?v=1RRltFt0Iss
@@ -126,7 +151,7 @@
 --AUTO_PAGO_PATIO
 
 --***************************************************************
---punto: 7  AUTO_PAGO   --Reportada por Nicolas       Generar documentos/COACTIVO_AUTO PAGO_______"Ver seguimiento"/AUTO DE PAGO
+--punto: 7  AUTO_PAGO   --Reportada por Nicolas       Generar documentos/COACTIVO_AUTO PAGO_______"Ver seguimiento"/AUTO DE PAGO  AUTO_PAGO_PATIO_V2
 --7. AUTO DE PAGO 2 :(
 --Francisco Xavier Rojas Esteves. Hay que update su titulo
 --Tiene 3 id_plantilla hay que identificar
@@ -254,7 +279,12 @@ order by id_coactivo desc
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --punto: 20  Jasper
 --Presente error en el sistema
---ORDENANZA_REQ_PAGO	ORDENANZA_REQ_PAGO
+--(ORDENANZA_REQ_PAGO	ORDENANZA_REQ_PAGO)x
+--ORDEN_COBRO_ORDENANZ
+
+
+
+
 --PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -368,7 +398,7 @@ commit tran
 
 
 --************************************REVISIÓN DE LAS PLANTILLAS GENERADAS**************************************************************
-select *from [documentos].[dbo].[plantilla] where id_plantilla=2619--2638--2324--2581--2324--2584--2641--2641--2625--4745--2628--4707--2659--2626  --2413--2596--2597  --2324--2596--2413--2596--2597--2685--2663    *
+select *from [documentos].[dbo].[plantilla] where id_plantilla=2581--2324--2619--2638--2324--2581--2324--2584--2641--2641--2625--4745--2628--4707--2659--2626  --2413--2596--2597  --2324--2596--2413--2596--2597--2685--2663    *
 																																	   *
 select top 20 *from [documentos].[dbo].[documento] order by 1 desc																	   *
 --**************************************************************************************************************************************
@@ -600,17 +630,6 @@ join trazabilidad_proceso tp on p.id_proceso=tp.id_proceso and tp.id_estado_proc
 where id_tipo_coactivo=4 
 --and tp.id_estado_proceso=70 
 order by tp.fecha_inicio desc
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -17,6 +17,22 @@
 --PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE PENDIENTE VPENDIENTE PENDIENTE
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+begin tran
+--update documentos..plantilla set fecha_fin='2022-03-11' where id_plantilla=2080   --2532
+update documentos..plantilla set fecha_fin='2024-03-20' where id_plantilla=2611
+--TODAS LAS PLANTILLAS DE COACTIVO
+update documentos..plantilla set fecha_inicio='2024-07-15' where id_plantilla in(2616,2617,2618,2619,2620,2621,2622,2623,2624,2625,2626,2627,2628,2629,2630,2631,2632,2633,2634,2635,2636,2637,2638,2639,2640,2641,2642)
+--update documentos..plantilla set fecha_inicio='2024-04-11' where id_plantilla in(2616,2617,2618,2620,2624,2625,2626,2634,2636,2638,2639)
+commit tran
+
+
+--************************************REVISIÓN DE LAS PLANTILLAS GENERADAS**************************************************************
+select *from [documentos].[dbo].[plantilla] where id_plantilla=2581--
+																																	   *
+select top 20 *from [documentos].[dbo].[documento] order by 1 desc																	   *
+--**************************************************************************************************************************************
+
+
 
 declare @codigoPlantilla varchar(20);
 set @codigoPlantilla = 'ORDEN_COBRO_COIP';--AUTO_PAGO_PATIO
