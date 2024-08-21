@@ -1,4 +1,11 @@
--- COACTIVO PROCESOS
+-- COACTIVO PROCESOS y PROVIDENCIA_PAGO_EMB van a la par si falla una fallan las dos, fue una incidencia que quito bastante tiempo
+
+--------------------------------Observaciones--------------------------
+--Las plantillas SENTAR_RAZON_PAGO
+
+
+
+
 
 --Query mas usados
 
@@ -7,20 +14,29 @@ begin tran
 --update documentos..plantilla set fecha_fin='2024-03-20' where id_plantilla=2611
 --TODAS LAS PLANTILLAS DE COACTIVO
 begin tran 
-update documentos..plantilla set fecha_inicio='2024-07-17' where id_plantilla in(2616,2617,2618,2619,2620,2621,2622,2623,2624,2625,2626,2627,2628,2629,2630,2631,2632,2633,2634,2635,2636,2637,2638,2639,2640,2641,2642)
+update documentos..plantilla set fecha_inicio='2024-07-21' where id_plantilla in(2616,2617,2618,2619,2620,2621,2622,2623,2624,2625,2626,2627,2628,2629,2630,2631,2632,2633,2634,2635,2636,2637,2638,2639,2640,2641,2642)
 
 --update documentos..plantilla set fecha_inicio='2024-04-11' where id_plantilla in(2616,2617,2618,2620,2624,2625,2626,2634,2636,2638,2639)
 commit tran
 
+(2652,2648,2645,4743,2619,4742,4744,2639)
+
+2639
+2638
+2623
+2639
+2638
+2623
 
 --************************************REVISIÓN DE LAS PLANTILLAS GENERADAS**************************************************************
-select *from [documentos].[dbo].[plantilla] where id_plantilla=2638--2581--
+select *from [documentos].[dbo].[plantilla] where id_plantilla in(2)--(4743,4742,2619)--(2652,2648,2645,4743,2619,4742,4744,2639)--(4744,2639,2638,2623,2662,4764)--(2324,2581)   --=2325--2582--2581--
 																																 -- *
 select top 20 *from [documentos].[dbo].[documento] order by 1 desc																	 --*
 --**************************************************************************************************************************************
 --Plantillas que se generan de la misma manera
 
-
+select top 20 *from [documentos].[dbo].[documento] 
+where id_plantilla=2626
 
 ------------------------------------------------------------------------
 
@@ -152,6 +168,14 @@ select top 20 *from [documentos].[dbo].[documento] order by 1 desc														
 
 --***************************************************************
 --punto: 7  AUTO_PAGO   --Reportada por Nicolas       Generar documentos/COACTIVO_AUTO PAGO_______"Ver seguimiento"/AUTO DE PAGO  AUTO_PAGO_PATIO_V2
+--DELEGADO del(la) Director(a) de Gestión de Infracciones y Servicios de tránsito
+--DELEGADO FUNCIONARIO EJECUTOR DEL DIRECTOR DE GESTIÓN DE INFRACCIONES Y SERVICIOS DE TRÁNSITO DE LA ATM
+
+--AUTO_PAGO_PATIO_V2
+--Actualmente en el documento se indica: Dirección de Registro de Propiedad Vehicular de la Autoridad de Tránsito Municipal; y EMPRESA PÚBLICA MUNICIPAL DE TRÁNSITO Y MOVILIDAD DE GUAYAQUIL EP.
+--Lo correcto es:                        Dirección de Registro de Propiedad Vehicular de la Agencia de Tránsito; y, EMPRESA PÚBLICA DE TRÁNSITO Y MOVILIDAD DE GUAYAQUIL EP.
+
+
 --7. AUTO DE PAGO 2 :(
 --Francisco Xavier Rojas Esteves. Hay que update su titulo
 --Tiene 3 id_plantilla hay que identificar

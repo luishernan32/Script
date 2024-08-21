@@ -40,7 +40,7 @@ https://gacetamultas.atm.gob.ec/imagenes/img/background_certificado_virtual_v2.p
 
 --(ACTA_SEG_V_CUL,ACTA_SV_EVIRTUAL_100,ACTA_SEG_V_EVIRTUAL)
 
-
+--ACTA_SEG_V_CUL Está plantilla fue enviada a producción
 
 --*************************************************************************************
 --*************************************************************************************
@@ -88,13 +88,19 @@ https://gacetamultas.atm.gob.ec/imagenes/img/background_certificado_virtual_v2.p
 
 --RESOL_INCUMP_VIRTU	30024397 - Se debe dejar variable el nombre de la empresa.
 
+--***********************************************************************************************
+--Reportadas 22/07/2024
+--ACTA_SEG_V_CUL
+
+
+
 --***********************************************************************************************************************
 --OBSERVACIONES: 
 --***********************************************************************************************************************
 
 --****************************************************************************************************************************************************************
 declare @codigoPlantilla varchar(20);
-set @codigoPlantilla ='CARAT_CURSO_VIRTU'--'OFIC_BAN_CARTA_SEPS'-- 'AI_EXV_SGPS_TP';--AUTO_PAGO_PATIO  
+set @codigoPlantilla ='ACTA_SEG_V_CUL'--'OFIC_BAN_CARTA_SEPS'-- 'AI_EXV_SGPS_TP';--AUTO_PAGO_PATIO  
 select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla
 select * from documentos..plantilla_configuracion where id_plantilla in (select id_plantilla from documentos..plantilla where codigo_plantilla=@codigoPlantilla)
 select * from documentos..proceso where id_proceso IN (select id_proceso from documentos..plantilla where codigo_plantilla=@codigoPlantilla)

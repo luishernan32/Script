@@ -31,7 +31,7 @@ SET    consulta=   'SELECT e.fecha_registro,
         WHERE  codigo_parametro = 438)                 AS cargo_delegado,
        ( Upper((SELECT valor_parametro_defecto
                 FROM   parametro(nolock)
-                WHERE  codigo_parametro = 434)) )      AS
+                WHERE  codigo_parametro = 442)) )      AS
        cargo_delegado_mayusculas,
        (SELECT Concat(f.titulo_obtenido, '' '', Upper(
                Concat(per.nombre1, '' '', per.nombre2, '' '',

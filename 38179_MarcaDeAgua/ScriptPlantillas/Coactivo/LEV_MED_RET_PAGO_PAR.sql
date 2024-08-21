@@ -116,7 +116,7 @@ FROM   proceso p WITH (nolock)
        JOIN envio_doc_impresion_embargo edi2 WITH (nolock)
          ON edi2.id_seg_doc_impresion_embargo =
             sdi1.id_seg_doc_impresion_embargo
-WHERE  p.id_proceso is not null
+WHERE  p.id_proceso = :idProceso
        AND tp.id_trazabilidad_proceso = @id_trazabilidad_proceso '               
 	   , orden_variables='BANCO,CONSECUTIVO_PRUEBAS,fecha_actual,NOMBRE_INFRACTOR,DOCUMENTO_INFRACTOR,NUMERO_PAGO,VALOR_INTERES,FECHA_INGRESO,FECHA_INGRESO2,NUMERO_TRAMITE,NUMERO_JUICIO,NOMBRE_SECRETARIO,IMAGEN_FIRMA,NOMBRE_DELEGADO,IMAGEN_FIRMA_DOS,PROFESION_PART,CARGO_DELEGADO,PROFESION,TITULO_PLANTILLAS'
 WHERE  id_plantilla_config=10169
