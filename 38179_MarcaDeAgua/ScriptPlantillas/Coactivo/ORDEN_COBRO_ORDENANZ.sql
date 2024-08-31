@@ -10,7 +10,7 @@
 --CONSECUTIVO_ORDEN_COBRO, NOMBRE_DELEGADO, NOMBRE_INFRACTOR, T_DOCUMENTO_INFRACTOR, N_DOCUMENTO_INFRACTOR, TITULO, VALOR_MULTA, VALOR_RECARGOS, TOTAL_PENDIENTE, CIUDAD_INFRACCION, FECHA_INFRACCION, HORA, numero_citacion, 
 --DESCRIPCION_INFRACCION, PLACA_VEHICULO, DIRECCION_INFRACCION, NOMBRE_AGENTE, PLACA_AGENTE, FIRMA_AGENTE, FECHA_SOLICITUD, LogoATM_variable, FIRMA_FUNCIONARIO_, NOMBRE_COMPLETO,CARGO_DELEGADO,PROFESION,TITULO_PLANTILLAS
 --
-
+--EMPRESA PÚBLICA MUNICIPAL DE TRÁNSITO Y MOVILIDAD DE GUAYAQUIL EP.
 
 
 --Director de Gestión de Infracciones y Servicios de Tránsito.
@@ -27,10 +27,16 @@ SELECT valor_parametro_defecto
                 WHERE  codigo_parametro in(434,435,436,437,438,439,440,441) 
 
 
+SELECT valor_parametro_defecto
+                FROM   parametro(nolock)
+                WHERE  codigo_parametro=436
 
+begin tran
 update parametro
-set valor_parametro_defecto=
-
+set valor_parametro_defecto='DELEGADO FUNCIONARIO EJECUTOR-COACTIVA DEL(LA) DIRECTOR(A) DE INFRACCIONES Y SERVICIOS DE TRÁNSITO DE LA EMPRESA PÚBLICA MUNICIPAL DE TRÁNSITO Y MOVILIDAD DE GUAYAQUIL EP.'
+                                                                                                                                      
+WHERE  codigo_parametro=436
+commit tran
 
 --DELEGADO del(la) Director(a) de Gestión de Infracciones y Servicios de Tránsito 434
 --N 435

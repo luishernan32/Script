@@ -1,3 +1,9 @@
+select *from coactivo where numero_coactivo='14031691'
+
+
+select *from cartera
+
+
 ---Importante para hacer mis consultas
 --Datos
 
@@ -21,24 +27,7 @@ inner join ordenamiento_pais op on ci.id_ordenamiento_pais=op.id_ordenamiento_pa
 
 where p.id_estado_proceso in(29) and anio=2021
 
---and ci.id_ordenamiento_pais=1
-
-and c.id_tipo_coactivo=1
-
-and c.cantidad_obligaciones=1
-
---and c.fecha_notificacion is null
-
---and oc.valor_interes_moratorios0
-
---and oc.valor_costas_procesales0
-
-and ci.fecha_fin_vigencia is null
-
---and exists (select * from obligacion_coactivo_historico och where och.id_obligacion_coactivo=oc.id_obligacion_coactivo)
-
-and not exists (select 1 from circulemos2.dbo.trazabilidad_proceso tp where tp.id_proceso = p.id_proceso and tp.id_estado_proceso = 36)
---and c.numero_coactivo='14031691'
+and c.numero_coactivo='14031691'
 order by p.fecha_inicio desc
 
 
@@ -47,3 +36,23 @@ order by p.fecha_inicio desc
 --10398133 0950306571 1455818
 --10398211  0914932918  1455869
 --0950614750 1455838 10398161
+
+
+select top 10 id_factura_axis
+from comparendo
+
+
+select top 10 oc.numero_obligacion
+from
+coactivo c inner join obligacion_coactivo oc on
+c.id_coactivo=oc.id_coactivo
+inner join persona pe on c.id_deudor=pe.id_persona
+inner join comparendo co on convert(varchar,co.id_factura_axis)=oc.numero_obligacion
+where c.numero_coactivo='14031691'
+
+
+
+inner join comparendo co 
+
+
+on convert(varchar,co.id_factura_axis)=oc.numero_obligacion
