@@ -1,0 +1,24 @@
+USE [integracion_terceros]
+
+begin tran
+INSERT INTO [dbo].[reconstr_notifica_coactivo_multas]
+           ([NUMERO_JUICIO]
+           ,[NUMERO_COACTIVO]
+           ,[ID_TRAMITE]
+           ,[FECHA_REGISTRO]
+           ,[FACTURA_AXIS]
+           ,[VALOR_FACTURA]
+           ,[TIPO_IDENTIFICACION]
+           ,[NUMERO_IDENTIFICACION]
+           ,[ID_TIPO_COACTIVO]
+           ,[TIPO_NOTIFICACION]
+           ,[FECHA_NOTIFICACION]
+           ,[ESTADO_LECTURA]
+           ,[ERROR])
+     VALUES
+	 ('322749-2023','13616591',	'10582383','4/01/2024 16:28','10582383','20.74','CED','0912386513',1,'NOTIFICADO POR EMAIL','26/12/2023',1	,null),
+     ('3007-2024','13665863','13244637','16/01/2024 13:12','13244637','25.61','CED','0918150970',1, 'NOTIFICADO POR GACETA','8/01/2024	',1	,null),
+     ('15582-2024','13690629','13407034','23/01/2024 10:22','13407034','113.4','CED','0905399705',1,'NOTIFICADO POR EMAIL','15/01/2024',1	,null),
+     ('16547-2024','13703172','11925173','23/01/2024 10:36','11925173','99.99','CED','0905563839',1,'NOTIFICADO POR EMAIL','16/01/2024',1	,null)
+
+commit tran

@@ -155,7 +155,7 @@ WHERE  id_plantilla_config=10108
 
 commit tran
 
-
+--                         FECHA_TEXTO,numero_consecutivo,LogoATM_variable,MEMO_DELEGADO,FECHA_DELEGADO,NOMBRE_INFRACTOR,N_DOCUMENTO_INFRACTOR,numero_citacion,F_IMPOSICION_COMPARENDO,NOMBRE_DIRECTOR_INFRACCIONES,IMAGEN_FIRMA,NOMBRE_SECRETARIO,NOMBRE_DELEGADO,TITULO_PLANTILLAS
 declare @codigoPlantilla varchar(20);
 set @codigoPlantilla = 'RESOL_INCUMP_VIRTU';--AUTO_PAGO_PATIO
 select * from documentos..plantilla where codigo_plantilla=@codigoPlantilla

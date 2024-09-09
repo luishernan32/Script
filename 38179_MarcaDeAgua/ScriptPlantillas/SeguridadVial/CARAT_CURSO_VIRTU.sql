@@ -220,6 +220,16 @@ from documentos..variable_plantilla v
 inner join documentos..variable va on va.id_variable=v.id_variable
 where id_plantilla='2231'
 
-----------------------------------
+------------------------------------------------
+
+
+------------------GenerandoCaratulaExitosa....................
+http://10.6.30.176:9091/documento/generarCaratulaCursoVirtual
+ 
+{
+    "estadoCurso": 3,
+    "consecutivo": 8256,
+    "idFacturaAxis": 13414814
+}
 
 
