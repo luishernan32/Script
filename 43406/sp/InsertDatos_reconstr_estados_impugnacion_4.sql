@@ -379,8 +379,3 @@ END
 	CLOSE cerrar_impugnaciones_csr;
 	DEALLOCATE cerrar_impugnaciones_csr;
 
-
-
-
-
-

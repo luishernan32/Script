@@ -1,0 +1,3 @@
+sudo cp /opt/artefactos/reconstr/Book_35/PDF_1/865147-30184-2022-1.pdf /documentos/c2/providencia_retencion/2023/12/11/21014631_v1.pdf 2>> errores.txt
+sudo cp /opt/artefactos/reconstr/Book_35/PDF_2/865147-30184-2022-2.pdf /documentos/c2/Solicitud_oficio_bien/2023/12/11/21014632_v1.pdf 2>> errores.txt
+sudo cp /opt/artefactos/reconstr/Book_35/PDF_3/865147-30184-2022-3.pdf /documentos/c2/coa_sentar_razon/2023/12/11/21014633_v1.pdf 2>> errores.txt

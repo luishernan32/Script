@@ -16,17 +16,33 @@ INSERT INTO [dbo].[coactivo_pendiente]
            ,[tipo_coactivo]
            ,[numero_proceso])
      VALUES
-		    
             ('13542134','15457708',CONVERT(VARCHAR(19), GETDATE(), 120),'13417794','45','CED','1306119304',getdate(),1,0,null,1,'307377'),
-            
             ('13781036','15631736',CONVERT(VARCHAR(19), GETDATE(), 120),'13621757','135','CED','702663030',getdate(),1,0,null,1,'26863')
-
 
 GO
 
 begin tran
 update coactivo_pendiente
-set 
+set numero_proceso='497207'
+where id_coactivo_pendiente=141454 
+
+begin tran
+update coactivo_pendiente
+set numero_proceso='497208'
+where id_coactivo_pendiente=141457
+
+begin tran
+update coactivo_pendiente
+set numero_proceso='497207'
+where id_coactivo_pendiente=141454 
+
+begin tran
+update coactivo_pendiente
+set numero_proceso='497208'
+where id_coactivo_pendiente=141457
+
+
+
 
 
 select *from coactivo_pendiente
@@ -45,19 +61,29 @@ where numero_proceso in ('307377','26863')--datos
   --CONCAT(p.numero_proceso,'-',YEAR(p.fecha_inicio)) 
   *from circulemos2.dbo.proceso p
   where id_tipo_proceso = 4
-  and CONCAT(p.numero_proceso,'-',YEAR(p.fecha_inicio)) in('307377-2024','26863-2024')--datos
+  and CONCAT(p.numero_proceso,'-',YEAR(p.fecha_inicio)) in('307377-2024','26863-2024')--vacio
 
 
     select 
   --CONCAT(p.numero_proceso,'-',YEAR(p.fecha_inicio)) 
   *from circulemos2.dbo.proceso p
   where id_tipo_proceso = 4
-  and CONCAT(p.numero_proceso,'-',YEAR(p.fecha_inicio)) in('497208-2024','497207-2024')--vacio
+  and CONCAT(p.numero_proceso,'-',YEAR(p.fecha_inicio)) in('497208-2024','497207-2024')--datos
 
 
+  begin tran
+  Update circulemos2.dbo.proceso p
+  set numero_proceso='307377'
+  where id_proceso=2814841
+
+  Update circulemos2.dbo.proceso p
+  set numero_proceso='26863'
+  where id_proceso=2814836
+
+  commit tran
 
 select *from coactivo_pendiente
-where numero_proceso in ('2087','304104','15862','13477','11055','307377','308542','22481','26863')
+where numero_proceso in ('307377','26863')
 
 
 select *from coactivo_pendiente

@@ -1,7 +1,7 @@
 ﻿select *from circulemos2.dbo.tipo_fallo
 
 select *from circulemos2.dbo.usuario_persona
-where login like '%DARLING%'
+where login like '%NEIMY%'
 
 select *from circulemos2.dbo.estado_proceso
 where id_tipo_proceso=1
@@ -44,6 +44,8 @@ CREATE TABLE integracion_terceros.[dbo].[reconstr_estados_impugnacion](
 --commit tran
 
 
+/*delete integracion_terceros.[dbo].[reconstr_estados_impugnacion]
+where id_reconstr=10*/
 ----------------------------------------------------------------------
  SELECT *FROM integracion_terceros.[dbo].[reconstr_estados_impugnacion]
 
@@ -222,7 +224,7 @@ select top 2 *from circulemos2.[dbo].[trazabilidad_proceso]
 where id_estado_proceso=4
 
 select top 2 *from circulemos2.[dbo].proceso
-where id_estado_proceso=4
+where id_estado_proceso=23
 
 select *from circulemos2.[dbo].[estado_proceso]
 
@@ -274,6 +276,22 @@ INSERT INTO [circulemos2].[dbo].[fallo_impugnacion]
 
 -------------------------------------------------------------------
 
+select co.id_coactivo
+from coactivo co
+inner join proceso po on po.id_proceso=co.id_proceso
+inner join obligacion_coactivo oc on co.id_coactivo=oc.id_coactivo
+inner join comparendo com on com.id_factura_axis=oc.numero_obligacion
+inner join comparendo_proceso cp on cp.cicomparendo=com.cicomparendo 
+inner join proceso pe on pe.id_proceso=cp.id_proceso and pe.id_tipo_proceso = 1
+where po.nu in('276972','269279','274477','281588','284544','284591','287643','287470','290353')
+and year(po.fecha_inicio)='2023'
+--and  po.id_proceso=cp.id_proceso
+--and  po.id_tipo_proceso = 1
+
+select top 2 *from proceso
+select top 2 *from obligacion_coactivo
+select top 2 *from comparendo
+select top 2 *from comparendo_proceso
 ------------------------------------------------------------------
 USE [circulemos2]
 GO

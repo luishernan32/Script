@@ -1,5 +1,33 @@
-USE [integracion_terceros]
-GO
+
+--drop table integracion_terceros.[dbo].[reconstr_estados_impugnacion]
+
+CREATE TABLE integracion_terceros.[dbo].[reconstr_estados_impugnacion](
+ [id_reconstr][bigint] IDENTITY(1,1) NOT NULL,
+ [expediente] [varchar](20),	
+ [Tipo Fallo] [varchar](50), --Es un valor grandeeeee	
+ [Motivación_fallo] [varchar](max),	
+ [Usuario Sogit Fallo] [varchar](20),
+ [Fecha Fallo] [datetime],--GETDATE() AÑO, MES , DIA
+ [Plantilla Fallo] [varchar](50),	
+ [Documento Fallo] [varchar](255) NULL,	
+ [Estado Fallo] [varchar](50),	
+ [Usuario Sogit Resolucion(Estado_Cerrado)][varchar](20),
+ [Fecha_resolucion(Estado_Cerrado)][datetime],	
+ [documento resolucion][varchar](50),	
+ [Estado SOGIT resolucion][varchar](50),
+ [fecha_procesamiento] [datetime],	--Parece que esté es el final datetime
+ [procesado][smallint] NOT NULL,	
+ [error] [varchar](250) NULL,	
+ [path_documento][varchar](255) NULL,
+ [path_documento_cerrado][varchar](1000) NULL
+ );
+
+
+------------------------------------------------------------------------------------------------
+ --INSERT A LA TABLA
+ set dateformat ymd;
+ USE [integracion_terceros]
+begin tran
 
 INSERT INTO [dbo].[reconstr_estados_impugnacion]
            ([expediente]
@@ -73,7 +101,7 @@ recurso de apelación ante la máxima autoridad de esta entidad. Actúe Cristina Ma
 '
 
 
-,'darling.magallanes','7-12-2023',	'Registro_Fallo','RESOLUCION ADMINISTRATIVA 14807-2023.pdf','FALLO PROYECTADO','felipe.larreategui','7-12-2023','RESOLUCION ADMINISTRATIVA 14807-2023.pdf','CERRADO',null,0,null,null,null),
+,'darling.magallanes',cast('2023-12-07' as datetime),	'Registro_Fallo','RESOLUCION ADMINISTRATIVA 14807-2023.pdf','FALLO PROYECTADO','felipe.larreategui',cast('2023-12-07'as datetime),'RESOLUCION ADMINISTRATIVA 14807-2023.pdf','CERRADO',null,0,null,null,null),
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---registro 2
@@ -257,7 +285,7 @@ ad-hoc.-NOTIFÍQUESE Y CÚMPLASE. –"
 
 
 
-,'meybi.villamar','14-12-2023','Registro_Fallo','RESOLUCION ADMINISTRATIVA 14960-2023.pdf','FALLO PROYECTADO','ariana.aviles','14-12-2023','RESOLUCION ADMINISTRATIVA 14960-2023.pdf','CERRADO',null,0,null,null,null),
+,'meybi.villamar',cast('2023-12-14' as datetime),'Registro_Fallo','RESOLUCION ADMINISTRATIVA 14960-2023.pdf','FALLO PROYECTADO','ariana.aviles',cast('2023-12-14' as datetime),'RESOLUCION ADMINISTRATIVA 14960-2023.pdf','CERRADO',null,0,null,null,null),
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -425,7 +453,7 @@ el correspondiente recurso de apelación ante la máxima autoridad de esta entidad
 secretario(a) ad-hoc. -NOTIFÍQUESE Y CÚMPLASE.-"
 '
 
-,'meybi.villamar','11-12-2023','Registro_Fallo','RESOLUCION ADMINISTRATIVA 15289-2023.pdf','FALLO PROYECTADO','felipe.larreategui','11-12-2023','RESOLUCION ADMINISTRATIVA 15289-2023.pdf','CERRADO',null,0,null,null,null),
+,'meybi.villamar',cast('2023-12-11' as datetime),'Registro_Fallo','RESOLUCION ADMINISTRATIVA 15289-2023.pdf','FALLO PROYECTADO','felipe.larreategui',cast('2023-12-11' as datetime),'RESOLUCION ADMINISTRATIVA 15289-2023.pdf','CERRADO',null,0,null,null,null),
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---registro 4
@@ -604,7 +632,7 @@ autoridad de esta entidad. Actúe Arianna Cueva como secretario(a) AD-HOC.-NOTIFÍ
 
 
 
-,'arianna.cueva','11-12-2023','Registro_Fallo','RESOLUCION ADMINISTRATIVA 15121-2023.pdf','FALLO PROYECTADO','felipe.larreategui','11-12-2023','RESOLUCION ADMINISTRATIVA 15121-2023.pdf','CERRADO',null,0,null,null,null),
+,'arianna.cueva',cast('2023-12-11' as datetime),'Registro_Fallo','RESOLUCION ADMINISTRATIVA 15121-2023.pdf','FALLO PROYECTADO','felipe.larreategui',cast('2023-12-11' as datetime),'RESOLUCION ADMINISTRATIVA 15121-2023.pdf','CERRADO',null,0,null,null,null),
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -772,7 +800,7 @@ NOTIFÍQUESE Y CÚMPLASE.-"
 '
 
 
-,'meybi.villamar','6-12-2024','Registro_Fallo','RESOLUCION ADMINISTRATIVA 15216-2023.pdf','FALLO PROYECTADO','francisco.rojas','6-12-2023','RESOLUCION ADMINISTRATIVA 15216-2023.pdf','CERRADO',null,0,null,null,null),
+,'meybi.villamar',cast('2024-12-06' as datetime),'Registro_Fallo','RESOLUCION ADMINISTRATIVA 15216-2023.pdf','FALLO PROYECTADO','francisco.rojas',cast('2023-12-06' as datetime),'RESOLUCION ADMINISTRATIVA 15216-2023.pdf','CERRADO',null,0,null,null,null),
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---registro 6
@@ -939,7 +967,7 @@ autoridad de esta entidad. Actúe Neimy Suárez como secretario(a) ad-hoc.-NOTIFÍQ
 '
 
 
-,'neimy.suarez','7-12-2023','Registro_Fallo','RESOLUCION ADMINISTRATIVA 15268-2023.pdf','FALLO PROYECTADO','francisco.rojas','7-12-2023','RESOLUCION ADMINISTRATIVA 15268-2023.pdf','CERRADO',null,0,null,null,null),
+,'neimy.suarez',cast('2023-12-07' as datetime),'Registro_Fallo','RESOLUCION ADMINISTRATIVA 15268-2023.pdf','FALLO PROYECTADO','francisco.rojas',cast('2023-12-07' as datetime),'RESOLUCION ADMINISTRATIVA 15268-2023.pdf','CERRADO',null,0,null,null,null),
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---registro 7
@@ -1152,7 +1180,7 @@ entidad. Actúe Arianna Cueva como secretario(a) ad-hoc.- NOTIFÍQUESE Y CÚMPLASE.
 '
 
 
-,'arianna.cueva','18-12-2023','Registro_Fallo','RESOLUCION ADMINISTRATIVA 15550-2023.pdf','FALLO PROYECTADO','ruben.barberan','18-12-2023','RESOLUCION ADMINISTRATIVA 15550-2023.pdf','CERRADO',null,0,null,null,null),
+,'arianna.cueva',cast('2023-12-18' as datetime),'Registro_Fallo','RESOLUCION ADMINISTRATIVA 15550-2023.pdf','FALLO PROYECTADO','ruben.barberan',cast('2023-12-18' as datetime),'RESOLUCION ADMINISTRATIVA 15550-2023.pdf','CERRADO',null,0,null,null,null),
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --Registro 8
@@ -1327,13 +1355,19 @@ CÚMPLASE.-"
 '
 
 
-,'neimy.suarez','18-12-2023','Registro_Fallo','RESOLUCION ADMINISTRATIVA 15608-2023.pdf','FALLO PROYECTADO','ruben.barberan','18-12-2023','RESOLUCION ADMINISTRATIVA 15608-2023.pdf','CERRADO',null,0,null,null,null)
+,'neimy.suarez',cast('2023-12-18' as datetime),'Registro_Fallo','RESOLUCION ADMINISTRATIVA 15608-2023.pdf','FALLO PROYECTADO','ruben.barberan',cast('2023-12-18' as datetime),'RESOLUCION ADMINISTRATIVA 15608-2023.pdf','CERRADO',null,0,null,null,null)
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+commit tran
 
 
 
 
 
+
+
+
+
+ 

@@ -23,3 +23,76 @@ where numero_coactivo in('13527098','13527099','13527101','13630905','13637367',
                          '13665860','13665863','13665865','13665872','13590619','13679104',
                          '13686972','13686974','13690629','13690635','13690636','13690637',
                          '13690655','13690664','13703172','13665862','13726062','13845161')
+
+
+
+
+
+
+ select 
+  CONCAT(p.numero_proceso,'-',YEAR(p.fecha_inicio)) 
+  from circulemos2.dbo.proceso p
+  where id_tipo_proceso = 4
+  and CONCAT(p.numero_proceso,'-',YEAR(p.fecha_inicio)) in('13527098','13527099','13527101','13630905','13637367','13573900',
+                         '13575108','13583046','13607033','13616573','13616591','13665859',
+                         '13665860','13665863','13665865','13665872','13590619','13679104',
+                         '13686972','13686974','13690629','13690635','13690636','13690637',
+                         '13690655','13690664','13703172','13665862','13726062','13845161')
+
+
+
+select 
+  CONCAT(p.numero_proceso,'-',YEAR(p.fecha_inicio)) 
+  from circulemos2.dbo.proceso p
+  where id_tipo_proceso = 4
+  and CONCAT(p.numero_proceso,'-',YEAR(p.fecha_inicio)) in('303379-2023','303380-2023','303382-2023','324827-2023','326306-2023','314653-2023',
+															'314768-2023','316389-2023','320771-2023','322738-2023','322749-2023','3002-2024',
+															'3004-2024','3007-2024','3009-2024','3016-2024','317074-2023','10190-2024',
+															'14322-2024','14324-2024','15582-2024','15584-2024','15585-2024','15586-2024',
+															'15593-2024','15597-2024','16547-2024','3006-2024','18805-2024','37163-2024')
+
+
+
+
+
+begin tran
+  Update circulemos2.dbo.proceso 
+  set numero_proceso='307377'
+  where id_proceso=2814841
+
+  Update circulemos2.dbo.proceso 
+  set numero_proceso='26863'
+  where id_proceso=2814836
+
+  commit tran
+  rollback tran
+
+
+
+
+select 
+  CONCAT(p.numero_proceso,'-',YEAR(p.fecha_inicio)) 
+  from circulemos2.dbo.proceso p
+  where id_tipo_proceso = 4
+  and CONCAT(p.numero_proceso,'-',YEAR(p.fecha_inicio)) in('303379-2023','303380-2023','303382-2023','324827-2023','326306-2023','314653-2023',
+															'314768-2023','316389-2023','320771-2023','322738-2023','322749-2023','3002-2024',
+															'3004-2024','3007-2024','3009-2024','3016-2024','317074-2023','10190-2024',
+															'14322-2024','14324-2024','15582-2024','15584-2024','15585-2024','15586-2024',
+															'15593-2024','15597-2024','16547-2024','3006-2024','18805-2024','37163-2024')
+
+
+
+ Update circulemos2.dbo.proceso 
+  set numero_proceso='15593' where id_proceso=2891796 
+  
+ Update circulemos2.dbo.proceso 
+  set numero_proceso='15597' where id_proceso=2890638 
+  
+ Update circulemos2.dbo.proceso 
+  set numero_proceso='16547' where id_proceso=3023623 
+  
+ Update circulemos2.dbo.proceso 
+  set numero_proceso='18805' where id_proceso=2891810 
+  
+ Update circulemos2.dbo.proceso 
+  set numero_proceso='37163' where id_proceso=2891837 

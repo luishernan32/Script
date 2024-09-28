@@ -7,8 +7,8 @@
 	--inner join comparendo com on com.id_factura_axis=oc.numero_obligacion
 	--inner join comparendo_proceso cp on cp.cicomparendo=com.cicomparendo 
 	--inner join proceso po on isnumeric(po.id_proceso)=cp.id_proceso
-	where po.numero_proceso in('21833')
-	and year(po.fecha_inicio)='2024'
+	where po.numero_proceso in('137578')
+	and year(po.fecha_inicio)='2019'
 
 /*
  begin tran
@@ -46,7 +46,7 @@ select top 2 *from trazabilidad_proceso
 
 
 select * FROM  integracion_terceros.dbo.reconstr_notifica_coactivo_multas r
-	where r.NUMERO_JUICIO in('21833')
+	where r.NUMERO_JUICIO in('137578')
 
 
 select top 20 *from trazabilidad_proceso

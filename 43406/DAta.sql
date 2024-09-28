@@ -42,11 +42,19 @@ select * FROM  integracion_terceros.dbo.reconstr_notifica_coactivo_multas r
  
  
  
+ --('307377-2024','26863-2024')
+ --
+
   select 
   --CONCAT(p.numero_proceso,'-',YEAR(p.fecha_inicio)) 
   *from circulemos2.dbo.proceso p
   where id_tipo_proceso = 4
-  and CONCAT(p.numero_proceso,'-',YEAR(p.fecha_inicio)) in ('298954-2023',
+  and CONCAT(p.numero_proceso,'-',YEAR(p.fecha_inicio)) in('307377-2024','26863-2024')
+  
+  
+  
+  
+  ('298954-2023',
 '303102-2023',
 '299205-2023',
 '304048-2023',
@@ -355,6 +363,8 @@ select * FROM  integracion_terceros.dbo.reconstr_notifica_coactivo_multas r
 select  rs.* from circulemos2.dbo.reconstruccion_solicitud_busqueda_bienes rs
 
 
+
+--497207
 
 
 
