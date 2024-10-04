@@ -53,20 +53,18 @@ exec circulemos2.dbo.sp_reconstruir_solicitud_bienes_coactivo
 
 */
 
-select COUNT(1) AS exitosos from circulemos2.dbo.reconstruccion_solicitud_busqueda_bienes rs
+select COUNT(1) AS exitosos from circulemos2.dbo.reconstruccion_solicitud_busqueda_bienes_documentos rs
 where procesado = 1
 AND CONVERT(date, fecha_procesamiento)>=CONVERT(date, '2024-08-22')
 
-select COUNT(1) AS Errores from circulemos2.dbo.reconstruccion_solicitud_busqueda_bienes rs
+select COUNT(1) AS Errores from circulemos2.dbo.reconstruccion_solicitud_busqueda_bienes_documentos rs
 where procesado = 0
 AND CONVERT(date, fecha_procesamiento)>=CONVERT(date, '2024-08-22')
 and error is not null
 
-select COUNT(1) AS Pendiente_Procesar from circulemos2.dbo.reconstruccion_solicitud_busqueda_bienes rs
+select COUNT(1) AS Pendiente_Procesar from circulemos2.dbo.reconstruccion_solicitud_busqueda_bienes_documentos rs
 where procesado = 0
 and error is null
-
-
 
 
 
@@ -75,13 +73,9 @@ and error is null
 
 
 
-
-
-
-
 --Inicialemente se tienen que cargar los registros
 --Esta informacioón es dada por un proveedor
-select  * from circulemos2.dbo.reconstruccion_solicitud_busqueda_bienes rs
+select  * from circulemos2.dbo.reconstruccion_solicitud_busqueda_bienes_documentos rs
 
 
 select  *,

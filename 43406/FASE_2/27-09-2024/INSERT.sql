@@ -103,3 +103,93 @@ INSERT INTO [dbo].[reconstr_notifica_coactivo_multas]
            ,<ERROR, varchar(4000),>)
 GO
 
+-----------------------------------------------------------
+
+INSERT INTO [dbo].[reconstr_notifica_coactivo_multas]
+           ([NUMERO_JUICIO]
+           ,[NUMERO_COACTIVO]
+           ,[ID_TRAMITE]
+           ,[FECHA_REGISTRO]
+           ,[FACTURA_AXIS]
+           ,[VALOR_FACTURA]
+           ,[TIPO_IDENTIFICACION]
+           ,[NUMERO_IDENTIFICACION]
+           ,[ID_TIPO_COACTIVO]
+           ,[TIPO_NOTIFICACION]
+           ,[FECHA_NOTIFICACION]
+           ,[ESTADO_LECTURA]
+           ,[ERROR])
+     VALUES
+		   ('127885-2022'  -- NUMERO_JUICIO (varchar)
+           ,'10992875'  -- NUMERO_COACTIVO (varchar)
+           ,12307258  -- ID_TRAMITE (bigint)
+           ,CAST('2022-04-21' AS date)  -- FECHA_REGISTRO (date)
+           ,10792269  -- FACTURA_AXIS (bigint)
+           ,127.50  -- VALOR_FACTURA (numeric(38,2))
+           ,'CED'  -- TIPO_IDENTIFICACION (varchar)
+           ,'0917913394'  -- NUMERO_IDENTIFICACION (varchar)
+           ,'1'  -- ID_TIPO_COACTIVO (varchar)
+           ,'NOTIFICADO POR COURIER'  -- TIPO_NOTIFICACION (varchar)
+           ,CAST('2022-08-11' AS date)  -- FECHA_NOTIFICACION (date)
+           ,1  -- ESTADO_LECTURA (tinyint)
+           ,NULL  -- ERROR (NULL)
+		   )
+
+
+----------------------------
+
+INSERT INTO [dbo].[reconstr_notifica_coactivo_multas]
+           ([NUMERO_JUICIO]
+           ,[NUMERO_COACTIVO]
+           ,[ID_TRAMITE]
+           ,[FECHA_REGISTRO]
+           ,[FACTURA_AXIS]
+           ,[VALOR_FACTURA]
+           ,[TIPO_IDENTIFICACION]
+           ,[NUMERO_IDENTIFICACION]
+           ,[ID_TIPO_COACTIVO]
+           ,[TIPO_NOTIFICACION]
+           ,[FECHA_NOTIFICACION]
+           ,[ESTADO_LECTURA]
+           ,[ERROR])
+     VALUES
+		   ('127885-2022'  -- NUMERO_JUICIO (varchar)
+           ,'10992875'  -- NUMERO_COACTIVO (varchar)
+           ,12307258  -- ID_TRAMITE (bigint)
+           ,CAST('2022-04-21' AS date)  -- FECHA_REGISTRO (date)
+           ,10792269  -- FACTURA_AXIS (bigint)
+           ,127.50  -- VALOR_FACTURA (numeric(38,2))
+           ,'CED'  -- TIPO_IDENTIFICACION (varchar)
+           ,'0917913394'  -- NUMERO_IDENTIFICACION (varchar)
+           ,'1'  -- ID_TIPO_COACTIVO (varchar)
+           ,'NOTIFICADO POR COURIER'  -- TIPO_NOTIFICACION (varchar)
+           ,CAST('2022-08-11' AS date)  -- FECHA_NOTIFICACION (date)
+           ,1  -- ESTADO_LECTURA (tinyint)
+           ,NULL  -- ERROR (NULL)
+		   )
+
+-------------------------------------------
+
+USE [integracion_terceros]
+
+
+INSERT INTO [dbo].[reconstr_notifica_coactivo_multas]
+           ([NUMERO_JUICIO]
+           ,[NUMERO_COACTIVO]
+           ,[ID_TRAMITE]
+           ,[FECHA_REGISTRO]
+           ,[FACTURA_AXIS]
+           ,[VALOR_FACTURA]
+           ,[TIPO_IDENTIFICACION]
+           ,[NUMERO_IDENTIFICACION]
+           ,[ID_TIPO_COACTIVO]
+           ,[TIPO_NOTIFICACION]
+           ,[FECHA_NOTIFICACION]
+           ,[ESTADO_LECTURA]
+           ,[ERROR])
+     VALUES
+     ('239514-2023','13271177',15204525,CAST('2024-09-25 0:00'AS date),13154935,31.5,'RUC','0991256911001','1','NOTIFICADO POR EMAIL',CAST('2023-10-06 0:00'AS date),1,null),
+     ('239529-2023','13271193',15204540,CAST('2024-09-25 0:00'AS date),13155597,31.5,'CED','0913559753','1','NOTIFICADO POR EMAIL',CAST('2023-10-06 0:00'AS date),1,null),
+     ('239565-2023','13271230',15204576,CAST('2024-09-25 0:00'AS date),13155927,31.5,'CED','0925776189','1','NOTIFICADO POR EMAIL',CAST('2023-10-06 0:00'AS date),1,null),
+     ('239583-2023','13271250',15204595,CAST('2024-09-25 0:00'AS date),13156093,31.5,'CED','0961478807','1','NOTIFICADO POR EMAIL',CAST('2023-09-29 0:00'AS date),1,null),
+     ('239663-2023','13271329',15204674,CAST('2024-09-25 0:00'AS date),13157746,135,'RUC','1791354907001','1','NOTIFICADO POR EMAIL',CAST('2023-09-29 0:00'AS date),1,null)
